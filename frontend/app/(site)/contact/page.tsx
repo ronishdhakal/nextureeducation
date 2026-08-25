@@ -7,8 +7,9 @@ import { Section, SectionHeading } from "@/components/ui/Section";
 import { getBranches, getDestinations, getSiteSettings } from "@/lib/api";
 
 export const metadata: Metadata = {
-  title: "Contact",
-  description: "Book a free counseling session with Nexture Education in Bagbazar, Kathmandu.",
+  title: "Contact Us",
+  description:
+    "Book a free counseling session with Nexture Education, the best consultancy in Bagbazar, Kathmandu, Nepal.",
 };
 
 export default async function ContactPage() {

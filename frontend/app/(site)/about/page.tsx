@@ -13,9 +13,9 @@ import {
 } from "@/lib/api";
 
 export const metadata: Metadata = {
-  title: "About",
+  title: "About Us",
   description:
-    "Why Nexture Education exists, how we work, and where to find us in Kathmandu.",
+    "Why Nexture Education exists, how we work, and where to find our office in Bagbazar, Kathmandu, Nepal.",
 };
 
 const VALUES = [

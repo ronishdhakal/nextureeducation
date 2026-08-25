@@ -40,10 +40,15 @@ function LoginForm() {
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wide text-stone mb-1.5">
+              <label
+                htmlFor="username"
+                className="block text-xs font-semibold uppercase tracking-wide text-stone mb-1.5"
+              >
                 Username
               </label>
               <input
+                id="username"
+                name="username"
                 autoFocus
                 required
                 value={username}
@@ -52,10 +57,15 @@ function LoginForm() {
               />
             </div>
             <div>
-              <label className="block text-xs font-semibold uppercase tracking-wide text-stone mb-1.5">
+              <label
+                htmlFor="password"
+                className="block text-xs font-semibold uppercase tracking-wide text-stone mb-1.5"
+              >
                 Password
               </label>
               <input
+                id="password"
+                name="password"
                 type="password"
                 required
                 value={password}

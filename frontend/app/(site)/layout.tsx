@@ -15,12 +15,12 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
           "@context": "https://schema.org",
           "@type": ["EducationalOrganization", "LocalBusiness"],
           name: "Nexture Education",
-          alternateName: "Nexture Education - Best Consultancy in Bagbazar",
+          alternateName: "Nexture Education - Best Consultancy in Bagbazar, Kathmandu, Nepal",
           url: SITE_URL,
           logo: `${SITE_URL}/assets/nexture-logo.png`,
           image: `${SITE_URL}/assets/nexture-logo.png`,
           description:
-            "Nexture Education is a study abroad consultancy based in Bagbazar, Kathmandu, guiding Nepali students through counseling, university selection, applications, visas and test prep.",
+            "Nexture Education is the best consultancy in Bagbazar, Kathmandu, Nepal for studying abroad, guiding Nepali students through counseling, university selection, applications, visas and test prep.",
           address: {
             "@type": "PostalAddress",
             streetAddress: settings?.address || "Bagbazar, Kathmandu",

@@ -19,9 +19,9 @@ import {
 } from "@/lib/api";
 
 export const metadata: Metadata = {
-  title: "Best Consultancy in Bagbazar for Study Abroad",
+  title: "Best Consultancy in Bagbazar, Kathmandu, Nepal",
   description:
-    "Nexture Education is a study abroad consultancy based in Bagbazar, Kathmandu — counseling, university selection, visa support and test prep for Australia, Canada, the UK, New Zealand, Malta and South Korea.",
+    "Nexture Education is the best consultancy in Bagbazar, Kathmandu, Nepal for studying abroad — counseling, university selection, visa support and test prep for Australia, Canada, the UK, New Zealand, Malta and South Korea.",
 };
 
 export default async function Home() {

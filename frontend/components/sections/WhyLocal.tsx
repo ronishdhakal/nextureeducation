@@ -26,7 +26,7 @@ export function WhyLocal({ settings }: { settings: SiteSettings | null }) {
       <div className="flex flex-col gap-5">
         <SectionHeading
           eyebrow="Why Nexture"
-          title="The best consultancy in Bagbazar for studying abroad — here's why students say that."
+          title="The best consultancy in Bagbazar, Kathmandu, Nepal for studying abroad — here's why students say that."
         />
         <p className="text-ink/65 leading-relaxed max-w-md">
           Bagbazar has no shortage of consultancies. What students tell us sets Nexture apart

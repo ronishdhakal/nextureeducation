@@ -43,8 +43,8 @@ export function AdminShell({ children }: { children: ReactNode }) {
   return (
     <div className="min-h-screen flex bg-[#f6f5f8] text-ink font-sans">
       <aside
-        className={`fixed lg:sticky top-0 z-40 h-screen w-64 shrink-0 bg-ink text-white flex flex-col transition-transform duration-200 ${
-          mobileOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
+        className={`fixed md:sticky top-0 z-40 h-screen w-64 shrink-0 bg-ink text-white flex flex-col transition-transform duration-200 ${
+          mobileOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         }`}
       >
         <div className="flex items-center justify-between px-5 py-5 border-b border-white/10">
@@ -54,7 +54,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
           <button
             type="button"
             onClick={() => setMobileOpen(false)}
-            className="lg:hidden text-white/70"
+            className="md:hidden text-white/70"
             aria-label="Close menu"
           >
             <X className="size-5" />
@@ -97,12 +97,12 @@ export function AdminShell({ children }: { children: ReactNode }) {
         <button
           aria-label="Close menu overlay"
           onClick={() => setMobileOpen(false)}
-          className="fixed inset-0 z-30 bg-ink/40 lg:hidden"
+          className="fixed inset-0 z-30 bg-ink/40 md:hidden"
         />
       ) : null}
 
       <div className="flex-1 min-w-0">
-        <header className="lg:hidden sticky top-0 z-20 bg-white border-b border-hairline px-4 py-3 flex items-center justify-between">
+        <header className="md:hidden sticky top-0 z-20 bg-white border-b border-hairline px-4 py-3 flex items-center justify-between">
           <span className="font-display font-bold">Nexture CRM</span>
           <button type="button" onClick={() => setMobileOpen(true)} aria-label="Open menu">
             <Menu className="size-5" />
