@@ -49,6 +49,7 @@
   --font-display: var(--font-jakarta);
   --font-sans: var(--font-inter);
   --font-mono: var(--font-jbmono);
+  --font-accent: var(--font-fraunces);
 }
 
 @media (prefers-reduced-motion: reduce) {

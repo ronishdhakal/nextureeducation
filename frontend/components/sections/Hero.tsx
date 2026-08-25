@@ -34,7 +34,7 @@ export function Hero({
             {eyebrow}
           </span>
 
-          <h1 className="font-display font-bold text-4xl sm:text-5xl leading-[1.12] text-white text-balance">
+          <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-white text-balance">
             {headline}
           </h1>
 
@@ -48,6 +48,10 @@ export function Hero({
               See destinations
             </Button>
           </div>
+
+          <p className="text-sm text-white/45">
+            Straight answers · No pressure to sign up today · Real timelines
+          </p>
         </Reveal>
       </div>
 

@@ -28,7 +28,7 @@ export function ServicesAndTestPrep({
                 href={`/services/${service.slug}`}
                 className="group flex flex-col gap-3 h-full bg-paper p-6 transition-colors hover:bg-paper-2"
               >
-                <span className="inline-flex size-9 items-center justify-center rounded-full border border-violet/30 text-violet-deep">
+                <span className="inline-flex size-10 items-center justify-center rounded-full bg-violet-pale text-violet-deep">
                   <ServiceIcon name={service.icon} className="size-4.5" />
                 </span>
                 <h3 className="font-display font-bold text-lg text-ink">{service.title}</h3>

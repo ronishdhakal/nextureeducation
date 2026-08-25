@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Hero } from "@/components/sections/Hero";
 import { HowItWorks } from "@/components/sections/HowItWorks";
+import { Manifesto } from "@/components/sections/Manifesto";
 import { ServicesAndTestPrep } from "@/components/sections/ServicesAndTestPrep";
 import { StatsBand } from "@/components/sections/StatsBand";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
@@ -55,6 +56,8 @@ export default async function Home() {
       <Section tone="tint">
         <HowItWorks />
       </Section>
+
+      <Manifesto />
 
       <Section tone="paper">
         <WhyLocal settings={settings} />

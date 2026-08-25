@@ -1,4 +1,3 @@
-import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/Section";
 
 const STEPS = [
@@ -34,16 +33,29 @@ export function HowItWorks() {
         subcopy="The same process for every student, every destination — because the paperwork changes, the honesty doesn't."
       />
 
-      <div className="mt-12 grid gap-px bg-hairline sm:grid-cols-2 lg:grid-cols-5 rounded-lg overflow-hidden border border-hairline">
-        {STEPS.map((step, i) => (
-          <Reveal key={step.title} delay={i * 60} className="bg-paper p-6 flex flex-col gap-3">
-            <span className="font-display font-bold text-sm text-violet-deep border border-violet/30 rounded-full size-8 flex items-center justify-center">
-              {i + 1}
-            </span>
-            <h3 className="font-display font-bold text-base text-ink">{step.title}</h3>
-            <p className="text-sm text-ink/60 leading-relaxed">{step.detail}</p>
-          </Reveal>
-        ))}
+      <div className="relative mt-14">
+        <div
+          aria-hidden
+          className="hidden sm:block absolute top-6 left-[10%] right-[10%] h-px bg-violet/25"
+        />
+        <div
+          aria-hidden
+          className="sm:hidden absolute top-1 bottom-1 left-6 w-px bg-violet/25"
+        />
+
+        <div className="flex flex-col gap-9 sm:grid sm:grid-cols-5 sm:gap-5">
+          {STEPS.map((step, i) => (
+            <div key={step.title} className="relative flex gap-4 sm:flex-col sm:items-center sm:text-center">
+              <span className="relative z-10 shrink-0 size-12 rounded-full bg-paper-2 border-2 border-violet flex items-center justify-center font-display font-bold text-violet-deep">
+                {i + 1}
+              </span>
+              <div className="pt-1.5 sm:pt-0">
+                <h3 className="font-display font-bold text-base text-ink mb-1">{step.title}</h3>
+                <p className="text-sm text-ink/60 leading-relaxed">{step.detail}</p>
+              </div>
+            </div>
+          ))}
+        </div>
       </div>
     </div>
   );
