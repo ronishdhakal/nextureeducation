@@ -57,7 +57,7 @@ export function SiteFooter({
         </div>
 
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/35 mb-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/35 mb-4">
             Explore
           </p>
           <ul className="flex flex-col gap-3 text-sm text-white/70">
@@ -72,7 +72,7 @@ export function SiteFooter({
         </div>
 
         <div>
-          <p className="font-mono text-xs uppercase tracking-[0.18em] text-white/35 mb-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/35 mb-4">
             {headOffice?.name || "Head Office"}
           </p>
           <p className="text-sm text-white/70 leading-relaxed">
@@ -85,7 +85,7 @@ export function SiteFooter({
         </div>
       </div>
       <div className="border-t border-white/10 py-6">
-        <p className="mx-auto w-full max-w-6xl px-6 sm:px-8 text-xs font-mono text-white/35">
+        <p className="mx-auto w-full max-w-6xl px-6 sm:px-8 text-xs text-white/35">
           © {new Date().getFullYear()} Nexture Education. All rights reserved.
         </p>
       </div>

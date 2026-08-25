@@ -1,42 +1,18 @@
-"use client";
+import type { ReactNode } from "react";
 
-import { useEffect, useRef, useState, type ReactNode } from "react";
-
+/**
+ * Historically wrapped children in a scroll-triggered fade-in. Removed: it
+ * relied on IntersectionObserver firing before content was ever read, which
+ * left below-the-fold sections stuck invisible when it didn't fire in time.
+ * Kept as a pass-through so call sites don't need to change.
+ */
 export function Reveal({
   children,
-  delay = 0,
   className = "",
 }: {
   children: ReactNode;
   delay?: number;
   className?: string;
 }) {
-  const ref = useRef<HTMLDivElement>(null);
-  const [visible, setVisible] = useState(false);
-
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setVisible(true);
-          observer.disconnect();
-        }
-      },
-      { threshold: 0.15 }
-    );
-    observer.observe(node);
-    return () => observer.disconnect();
-  }, []);
-
-  return (
-    <div
-      ref={ref}
-      className={`${visible ? "reveal" : "opacity-0"} ${className}`}
-      style={visible ? { animationDelay: `${delay}ms` } : undefined}
-    >
-      {children}
-    </div>
-  );
+  return <div className={className}>{children}</div>;
 }

@@ -10,11 +10,10 @@ type ButtonProps = {
 };
 
 const VARIANTS: Record<NonNullable<ButtonProps["variant"]>, string> = {
-  primary:
-    "bg-violet text-white shadow-[0_10px_30px_-10px_rgba(163,32,244,0.6)] hover:bg-violet-deep hover:shadow-[0_14px_36px_-8px_rgba(163,32,244,0.7)]",
-  secondary: "bg-amber text-ink hover:bg-[#ffc456]",
-  ghost: "border border-ink/15 text-ink hover:border-violet hover:text-violet-deep",
-  "ghost-light": "border border-white/25 text-white hover:border-white hover:bg-white/10",
+  primary: "bg-violet text-white hover:bg-violet-deep",
+  secondary: "bg-white text-violet-deep border border-violet/30 hover:border-violet",
+  ghost: "border border-ink/20 text-ink hover:border-violet hover:text-violet-deep",
+  "ghost-light": "border border-white/30 text-white hover:border-white hover:bg-white/10",
 };
 
 export function Button({
@@ -24,11 +23,11 @@ export function Button({
   className = "",
   size = "md",
 }: ButtonProps) {
-  const sizeClass = size === "lg" ? "px-7 py-3.5 text-base" : "px-5 py-3 text-sm";
+  const sizeClass = size === "lg" ? "px-6 py-3 text-base" : "px-5 py-2.5 text-sm";
   return (
     <Link
       href={href}
-      className={`inline-flex items-center justify-center gap-2 rounded-full font-semibold transition-all duration-200 hover:-translate-y-0.5 focus-visible:-translate-y-0.5 ${sizeClass} ${VARIANTS[variant]} ${className}`}
+      className={`inline-flex items-center justify-center gap-2 rounded-md font-semibold transition-colors duration-150 ${sizeClass} ${VARIANTS[variant]} ${className}`}
     >
       {children}
     </Link>

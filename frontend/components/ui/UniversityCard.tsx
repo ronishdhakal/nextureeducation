@@ -4,7 +4,7 @@ import type { University } from "@/lib/types";
 export function UniversityCard({ university }: { university: University }) {
   const logo = mediaUrl(university.logo);
   return (
-    <div className="flex items-center gap-4 rounded-2xl border border-hairline bg-paper p-5">
+    <div className="flex items-center gap-4 rounded-lg border border-hairline bg-paper p-5">
       {logo ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img src={logo} alt="" className="size-12 rounded-lg object-contain border border-hairline p-1" />

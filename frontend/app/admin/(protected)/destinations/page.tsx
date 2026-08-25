@@ -44,7 +44,7 @@ export default function AdminDestinationsPage() {
         action={
           <Link
             href="/admin/destinations/new"
-            className="inline-flex items-center gap-2 rounded-full bg-violet text-white font-semibold px-5 py-2.5 text-sm hover:bg-violet-deep transition-colors"
+            className="inline-flex items-center gap-2 rounded-md bg-violet text-white font-semibold px-5 py-2.5 text-sm hover:bg-violet-deep transition-colors"
           >
             <Plus className="size-4" /> New destination
           </Link>
@@ -56,7 +56,7 @@ export default function AdminDestinationsPage() {
       <div className="rounded-2xl border border-hairline bg-white overflow-hidden">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-hairline text-left text-xs font-mono uppercase tracking-wide text-stone">
+            <tr className="border-b border-hairline text-left text-xs font-semibold uppercase tracking-wide text-stone">
               <th className="px-5 py-3 font-medium">Name</th>
               <th className="px-5 py-3 font-medium">Code</th>
               <th className="px-5 py-3 font-medium">Order</th>
@@ -76,7 +76,7 @@ export default function AdminDestinationsPage() {
                 </td>
                 <td className="px-5 py-3">
                   <span
-                    className={`inline-flex rounded-full px-2.5 py-0.5 text-xs font-mono ${
+                    className={`inline-flex rounded-md px-2.5 py-0.5 text-xs font-semibold ${
                       d.is_published ? "bg-mint/15 text-[#0d7a63]" : "bg-stone/15 text-stone"
                     }`}
                   >

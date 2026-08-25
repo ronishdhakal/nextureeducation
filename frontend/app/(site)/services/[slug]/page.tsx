@@ -29,7 +29,7 @@ export default async function ServiceDetailPage({ params }: Props) {
   return (
     <>
       <PageHeader eyebrow="Service" title={service.title} subcopy={service.short_description}>
-        <span className="mt-6 inline-flex size-14 items-center justify-center rounded-2xl bg-white/10 text-white">
+        <span className="mt-6 inline-flex size-14 items-center justify-center rounded-lg bg-white/10 text-white">
           <ServiceIcon name={service.icon} className="size-6" strokeWidth={2} />
         </span>
       </PageHeader>
@@ -42,7 +42,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             </p>
           </div>
 
-          <div className="lg:sticky lg:top-24 h-fit rounded-3xl border border-hairline bg-paper-2 p-6 sm:p-7">
+          <div className="lg:sticky lg:top-24 h-fit rounded-lg border border-hairline bg-paper-2 p-6 sm:p-7">
             <SectionHeading
               title="Ready to talk it through?"
               subcopy="A quick form now saves a lot of back-and-forth later."

@@ -58,7 +58,7 @@ export default async function BlogPostPage({ params }: Props) {
         <div className="max-w-2xl mx-auto flex flex-col gap-8">
           {cover ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={cover} alt="" className="w-full rounded-3xl object-cover" />
+            <img src={cover} alt="" className="w-full rounded-lg object-cover" />
           ) : null}
           <div className="text-ink/75 leading-relaxed whitespace-pre-line text-lg">
             {post.body}

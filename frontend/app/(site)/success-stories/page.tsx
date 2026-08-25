@@ -29,7 +29,7 @@ export default async function SuccessStoriesPage() {
         {testimonials.length ? (
           <TestimonialsSection testimonials={testimonials} showHeading={false} />
         ) : (
-          <div className="rounded-3xl border border-dashed border-hairline p-10 text-center text-ink/60">
+          <div className="rounded-lg border border-hairline p-10 text-center text-ink/60">
             We&apos;re gathering student stories — check back soon, or ask us directly during
             your session.
           </div>

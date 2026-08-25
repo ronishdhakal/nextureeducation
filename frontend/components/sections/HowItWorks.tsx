@@ -34,26 +34,14 @@ export function HowItWorks() {
         subcopy="The same process for every student, every destination — because the paperwork changes, the honesty doesn't."
       />
 
-      <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-5">
+      <div className="mt-12 grid gap-px bg-hairline sm:grid-cols-2 lg:grid-cols-5 rounded-lg overflow-hidden border border-hairline">
         {STEPS.map((step, i) => (
-          <Reveal key={step.title} delay={i * 80} className="relative">
-            <div className="relative flex flex-col gap-4 h-full rounded-2xl border border-hairline bg-paper p-6">
-              <div
-                className={`size-12 rounded-full border-2 border-violet/30 flex items-center justify-center font-display font-extrabold text-violet ${
-                  i % 2 === 0 ? "-rotate-6" : "rotate-6"
-                }`}
-              >
-                {String(i + 1).padStart(2, "0")}
-              </div>
-              <h3 className="font-display font-bold text-lg text-ink">{step.title}</h3>
-              <p className="text-sm text-ink/60 leading-relaxed">{step.detail}</p>
-            </div>
-            {i < STEPS.length - 1 ? (
-              <span
-                aria-hidden
-                className="hidden lg:block absolute top-12 -right-3 w-6 border-t-2 border-dashed border-violet/25"
-              />
-            ) : null}
+          <Reveal key={step.title} delay={i * 60} className="bg-paper p-6 flex flex-col gap-3">
+            <span className="font-display font-bold text-sm text-violet-deep border border-violet/30 rounded-full size-8 flex items-center justify-center">
+              {i + 1}
+            </span>
+            <h3 className="font-display font-bold text-base text-ink">{step.title}</h3>
+            <p className="text-sm text-ink/60 leading-relaxed">{step.detail}</p>
           </Reveal>
         ))}
       </div>

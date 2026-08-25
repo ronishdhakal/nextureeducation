@@ -82,37 +82,6 @@ body {
   color: var(--paper);
 }
 
-@keyframes float-slow {
-  0%,
-  100% {
-    transform: translate(0, 0) rotate(0deg);
-  }
-  50% {
-    transform: translate(-2%, 3%) rotate(3deg);
-  }
-}
-
-@keyframes rise-in {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-float-slow {
-  animation: float-slow 14s ease-in-out infinite;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .reveal {
-    animation: rise-in 0.7s cubic-bezier(0.2, 0.7, 0.2, 1) both;
-  }
-}
-
 .text-balance {
   text-wrap: balance;
 }

@@ -7,6 +7,7 @@ from services.models import Service, TestPrep
 DESTINATIONS = [
     dict(
         name="Australia",
+        slug="australia",
         country_code="AUS",
         summary="Big cities, bigger job market — one of the most popular post-study work routes for Nepali students.",
         cost_overview="Tuition typically runs AUD 20,000–45,000 a year depending on the course and city; budget AUD 1,400–2,500 a month for living costs in Sydney or Melbourne, less in regional areas.",
@@ -18,6 +19,7 @@ DESTINATIONS = [
     ),
     dict(
         name="Canada",
+        slug="canada",
         country_code="CAN",
         summary="Strong permanent-residency pathway and a genuinely multicultural campus experience.",
         cost_overview="Tuition ranges CAD 15,000–35,000 a year; living costs are usually CAD 10,000–15,000 a year outside Toronto and Vancouver.",
@@ -28,17 +30,8 @@ DESTINATIONS = [
         order=2,
     ),
     dict(
-        name="USA",
-        country_code="USA",
-        summary="The widest range of universities and specializations, from community colleges to Ivy League research programs.",
-        cost_overview="Tuition varies enormously — CAD-equivalent USD 15,000 at a state college to USD 55,000+ at a private university; living costs depend heavily on the state.",
-        intake_overview="Fall (August/September) is the primary intake; Spring (January) is a smaller second option at many schools.",
-        visa_overview="F-1 student visa, which starts with your I-20 from the university, the SEVIS fee, and a consular interview — timeline and documentation matter here more than anywhere else.",
-        popular_intakes="August, January",
-        order=3,
-    ),
-    dict(
         name="United Kingdom",
+        slug="uk",
         country_code="UK",
         summary="One-year master's degrees mean a faster, often cheaper route to a postgraduate qualification.",
         cost_overview="Tuition is typically GBP 13,000–25,000 a year; living costs run GBP 1,000–1,400 a month, higher in London.",
@@ -46,37 +39,40 @@ DESTINATIONS = [
         visa_overview="Student visa (previously Tier 4), requiring a CAS from your university, proof of funds held for 28 days, and a TB test for most Nepali applicants.",
         popular_intakes="September, January",
         is_featured=True,
-        order=4,
+        order=3,
     ),
     dict(
         name="New Zealand",
+        slug="new-zealand",
         country_code="NZ",
         summary="Smaller class sizes, a straightforward visa process, and a calmer pace than the bigger study destinations.",
         cost_overview="Tuition is generally NZD 22,000–35,000 a year; budget NZD 1,250–1,600 a month for living costs.",
         intake_overview="Main intakes in February and July, with some polytechnics offering rolling intakes.",
         visa_overview="Student visa via Immigration New Zealand, needing an Offer of Place, proof of funds, and (for longer courses) a medical exam.",
         popular_intakes="February, July",
+        order=4,
+    ),
+    dict(
+        name="Malta",
+        slug="malta",
+        country_code="MLT",
+        summary="A growing English-speaking option in the EU — the market has attracted questionable agents, so we only work with institutions we've verified directly.",
+        cost_overview="Tuition varies widely by institution — EUR 3,000–9,000 a year at recognized colleges; living costs run EUR 700–1,000 a month. We show you the fee structure in writing before you apply anywhere.",
+        intake_overview="Main intake in September/October, with some institutes offering rolling admissions through the year.",
+        visa_overview="Malta national (D) student visa, requiring a letter of acceptance from an accredited institution, proof of funds, and confirmed accommodation — we verify accreditation before recommending any school.",
+        popular_intakes="September, October",
         order=5,
     ),
     dict(
-        name="Denmark",
-        country_code="DEN",
-        summary="Tuition-free or low-cost public universities for EU-aligned programs, with English-taught degrees increasingly common.",
-        cost_overview="Public university tuition for non-EU students is typically EUR 6,000–16,000 a year; living costs run EUR 800–1,200 a month.",
-        intake_overview="Single main intake in September (application deadlines usually fall in March).",
-        visa_overview="Residence permit for study, applied for through the Danish Immigration Service, with proof of admission and financial means as the core requirements.",
-        popular_intakes="September",
-        order=6,
-    ),
-    dict(
         name="South Korea",
+        slug="south-korea",
         country_code="KOR",
         summary="A fast-growing choice for Nepali students, with strong scholarship support and a rapidly internationalizing job market.",
         cost_overview="Tuition is typically KRW 3–8 million a semester at public universities; living costs run KRW 700,000–1,000,000 a month outside Seoul.",
         intake_overview="Two intakes: March (spring) and September (fall).",
         visa_overview="D-2 student visa, requiring a Certificate of Admission, proof of funds, and — for many programs — a TOPIK or English proficiency score.",
         popular_intakes="March, September",
-        order=7,
+        order=6,
     ),
 ]
 
@@ -163,6 +159,11 @@ class Command(BaseCommand):
             )
             self.stdout.write(f"{'Created' if created else 'Updated'} destination: {obj.name}")
 
+        removed = Destination.objects.exclude(name__in=[d["name"] for d in DESTINATIONS])
+        for d in removed:
+            self.stdout.write(f"Removing destination no longer served: {d.name}")
+        removed.delete()
+
         for data in SERVICES:
             obj, created = Service.objects.update_or_create(
                 title=data["title"], defaults=data
@@ -185,12 +186,12 @@ class Command(BaseCommand):
         )
         settings_obj.hero_subcopy = settings_obj.hero_subcopy or (
             "We help Nepali students get into the right university in Australia, Canada, "
-            "the USA, the UK, New Zealand, Denmark and South Korea — and get the visa to go with it."
+            "the UK, New Zealand, Malta and South Korea — and get the visa to go with it."
         )
         settings_obj.stat_students_placed = settings_obj.stat_students_placed or "1,200+"
         settings_obj.stat_partner_universities = settings_obj.stat_partner_universities or "85+"
         settings_obj.stat_visa_success_rate = settings_obj.stat_visa_success_rate or "92%"
-        settings_obj.stat_countries = settings_obj.stat_countries or "07"
+        settings_obj.stat_countries = str(len(DESTINATIONS)).zfill(2)
         settings_obj.save()
         self.stdout.write("Updated site settings")
 

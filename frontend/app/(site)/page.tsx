@@ -1,9 +1,12 @@
+import type { Metadata } from "next";
+
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Hero } from "@/components/sections/Hero";
 import { HowItWorks } from "@/components/sections/HowItWorks";
 import { ServicesAndTestPrep } from "@/components/sections/ServicesAndTestPrep";
 import { StatsBand } from "@/components/sections/StatsBand";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
+import { WhyLocal } from "@/components/sections/WhyLocal";
 import { DestinationCard } from "@/components/ui/DestinationCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section, SectionHeading } from "@/components/ui/Section";
@@ -14,6 +17,12 @@ import {
   getTestPreps,
   getTestimonials,
 } from "@/lib/api";
+
+export const metadata: Metadata = {
+  title: "Best Consultancy in Bagbazar for Study Abroad",
+  description:
+    "Nexture Education is a study abroad consultancy based in Bagbazar, Kathmandu — counseling, university selection, visa support and test prep for Australia, Canada, the UK, New Zealand, Malta and South Korea.",
+};
 
 export default async function Home() {
   const [settings, destinations, services, testPreps, testimonials] = await Promise.all([
@@ -31,13 +40,13 @@ export default async function Home() {
       <Section tone="paper" id="destinations">
         <SectionHeading
           eyebrow="Where you can go"
-          title="Seven countries. One honest shortlist."
+          title="Six countries. One honest shortlist."
           subcopy="Every destination page has real numbers — cost, intakes, visa process — not just a photo of a campus."
         />
-        <div className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {destinations.map((d, i) => (
             <Reveal key={d.id} delay={i * 60}>
-              <DestinationCard destination={d} index={i} />
+              <DestinationCard destination={d} />
             </Reveal>
           ))}
         </div>
@@ -48,13 +57,17 @@ export default async function Home() {
       </Section>
 
       <Section tone="paper">
+        <WhyLocal settings={settings} />
+      </Section>
+
+      <Section tone="tint">
         <ServicesAndTestPrep services={services} testPreps={testPreps} />
       </Section>
 
       <StatsBand settings={settings} />
 
       {testimonials.length ? (
-        <Section tone="tint">
+        <Section tone="paper">
           <TestimonialsSection testimonials={testimonials} />
         </Section>
       ) : null}

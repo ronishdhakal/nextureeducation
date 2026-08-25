@@ -40,7 +40,7 @@ function LoginForm() {
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wide text-stone mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wide text-stone mb-1.5">
                 Username
               </label>
               <input
@@ -52,7 +52,7 @@ function LoginForm() {
               />
             </div>
             <div>
-              <label className="block text-xs font-mono uppercase tracking-wide text-stone mb-1.5">
+              <label className="block text-xs font-semibold uppercase tracking-wide text-stone mb-1.5">
                 Password
               </label>
               <input
@@ -69,7 +69,7 @@ function LoginForm() {
             <button
               type="submit"
               disabled={loading}
-              className="mt-2 inline-flex items-center justify-center rounded-full bg-violet text-white font-semibold px-5 py-3 text-sm transition-all hover:bg-violet-deep disabled:opacity-60"
+              className="mt-2 inline-flex items-center justify-center rounded-md bg-violet text-white font-semibold px-5 py-3 text-sm transition-all hover:bg-violet-deep disabled:opacity-60"
             >
               {loading ? "Signing in…" : "Sign in"}
             </button>

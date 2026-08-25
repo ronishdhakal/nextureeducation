@@ -89,7 +89,7 @@ export default function LeadsPage() {
           <button
             type="button"
             onClick={handleExport}
-            className="inline-flex items-center gap-2 rounded-full border border-hairline bg-white px-5 py-2.5 text-sm font-semibold hover:border-violet transition-colors"
+            className="inline-flex items-center gap-2 rounded-md border border-hairline bg-white px-5 py-2.5 text-sm font-semibold hover:border-violet transition-colors"
           >
             <Download className="size-4" /> Export CSV
           </button>
@@ -97,7 +97,7 @@ export default function LeadsPage() {
       />
 
       <div className="flex items-center gap-3 mb-5">
-        <span className="text-xs font-mono uppercase tracking-wide text-stone">Filter</span>
+        <span className="text-xs font-semibold uppercase tracking-wide text-stone">Filter</span>
         <Select
           value={statusFilter}
           onChange={(e) => setStatusFilter(e.target.value as LeadStatus | "all")}
@@ -118,7 +118,7 @@ export default function LeadsPage() {
         <div className="rounded-2xl border border-hairline bg-white overflow-hidden overflow-x-auto">
           <table className="w-full text-sm">
             <thead>
-              <tr className="border-b border-hairline text-left text-xs font-mono uppercase tracking-wide text-stone">
+              <tr className="border-b border-hairline text-left text-xs font-semibold uppercase tracking-wide text-stone">
                 <th className="px-5 py-3 font-medium">Name</th>
                 <th className="px-5 py-3 font-medium">Destination</th>
                 <th className="px-5 py-3 font-medium">Status</th>
@@ -205,7 +205,7 @@ export default function LeadsPage() {
               </dl>
               {selected.message ? (
                 <div>
-                  <p className="text-xs font-mono uppercase tracking-wide text-stone mb-1.5">
+                  <p className="text-xs font-semibold uppercase tracking-wide text-stone mb-1.5">
                     Message
                   </p>
                   <p className="text-sm text-ink/75 leading-relaxed whitespace-pre-line">
@@ -215,7 +215,7 @@ export default function LeadsPage() {
               ) : null}
 
               <div>
-                <p className="text-xs font-mono uppercase tracking-wide text-stone mb-1.5">
+                <p className="text-xs font-semibold uppercase tracking-wide text-stone mb-1.5">
                   Status
                 </p>
                 <Select

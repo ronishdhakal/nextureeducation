@@ -54,7 +54,7 @@ export default async function AboutPage() {
         <SectionHeading eyebrow="How we work" title="Three things we don't compromise on." />
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
           {VALUES.map((v) => (
-            <div key={v.title} className="rounded-2xl border border-hairline bg-paper-2 p-6">
+            <div key={v.title} className="rounded-lg border border-hairline bg-paper-2 p-6">
               <h3 className="font-display font-bold text-lg text-ink mb-2">{v.title}</h3>
               <p className="text-sm text-ink/65 leading-relaxed">{v.detail}</p>
             </div>
@@ -98,7 +98,7 @@ export default async function AboutPage() {
           <SectionHeading eyebrow="Find us" title="Visit our office." />
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
             {branches.map((b) => (
-              <div key={b.id} className="rounded-2xl border border-hairline bg-paper-2 p-6">
+              <div key={b.id} className="rounded-lg border border-hairline bg-paper-2 p-6">
                 <p className="font-display font-bold text-ink">{b.name}</p>
                 <p className="text-sm text-ink/65 mt-2 leading-relaxed">{b.address}</p>
                 <p className="text-sm text-ink/65 mt-1">

@@ -28,28 +28,28 @@ export default async function TestPrepPage() {
           {testPreps.map((tp) => (
             <div
               key={tp.id}
-              className="rounded-3xl border border-hairline bg-paper p-7 flex flex-col gap-4"
+              className="rounded-lg border border-hairline bg-paper p-7 flex flex-col gap-4"
             >
-              <span className="font-mono text-xs uppercase tracking-[0.16em] text-violet-deep">
+              <span className="text-sm font-bold uppercase tracking-[0.1em] text-violet-deep">
                 {tp.name}
               </span>
               <p className="text-ink/70 text-sm leading-relaxed flex-1">{tp.description}</p>
-              <dl className="text-xs text-stone space-y-1.5 border-t border-dashed border-ink/15 pt-4">
+              <dl className="text-xs text-stone space-y-1.5 border-t border-hairline pt-4">
                 {tp.format_note ? (
                   <div className="flex gap-2">
-                    <dt className="font-mono uppercase shrink-0">Format</dt>
+                    <dt className="font-semibold uppercase shrink-0">Format</dt>
                     <dd>{tp.format_note}</dd>
                   </div>
                 ) : null}
                 {tp.schedule_note ? (
                   <div className="flex gap-2">
-                    <dt className="font-mono uppercase shrink-0">Schedule</dt>
+                    <dt className="font-semibold uppercase shrink-0">Schedule</dt>
                     <dd>{tp.schedule_note}</dd>
                   </div>
                 ) : null}
                 {tp.fees_note ? (
                   <div className="flex gap-2">
-                    <dt className="font-mono uppercase shrink-0">Fees</dt>
+                    <dt className="font-semibold uppercase shrink-0">Fees</dt>
                     <dd>{tp.fees_note}</dd>
                   </div>
                 ) : null}

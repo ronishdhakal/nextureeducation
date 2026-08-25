@@ -13,7 +13,7 @@ type Row = Record<string, unknown>;
 function renderCell(value: unknown) {
   if (typeof value === "boolean") {
     return value ? (
-      <span className="inline-flex rounded-full px-2.5 py-0.5 text-xs font-mono bg-mint/15 text-[#0d7a63]">
+      <span className="inline-flex rounded-md px-2.5 py-0.5 text-xs font-semibold bg-mint/15 text-[#0d7a63]">
         Yes
       </span>
     ) : (
@@ -60,7 +60,7 @@ export function GenericResourceList({ config }: { config: ResourceConfig }) {
         action={
           <Link
             href={`${config.basePath}/new`}
-            className="inline-flex items-center gap-2 rounded-full bg-violet text-white font-semibold px-5 py-2.5 text-sm hover:bg-violet-deep transition-colors"
+            className="inline-flex items-center gap-2 rounded-md bg-violet text-white font-semibold px-5 py-2.5 text-sm hover:bg-violet-deep transition-colors"
           >
             <Plus className="size-4" /> New {config.singularLabel.toLowerCase()}
           </Link>
@@ -72,7 +72,7 @@ export function GenericResourceList({ config }: { config: ResourceConfig }) {
       <div className="rounded-2xl border border-hairline bg-white overflow-hidden overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
-            <tr className="border-b border-hairline text-left text-xs font-mono uppercase tracking-wide text-stone">
+            <tr className="border-b border-hairline text-left text-xs font-semibold uppercase tracking-wide text-stone">
               {config.listColumns.map((col) => (
                 <th key={col.key} className="px-5 py-3 font-medium">
                   {col.label}

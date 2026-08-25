@@ -31,10 +31,7 @@ export const metadata: Metadata = {
     template: "%s — Nexture Education",
   },
   description:
-    "Nexture Education guides Nepali students to study in Australia, Canada, the USA, the UK, New Zealand, Denmark and South Korea — counseling, university matching, applications, visas, and test prep, straight talk only.",
-  icons: {
-    icon: "/assets/nexture-logo.jpeg",
-  },
+    "Nexture Education guides Nepali students to study in Australia, Canada, the UK, New Zealand, Malta and South Korea — counseling, university matching, applications, visas, and test prep, straight talk only.",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

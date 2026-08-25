@@ -10,7 +10,7 @@ import { getDestinations } from "@/lib/api";
 export const metadata: Metadata = {
   title: "Destinations",
   description:
-    "Seven study destinations for Nepali students — Australia, Canada, the USA, the UK, New Zealand, Denmark and South Korea — with real cost, intake and visa information.",
+    "Six study destinations for Nepali students — Australia, Canada, the UK, New Zealand, Malta and South Korea — with real cost, intake and visa information.",
 };
 
 export default async function DestinationsPage() {
@@ -20,7 +20,7 @@ export default async function DestinationsPage() {
     <>
       <PageHeader
         eyebrow="Destinations"
-        title="Seven countries. Pick the one that fits your life, not just your grades."
+        title="Six countries. Pick the one that fits your life, not just your grades."
         subcopy="Cost of living, intake seasons, visa requirements — the things that actually decide whether a move works."
       />
 
@@ -28,7 +28,7 @@ export default async function DestinationsPage() {
         <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {destinations.map((d, i) => (
             <Reveal key={d.id} delay={i * 60}>
-              <DestinationCard destination={d} index={i} />
+              <DestinationCard destination={d} />
             </Reveal>
           ))}
         </div>

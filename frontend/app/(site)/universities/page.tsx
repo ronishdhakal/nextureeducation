@@ -8,7 +8,7 @@ import { getDestinations, getUniversities } from "@/lib/api";
 
 export const metadata: Metadata = {
   title: "Partner Universities",
-  description: "Universities we work with across Australia, Canada, the USA, the UK, New Zealand, Denmark and South Korea.",
+  description: "Universities we work with across Australia, Canada, the UK, New Zealand, Malta and South Korea.",
 };
 
 export default async function UniversitiesPage() {
@@ -33,7 +33,7 @@ export default async function UniversitiesPage() {
             ))}
           </div>
         ) : (
-          <div className="rounded-3xl border border-dashed border-hairline p-10 text-center text-ink/60">
+          <div className="rounded-lg border border-hairline p-10 text-center text-ink/60">
             Our partner university list is being updated — get in touch and we&apos;ll match
             you directly.
           </div>

@@ -39,7 +39,7 @@ export default async function BlogPage() {
                 <Link
                   key={post.id}
                   href={`/blog/${post.slug}`}
-                  className="group flex flex-col rounded-2xl border border-hairline bg-paper overflow-hidden transition-all hover:-translate-y-1 hover:shadow-[0_20px_44px_-20px_rgba(23,11,34,0.25)]"
+                  className="group flex flex-col rounded-lg border border-hairline bg-paper overflow-hidden transition-shadow hover:shadow-md"
                 >
                   {cover ? (
                     // eslint-disable-next-line @next/next/no-img-element
@@ -52,7 +52,7 @@ export default async function BlogPage() {
                     </div>
                   )}
                   <div className="p-6 flex flex-col gap-2 flex-1">
-                    <span className="font-mono text-[11px] uppercase tracking-wide text-stone">
+                    <span className="text-xs font-medium uppercase tracking-wide text-stone">
                       {formatDate(post.published_at)}
                       {post.author ? ` · ${post.author}` : ""}
                     </span>
@@ -66,7 +66,7 @@ export default async function BlogPage() {
             })}
           </div>
         ) : (
-          <div className="rounded-3xl border border-dashed border-hairline p-10 text-center text-ink/60">
+          <div className="rounded-lg border border-hairline p-10 text-center text-ink/60">
             No posts yet — check back soon.
           </div>
         )}

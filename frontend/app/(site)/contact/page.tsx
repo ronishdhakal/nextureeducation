@@ -82,7 +82,7 @@ export default async function ContactPage() {
             ))}
           </div>
 
-          <div className="rounded-3xl border border-hairline bg-paper-2 p-6 sm:p-8">
+          <div className="rounded-lg border border-hairline bg-paper-2 p-6 sm:p-8">
             <SectionHeading
               title="Book a free session"
               subcopy="No obligation, no sales pressure — just a straight conversation about your options."

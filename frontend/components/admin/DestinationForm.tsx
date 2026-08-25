@@ -191,7 +191,7 @@ export function DestinationForm({ destination }: { destination?: Destination }) 
         <button
           type="submit"
           disabled={saving}
-          className="inline-flex items-center justify-center rounded-full bg-violet text-white font-semibold px-6 py-3 text-sm transition-all hover:bg-violet-deep disabled:opacity-60"
+          className="inline-flex items-center justify-center rounded-md bg-violet text-white font-semibold px-6 py-3 text-sm transition-all hover:bg-violet-deep disabled:opacity-60"
         >
           {saving ? "Saving…" : destination ? "Save changes" : "Create destination"}
         </button>

@@ -7,6 +7,7 @@ import { InquiryForm } from "@/components/ui/InquiryForm";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { UniversityCard } from "@/components/ui/UniversityCard";
 import { getDestination, getDestinations, getUniversities } from "@/lib/api";
+import { getFlagSrc } from "@/lib/destinationFlags";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -36,6 +37,7 @@ export default async function DestinationDetailPage({ params }: Props) {
   if (!destination) notFound();
 
   const universities = await getUniversities(destination.id);
+  const flag = getFlagSrc(destination.slug);
 
   return (
     <>
@@ -43,7 +45,16 @@ export default async function DestinationDetailPage({ params }: Props) {
         eyebrow={`Study in ${destination.country_code || destination.name}`}
         title={destination.name}
         subcopy={destination.summary}
-      />
+      >
+        {flag ? (
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
+            src={flag}
+            alt=""
+            className="mt-6 h-8 w-12 rounded-sm object-cover border border-white/20"
+          />
+        ) : null}
+      </PageHeader>
 
       <Section tone="paper">
         <div className="grid lg:grid-cols-[1fr_0.7fr] gap-16">
@@ -60,11 +71,11 @@ export default async function DestinationDetailPage({ params }: Props) {
             })}
 
             {destination.popular_intakes ? (
-              <div className="flex items-center gap-3 rounded-2xl bg-violet-pale px-5 py-4 w-fit">
-                <span className="font-mono text-xs uppercase tracking-wide text-violet-deep">
+              <div className="flex items-center gap-3 rounded-lg bg-violet-pale px-5 py-4 w-fit">
+                <span className="text-xs font-semibold uppercase tracking-wide text-violet-deep">
                   Popular intakes
                 </span>
-                <span className="font-mono text-sm text-violet-deep font-semibold">
+                <span className="text-sm text-violet-deep font-semibold">
                   {destination.popular_intakes}
                 </span>
               </div>
@@ -84,7 +95,7 @@ export default async function DestinationDetailPage({ params }: Props) {
             ) : null}
           </div>
 
-          <div className="lg:sticky lg:top-24 h-fit rounded-3xl border border-hairline bg-paper-2 p-6 sm:p-7">
+          <div className="lg:sticky lg:top-24 h-fit rounded-lg border border-hairline bg-paper-2 p-6 sm:p-7">
             <SectionHeading
               title={`Thinking about ${destination.name}?`}
               subcopy="Tell us a bit about yourself — we'll call within one business day."

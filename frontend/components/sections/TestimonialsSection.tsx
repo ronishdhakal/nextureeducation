@@ -31,24 +31,14 @@ export function TestimonialsSection({
         />
       ) : null}
 
-      <div className={`grid gap-6 sm:grid-cols-2 lg:grid-cols-3 ${showHeading ? "mt-14" : ""}`}>
+      <div className={`grid gap-5 sm:grid-cols-2 lg:grid-cols-3 ${showHeading ? "mt-12" : ""}`}>
         {testimonials.map((t, i) => {
           const photo = mediaUrl(t.photo);
           return (
-            <Reveal key={t.id} delay={i * 70}>
-              <div
-                className={`relative h-full rounded-2xl bg-paper border border-hairline p-6 shadow-[0_16px_36px_-20px_rgba(23,11,34,0.25)] ${
-                  i % 2 === 0 ? "-rotate-1" : "rotate-1"
-                } hover:rotate-0 transition-transform duration-300`}
-              >
-                <span
-                  aria-hidden
-                  className="absolute -top-2.5 -right-2.5 size-8 rounded-full bg-amber flex items-center justify-center text-ink text-xs font-mono font-bold rotate-6"
-                >
-                  ✓
-                </span>
-                <p className="text-ink/75 leading-relaxed italic">&ldquo;{t.quote}&rdquo;</p>
-                <div className="mt-6 flex items-center gap-3">
+            <Reveal key={t.id} delay={i * 60}>
+              <div className="h-full rounded-lg bg-paper border border-hairline p-6">
+                <p className="text-ink/75 leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
+                <div className="mt-5 flex items-center gap-3 border-t border-hairline pt-4">
                   {photo ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -57,7 +47,7 @@ export function TestimonialsSection({
                       className="size-10 rounded-full object-cover border border-hairline"
                     />
                   ) : (
-                    <span className="size-10 rounded-full bg-violet-pale text-violet-deep font-mono text-sm font-bold flex items-center justify-center">
+                    <span className="size-10 rounded-full bg-violet-pale text-violet-deep text-sm font-bold flex items-center justify-center">
                       {initials(t.student_name)}
                     </span>
                   )}

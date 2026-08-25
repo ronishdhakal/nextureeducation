@@ -62,14 +62,14 @@ export function InquiryForm({
 
   const inputClass =
     tone === "ink"
-      ? "w-full rounded-xl bg-white/10 border border-white/20 px-4 py-3 text-sm text-white placeholder:text-white/40 focus:border-white/60 outline-none transition-colors"
-      : "w-full rounded-xl bg-paper-2 border border-hairline px-4 py-3 text-sm text-ink placeholder:text-stone-light focus:border-violet outline-none transition-colors";
-  const labelClass = `block text-xs font-mono uppercase tracking-wide mb-1.5 ${tone === "ink" ? "text-white/60" : "text-stone"}`;
+      ? "w-full rounded-md bg-white/10 border border-white/20 px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/60 outline-none transition-colors"
+      : "w-full rounded-md bg-paper-2 border border-hairline px-4 py-2.5 text-sm text-ink placeholder:text-stone-light focus:border-violet outline-none transition-colors";
+  const labelClass = `block text-xs font-semibold uppercase tracking-wide mb-1.5 ${tone === "ink" ? "text-white/60" : "text-stone"}`;
 
   if (status === "success") {
     return (
       <div
-        className={`rounded-2xl px-6 py-8 text-center ${tone === "ink" ? "bg-white/10" : "bg-violet-pale"} ${className}`}
+        className={`rounded-lg px-6 py-8 text-center ${tone === "ink" ? "bg-white/10" : "bg-violet-pale"} ${className}`}
       >
         <p className="font-display font-bold text-xl mb-1">You&apos;re on the list.</p>
         <p className={tone === "ink" ? "text-white/70" : "text-ink/65"}>
@@ -190,7 +190,7 @@ export function InquiryForm({
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex items-center justify-center rounded-full bg-violet text-white font-semibold px-6 py-3.5 text-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-violet-deep disabled:opacity-60 disabled:hover:translate-y-0"
+        className="inline-flex items-center justify-center rounded-md bg-violet text-white font-semibold px-6 py-3 text-sm transition-colors duration-150 hover:bg-violet-deep disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Book a free session"}
       </button>

@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="480" height="240">
+    <path id="star" d="M 0,-1 L 0.588,0.809 -0.951,-0.309 0.951,-0.309 -0.588,0.809 z" />
+    <g id="canton">
+        <clipPath id="UK_flag">
+            <rect x="0" y="0" width="300" height="150" />
+        </clipPath>
+        <clipPath id="pinwheel">
+            <path d="M 0,0 300,150 300,75 0,75 Z M 300,0 L 0,150 150,150 150,0 Z" />
+        </clipPath>
+        <g clip-path="url(#UK_flag)">
+            <rect x="0" y="0" width="300" height="150" fill="blue"/>
+            <line x1="0" y1="0" x2="300" y2="150" stroke="white" stroke-width="30" />
+            <line x1="0" y1="150" x2="300" y2="0" stroke="white" stroke-width="30" />
+            <g clip-path="url(#pinwheel)">
+                <line x1="0" y1="0" x2="300" y2="150" stroke="red" stroke-width="20" />
+                <line x1="0" y1="150" x2="300" y2="0" stroke="red" stroke-width="20" />
+            </g>
+            <line x1="150" y1="0" x2="150" y2="150" stroke="white" stroke-width="50" />
+            <line x1="0" y1="75" x2="300" y2="75" stroke="white" stroke-width="50" />
+            <line x1="150" y1="0" x2="150" y2="150" stroke="red" stroke-width="30" />
+            <line x1="0" y1="75" x2="300" y2="75" stroke="red" stroke-width="30" />
+        </g>
+    </g>
+    <g transform="scale(2)">
+    <rect x="0" y="0" width="240" height="120" fill="blue"/>
+    <use xlink:href="#canton" transform="scale(0.4)"/>
+    <use xlink:href="#star" transform="translate(180,96) scale(9)" fill="white" />
+    <use xlink:href="#star" transform="translate(180,96) scale(7)" fill="red" />
+    <use xlink:href="#star" transform="translate(180,24) scale(8)" fill="white" />
+    <use xlink:href="#star" transform="translate(180,24) scale(6)" fill="red" />
+    <use xlink:href="#star" transform="translate(152.3,51.9) scale(8)" fill="white" />
+    <use xlink:href="#star" transform="translate(152.3,51.9) scale(6)" fill="red" />
+    <use xlink:href="#star" transform="translate(203.8,44.7) scale(7)" fill="white" />
+    <use xlink:href="#star" transform="translate(203.8,44.7) scale(5)" fill="red" />
+    </g>
+</svg>

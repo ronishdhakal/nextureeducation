@@ -25,7 +25,7 @@ export function Section({
 }: SectionProps) {
   return (
     <section id={id} className={`relative ${TONE_CLASSES[tone]} ${className}`}>
-      <div className={`mx-auto w-full max-w-6xl px-6 sm:px-8 py-16 sm:py-24 ${innerClassName}`}>
+      <div className={`mx-auto w-full max-w-6xl px-6 sm:px-8 py-14 sm:py-20 ${innerClassName}`}>
         {children}
       </div>
     </section>
@@ -41,13 +41,10 @@ export function Eyebrow({
 }) {
   return (
     <span
-      className={`inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.2em] ${
-        tone === "violet" ? "text-violet-deep" : "text-paper/70"
+      className={`text-xs font-semibold uppercase tracking-[0.14em] ${
+        tone === "violet" ? "text-violet-deep" : "text-paper/75"
       }`}
     >
-      <span
-        className={`size-1.5 rounded-full ${tone === "violet" ? "bg-violet" : "bg-amber"}`}
-      />
       {children}
     </span>
   );
@@ -68,14 +65,14 @@ export function SectionHeading({
 }) {
   return (
     <div
-      className={`flex flex-col gap-4 max-w-2xl ${align === "center" ? "mx-auto text-center items-center" : ""}`}
+      className={`flex flex-col gap-3 max-w-2xl ${align === "center" ? "mx-auto text-center items-center" : ""}`}
     >
       {eyebrow ? <Eyebrow tone={tone}>{eyebrow}</Eyebrow> : null}
-      <h2 className="font-display font-extrabold text-3xl sm:text-4xl lg:text-[2.75rem] leading-[1.1] text-balance">
+      <h2 className="font-display font-bold text-3xl sm:text-4xl leading-[1.15] text-balance">
         {title}
       </h2>
       {subcopy ? (
-        <p className={`text-base sm:text-lg ${tone === "paper" ? "text-paper/70" : "text-ink/65"}`}>
+        <p className={`text-base ${tone === "paper" ? "text-paper/70" : "text-ink/65"}`}>
           {subcopy}
         </p>
       ) : null}
