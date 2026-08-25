@@ -1,6 +1,8 @@
 export type FieldType =
   | "text"
   | "textarea"
+  | "richtext"
+  | "date"
   | "number"
   | "boolean"
   | "select"
@@ -27,6 +29,11 @@ export interface ResourceConfig {
   listColumns: { key: string; label: string }[];
   titleField: string;
 }
+
+const SEO_FIELDS: FieldConfig[] = [
+  { key: "meta_title", label: "SEO title", type: "text", hint: "Leave blank to use the page title" },
+  { key: "meta_description", label: "SEO description", type: "text" },
+];
 
 export const SERVICE_CONFIG: ResourceConfig = {
   resource: "services",
@@ -57,9 +64,10 @@ export const SERVICE_CONFIG: ResourceConfig = {
       ],
     },
     { key: "short_description", label: "Short description", type: "textarea", required: true, maxLength: 200 },
-    { key: "long_description", label: "Long description", type: "textarea" },
+    { key: "long_description", label: "Long description", type: "richtext" },
     { key: "order", label: "Order", type: "number", defaultValue: 0 },
     { key: "is_published", label: "Published", type: "boolean", defaultValue: true },
+    ...SEO_FIELDS,
   ],
 };
 
@@ -84,6 +92,7 @@ export const TESTPREP_CONFIG: ResourceConfig = {
     { key: "fees_note", label: "Fees", type: "text" },
     { key: "order", label: "Order", type: "number", defaultValue: 0 },
     { key: "is_published", label: "Published", type: "boolean", defaultValue: true },
+    ...SEO_FIELDS,
   ],
 };
 
@@ -132,5 +141,76 @@ export const TESTIMONIAL_CONFIG: ResourceConfig = {
     { key: "order", label: "Order", type: "number", defaultValue: 0 },
     { key: "is_featured", label: "Featured", type: "boolean" },
     { key: "is_published", label: "Published", type: "boolean", defaultValue: true },
+  ],
+};
+
+export const UNIVERSITY_CONFIG: ResourceConfig = {
+  resource: "universities",
+  basePath: "/admin/universities",
+  singularLabel: "University",
+  pluralLabel: "Universities",
+  description: "Partner universities shown on destination pages and /universities.",
+  titleField: "name",
+  listColumns: [
+    { key: "name", label: "Name" },
+    { key: "city", label: "City" },
+    { key: "is_partner", label: "Partner" },
+    { key: "is_published", label: "Published" },
+  ],
+  fields: [
+    { key: "name", label: "Name", type: "text", required: true },
+    { key: "country", label: "Country", type: "destination-select", required: true },
+    { key: "city", label: "City", type: "text" },
+    { key: "ranking_note", label: "Ranking note", type: "text", hint: "e.g. Top 50 QS ranked" },
+    { key: "programs_summary", label: "Programs summary", type: "textarea" },
+    { key: "external_link", label: "Website", type: "text" },
+    { key: "order", label: "Order", type: "number", defaultValue: 0 },
+    { key: "is_partner", label: "Active partner", type: "boolean", defaultValue: true },
+    { key: "is_published", label: "Published", type: "boolean", defaultValue: true },
+  ],
+};
+
+export const BLOGPOST_CONFIG: ResourceConfig = {
+  resource: "blog",
+  basePath: "/admin/blog",
+  singularLabel: "Blog Post",
+  pluralLabel: "Blog",
+  description: "Articles shown on /blog.",
+  titleField: "title",
+  listColumns: [
+    { key: "title", label: "Title" },
+    { key: "author", label: "Author" },
+    { key: "is_published", label: "Published" },
+  ],
+  fields: [
+    { key: "title", label: "Title", type: "text", required: true },
+    { key: "slug", label: "Slug", type: "text", hint: "Leave blank to auto-generate" },
+    { key: "excerpt", label: "Excerpt", type: "textarea", maxLength: 280, hint: "Shown on the blog list" },
+    { key: "body", label: "Body", type: "richtext", required: true },
+    { key: "author", label: "Author", type: "text" },
+    { key: "published_at", label: "Publish date", type: "date" },
+    { key: "is_published", label: "Published", type: "boolean", defaultValue: true },
+    ...SEO_FIELDS,
+  ],
+};
+
+export const PAGE_CONFIG: ResourceConfig = {
+  resource: "pages",
+  basePath: "/admin/pages",
+  singularLabel: "Page",
+  pluralLabel: "Pages",
+  description: "Freeform pages (e.g. Privacy Policy) available at /pages/[slug].",
+  titleField: "title",
+  listColumns: [
+    { key: "title", label: "Title" },
+    { key: "slug", label: "Slug" },
+    { key: "is_published", label: "Published" },
+  ],
+  fields: [
+    { key: "title", label: "Title", type: "text", required: true },
+    { key: "slug", label: "Slug", type: "text", hint: "Leave blank to auto-generate" },
+    { key: "body", label: "Body", type: "richtext", required: true },
+    { key: "is_published", label: "Published", type: "boolean", defaultValue: true },
+    ...SEO_FIELDS,
   ],
 };

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 
-import { getBlogPosts, getDestinations, getServices } from "@/lib/api";
+import { getBlogPosts, getDestinations, getPages, getServices } from "@/lib/api";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nexture.edu.np";
 
@@ -17,10 +17,11 @@ const STATIC_ROUTES = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [destinations, services, posts] = await Promise.all([
+  const [destinations, services, posts, pages] = await Promise.all([
     getDestinations(),
     getServices(),
     getBlogPosts(),
+    getPages(),
   ]);
 
   const staticEntries = STATIC_ROUTES.map((route) => ({
@@ -43,5 +44,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: p.published_at ? new Date(p.published_at) : new Date(),
   }));
 
-  return [...staticEntries, ...destinationEntries, ...serviceEntries, ...blogEntries];
+  const pageEntries = pages.map((p) => ({
+    url: `${SITE_URL}/pages/${p.slug}`,
+    lastModified: new Date(),
+  }));
+
+  return [...staticEntries, ...destinationEntries, ...serviceEntries, ...blogEntries, ...pageEntries];
 }

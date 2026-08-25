@@ -5,8 +5,11 @@ import { usePathname, useRouter } from "next/navigation";
 import { useState, type ReactNode } from "react";
 import {
   Award,
+  BookOpen,
   Building2,
+  FileStack,
   FileText,
+  GraduationCap,
   Globe2,
   LayoutDashboard,
   LogOut,
@@ -23,9 +26,12 @@ const NAV = [
   { label: "Dashboard", href: "/admin/dashboard", icon: LayoutDashboard },
   { label: "Leads", href: "/admin/leads", icon: Users },
   { label: "Destinations", href: "/admin/destinations", icon: Globe2 },
+  { label: "Universities", href: "/admin/universities", icon: GraduationCap },
   { label: "Services", href: "/admin/services", icon: Award },
   { label: "Test Prep", href: "/admin/test-prep", icon: FileText },
   { label: "Testimonials", href: "/admin/testimonials", icon: Newspaper },
+  { label: "Blog", href: "/admin/blog", icon: BookOpen },
+  { label: "Pages", href: "/admin/pages", icon: FileStack },
   { label: "Branches", href: "/admin/branches", icon: Building2 },
   { label: "Site Settings", href: "/admin/settings", icon: Settings },
 ];

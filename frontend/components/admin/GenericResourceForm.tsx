@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
 import { Checkbox, Field, Select, TextArea, TextInput } from "@/components/admin/FormField";
+import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { createResource, listResource, updateResource } from "@/lib/adminApi";
 import type { ResourceConfig } from "@/lib/adminResources";
 import type { Destination } from "@/lib/types";
@@ -72,7 +73,20 @@ export function GenericResourceForm({ config, row }: { config: ResourceConfig; r
         .filter((f) => f.type !== "boolean")
         .map((field) => (
           <Field key={field.key} label={field.label} htmlFor={field.key} hint={field.hint}>
-            {field.type === "textarea" ? (
+            {field.type === "richtext" ? (
+              <RichTextEditor
+                value={String(form[field.key] ?? "")}
+                onChange={(html) => set(field.key, html)}
+              />
+            ) : field.type === "date" ? (
+              <TextInput
+                id={field.key}
+                type="date"
+                required={field.required}
+                value={String(form[field.key] ?? "").slice(0, 10)}
+                onChange={(e) => set(field.key, e.target.value ? `${e.target.value}T00:00:00` : "")}
+              />
+            ) : field.type === "textarea" ? (
               <TextArea
                 id={field.key}
                 required={field.required}

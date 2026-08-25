@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { InquiryForm } from "@/components/ui/InquiryForm";
+import { RichText } from "@/components/ui/RichText";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { getDestinations, getService } from "@/lib/api";
 import { ServiceIcon } from "@/lib/icons";
@@ -36,10 +37,12 @@ export default async function ServiceDetailPage({ params }: Props) {
 
       <Section tone="paper">
         <div className="grid lg:grid-cols-[1fr_0.7fr] gap-16">
-          <div className="prose-ish">
-            <p className="text-ink/70 leading-relaxed whitespace-pre-line text-lg">
-              {service.long_description || service.short_description}
-            </p>
+          <div>
+            {service.long_description ? (
+              <RichText html={service.long_description} className="text-ink/70" />
+            ) : (
+              <p className="text-ink/70 leading-relaxed text-lg">{service.short_description}</p>
+            )}
           </div>
 
           <div className="lg:sticky lg:top-24 h-fit rounded-lg border border-hairline bg-paper-2 p-6 sm:p-7">

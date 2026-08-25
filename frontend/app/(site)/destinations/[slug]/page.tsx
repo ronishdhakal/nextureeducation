@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { InquiryForm } from "@/components/ui/InquiryForm";
+import { RichText } from "@/components/ui/RichText";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { UniversityCard } from "@/components/ui/UniversityCard";
 import { getDestination, getDestinations, getUniversities } from "@/lib/api";
@@ -65,7 +66,7 @@ export default async function DestinationDetailPage({ params }: Props) {
               return (
                 <div key={block.key}>
                   <h2 className="font-display font-bold text-xl text-ink mb-3">{block.label}</h2>
-                  <p className="text-ink/70 leading-relaxed whitespace-pre-line">{value}</p>
+                  <RichText html={value} className="text-ink/70" />
                 </div>
               );
             })}

@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { Checkbox, Field, TextArea, TextInput } from "@/components/admin/FormField";
+import { RichTextEditor } from "@/components/admin/RichTextEditor";
 import { createResource, updateResource } from "@/lib/adminApi";
 import type { Destination } from "@/lib/types";
 
@@ -111,29 +112,23 @@ export function DestinationForm({ destination }: { destination?: Destination }) 
       </Field>
 
       <Field label="Cost of living & tuition" htmlFor="cost_overview">
-        <TextArea
-          id="cost_overview"
-          rows={3}
+        <RichTextEditor
           value={form.cost_overview}
-          onChange={(e) => set("cost_overview", e.target.value)}
+          onChange={(html) => set("cost_overview", html)}
         />
       </Field>
 
       <Field label="Intakes" htmlFor="intake_overview">
-        <TextArea
-          id="intake_overview"
-          rows={2}
+        <RichTextEditor
           value={form.intake_overview}
-          onChange={(e) => set("intake_overview", e.target.value)}
+          onChange={(html) => set("intake_overview", html)}
         />
       </Field>
 
       <Field label="Visa process" htmlFor="visa_overview">
-        <TextArea
-          id="visa_overview"
-          rows={3}
+        <RichTextEditor
           value={form.visa_overview}
-          onChange={(e) => set("visa_overview", e.target.value)}
+          onChange={(html) => set("visa_overview", html)}
         />
       </Field>
 

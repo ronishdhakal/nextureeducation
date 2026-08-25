@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/JsonLd";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { PageHeader } from "@/components/sections/PageHeader";
+import { RichText } from "@/components/ui/RichText";
 import { Section } from "@/components/ui/Section";
 import { getBlogPost, getDestinations, mediaUrl } from "@/lib/api";
 
@@ -60,9 +61,7 @@ export default async function BlogPostPage({ params }: Props) {
             // eslint-disable-next-line @next/next/no-img-element
             <img src={cover} alt="" className="w-full rounded-lg object-cover" />
           ) : null}
-          <div className="text-ink/75 leading-relaxed whitespace-pre-line text-lg">
-            {post.body}
-          </div>
+          <RichText html={post.body || ""} className="text-ink/75 text-lg" />
         </div>
       </Section>
 

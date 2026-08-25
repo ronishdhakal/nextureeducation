@@ -171,6 +171,16 @@ export async function getPage(slug: string): Promise<Page | null> {
   }
 }
 
+export async function getPages(): Promise<Page[]> {
+  try {
+    const data = await apiFetch<Paginated<Page>>("/pages/?page_size=50");
+    return data.results;
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+}
+
 export async function createLead(payload: LeadPayload): Promise<{ detail: string }> {
   const res = await fetch(`${PUBLIC_API_BASE}/leads/`, {
     method: "POST",
