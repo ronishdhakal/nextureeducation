@@ -184,7 +184,7 @@ export function InquiryForm({
       ) : null}
 
       {status === "error" ? (
-        <p className={`text-sm ${tone === "ink" ? "text-amber" : "text-red-600"}`}>{error}</p>
+        <p className={`text-sm ${tone === "ink" ? "text-red-400" : "text-red-600"}`}>{error}</p>
       ) : null}
 
       <button

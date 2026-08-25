@@ -13,7 +13,6 @@
   --paper: #ffffff;
   --paper-2: #f8f4fc;
 
-  --amber: #ffb627;
   --mint: #1fc9a3;
 
   --stone: #6e6478;
@@ -36,7 +35,6 @@
   --color-paper: var(--paper);
   --color-paper-2: var(--paper-2);
 
-  --color-amber: var(--amber);
   --color-mint: var(--mint);
 
   --color-stone: var(--stone);

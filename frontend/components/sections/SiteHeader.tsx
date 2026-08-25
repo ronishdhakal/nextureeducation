@@ -26,7 +26,7 @@ export function SiteHeader({ settings }: { settings: SiteSettings | null }) {
           <span>{settings?.address || "Bagbazar, Kathmandu"}</span>
           <a
             href={`tel:${(settings?.phone || "+9779800000000").replace(/\s/g, "")}`}
-            className="hover:text-amber transition-colors"
+            className="hover:text-violet-pale transition-colors"
           >
             {settings?.phone || "+977 98-0000-0000"}
           </a>

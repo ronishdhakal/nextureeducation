@@ -72,7 +72,7 @@ export default function AdminDestinationsPage() {
                 <td className="px-5 py-3 font-mono text-xs text-stone">{d.country_code}</td>
                 <td className="px-5 py-3 text-stone">{d.order}</td>
                 <td className="px-5 py-3">
-                  {d.is_featured ? <span className="text-amber-600">★</span> : "—"}
+                  {d.is_featured ? <span className="text-violet-deep">★</span> : "—"}
                 </td>
                 <td className="px-5 py-3">
                   <span
