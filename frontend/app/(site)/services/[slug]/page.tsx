@@ -30,7 +30,7 @@ export default async function ServiceDetailPage({ params }: Props) {
   return (
     <>
       <PageHeader eyebrow="Service" title={service.title} subcopy={service.short_description}>
-        <span className="mt-6 inline-flex size-14 items-center justify-center rounded-lg bg-white/10 text-white">
+        <span className="mt-6 inline-flex size-14 items-center justify-center rounded-lg bg-violet-pale text-violet-deep">
           <ServiceIcon name={service.icon} className="size-6" strokeWidth={2} />
         </span>
       </PageHeader>

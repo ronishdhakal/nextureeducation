@@ -21,12 +21,12 @@ export function SiteHeader({ settings }: { settings: SiteSettings | null }) {
 
   return (
     <header className="sticky top-0 z-50 bg-paper/90 backdrop-blur border-b border-hairline">
-      <div className="bg-ink text-white">
-        <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 flex items-center justify-between py-1.5 text-xs text-white/60">
+      <div className="bg-violet-tint border-b border-hairline">
+        <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 flex items-center justify-between py-1.5 text-xs text-ink/60">
           <span>{settings?.address || "Bagbazar, Kathmandu"}</span>
           <a
             href={`tel:${(settings?.phone || "+9779800000000").replace(/\s/g, "")}`}
-            className="hover:text-violet-pale transition-colors"
+            className="hover:text-violet-deep transition-colors"
           >
             {settings?.phone || "+977 98-0000-0000"}
           </a>

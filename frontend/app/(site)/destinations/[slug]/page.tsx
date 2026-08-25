@@ -52,7 +52,7 @@ export default async function DestinationDetailPage({ params }: Props) {
           <img
             src={flag}
             alt=""
-            className="mt-6 h-8 w-12 rounded-sm object-cover border border-white/20"
+            className="mt-6 h-8 w-12 rounded-sm object-cover border border-hairline"
           />
         ) : null}
       </PageHeader>

@@ -27,43 +27,39 @@ export function Hero({
   ];
 
   return (
-    <div className="bg-ink">
+    <div className="bg-paper">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 pt-16 sm:pt-20 pb-14 sm:pb-16">
         <Reveal className="max-w-2xl flex flex-col gap-6">
-          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-pale">
+          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-deep">
             {eyebrow}
           </span>
 
-          <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-white text-balance">
+          <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-ink text-balance">
             {headline}
           </h1>
 
-          <p className="text-lg text-white/70 max-w-xl leading-relaxed">{subcopy}</p>
+          <p className="text-lg text-ink/65 max-w-xl leading-relaxed">{subcopy}</p>
 
           <div className="flex flex-wrap gap-3 pt-1">
             <Button href="/contact" size="lg">
               Book a free session
             </Button>
-            <Button href="/destinations" variant="ghost-light" size="lg">
+            <Button href="/destinations" variant="ghost" size="lg">
               See destinations
             </Button>
           </div>
 
-          <p className="text-sm text-white/45">
+          <p className="text-sm text-stone">
             Straight answers · No pressure to sign up today · Real timelines
           </p>
         </Reveal>
       </div>
 
-      <div className="border-t border-white/10 bg-ink-2">
-        <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 py-8 grid grid-cols-2 sm:grid-cols-4 divide-x divide-white/10">
+      <div className="border-t border-hairline bg-paper-2">
+        <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 py-8 grid grid-cols-2 sm:grid-cols-4 divide-x divide-hairline">
           {stats.map((s) => (
             <div key={s.label} className="px-4 first:pl-0 sm:px-6">
-              <StatCard
-                value={s.value}
-                label={s.label}
-                className="[&_p:first-child]:text-white [&_p:last-child]:text-white/55"
-              />
+              <StatCard value={s.value} label={s.label} />
             </div>
           ))}
         </div>

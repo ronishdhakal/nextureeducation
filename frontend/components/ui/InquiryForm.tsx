@@ -19,16 +19,18 @@ type Props = {
   defaultDestinationId?: number;
   sourcePage: string;
   variant?: "full" | "compact";
-  tone?: "paper" | "ink";
   className?: string;
 };
+
+const inputClass =
+  "w-full rounded-md bg-paper-2 border border-hairline px-4 py-2.5 text-sm text-ink placeholder:text-stone-light focus:border-violet outline-none transition-colors";
+const labelClass = "block text-xs font-semibold uppercase tracking-wide mb-1.5 text-stone";
 
 export function InquiryForm({
   destinations = [],
   defaultDestinationId,
   sourcePage,
   variant = "full",
-  tone = "paper",
   className = "",
 }: Props) {
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
@@ -60,19 +62,11 @@ export function InquiryForm({
     }
   }
 
-  const inputClass =
-    tone === "ink"
-      ? "w-full rounded-md bg-white/10 border border-white/20 px-4 py-2.5 text-sm text-white placeholder:text-white/40 focus:border-white/60 outline-none transition-colors"
-      : "w-full rounded-md bg-paper-2 border border-hairline px-4 py-2.5 text-sm text-ink placeholder:text-stone-light focus:border-violet outline-none transition-colors";
-  const labelClass = `block text-xs font-semibold uppercase tracking-wide mb-1.5 ${tone === "ink" ? "text-white/60" : "text-stone"}`;
-
   if (status === "success") {
     return (
-      <div
-        className={`rounded-lg px-6 py-8 text-center ${tone === "ink" ? "bg-white/10" : "bg-violet-pale"} ${className}`}
-      >
-        <p className="font-display font-bold text-xl mb-1">You&apos;re on the list.</p>
-        <p className={tone === "ink" ? "text-white/70" : "text-ink/65"}>
+      <div className={`rounded-lg px-6 py-8 text-center bg-violet-pale ${className}`}>
+        <p className="font-display font-bold text-xl mb-1 text-ink">You&apos;re on the list.</p>
+        <p className="text-ink/65">
           We&apos;ll call or email you within one business day — no spam, no sales calls in
           between.
         </p>
@@ -183,9 +177,7 @@ export function InquiryForm({
         </div>
       ) : null}
 
-      {status === "error" ? (
-        <p className={`text-sm ${tone === "ink" ? "text-red-400" : "text-red-600"}`}>{error}</p>
-      ) : null}
+      {status === "error" ? <p className="text-sm text-red-600">{error}</p> : null}
 
       <button
         type="submit"

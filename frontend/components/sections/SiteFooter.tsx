@@ -1,5 +1,6 @@
 import Link from "next/link";
 
+import { Logo } from "@/components/ui/Logo";
 import type { Branch, SiteSettings } from "@/lib/types";
 
 const SOCIALS: { key: keyof SiteSettings; label: string }[] = [
@@ -29,13 +30,11 @@ export function SiteFooter({
   const headOffice = branches.find((b) => b.is_head_office) || branches[0];
 
   return (
-    <footer className="relative bg-ink text-white mt-auto">
+    <footer className="relative bg-paper-2 border-t border-hairline text-ink mt-auto">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 pt-16 sm:pt-20 pb-12 grid gap-12 sm:grid-cols-2 lg:grid-cols-4">
         <div className="lg:col-span-2">
-          <p className="font-display font-extrabold text-2xl mb-3">
-            Nexture <span className="text-violet-pale">Education</span>
-          </p>
-          <p className="text-sm text-white/60 max-w-xs leading-relaxed">
+          <Logo className="mb-4" />
+          <p className="text-sm text-ink/60 max-w-xs leading-relaxed">
             Your next step to a bright future — straight talk on studying abroad, from the
             first conversation to the day you land.
           </p>
@@ -47,7 +46,7 @@ export function SiteFooter({
                   href={settings?.[s.key] as string}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-white/60 hover:text-violet-pale transition-colors"
+                  className="text-ink/60 hover:text-violet-deep transition-colors"
                 >
                   {s.label}
                 </a>
@@ -57,13 +56,13 @@ export function SiteFooter({
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/35 mb-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-stone mb-4">
             Explore
           </p>
-          <ul className="flex flex-col gap-3 text-sm text-white/70">
+          <ul className="flex flex-col gap-3 text-sm text-ink/70">
             {NAV.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="hover:text-violet-pale transition-colors">
+                <Link href={link.href} className="hover:text-violet-deep transition-colors">
                   {link.label}
                 </Link>
               </li>
@@ -72,10 +71,10 @@ export function SiteFooter({
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-white/35 mb-4">
+          <p className="text-xs font-semibold uppercase tracking-[0.14em] text-stone mb-4">
             {headOffice?.name || "Head Office"}
           </p>
-          <p className="text-sm text-white/70 leading-relaxed">
+          <p className="text-sm text-ink/70 leading-relaxed">
             {headOffice?.address || settings?.address || "Bagbazar, Kathmandu, Nepal"}
             <br />
             {headOffice?.phone || settings?.phone}
@@ -84,8 +83,8 @@ export function SiteFooter({
           </p>
         </div>
       </div>
-      <div className="border-t border-white/10 py-6">
-        <p className="mx-auto w-full max-w-6xl px-6 sm:px-8 text-xs text-white/35">
+      <div className="border-t border-hairline py-6">
+        <p className="mx-auto w-full max-w-6xl px-6 sm:px-8 text-xs text-stone">
           © {new Date().getFullYear()} Nexture Education. All rights reserved.
         </p>
       </div>
