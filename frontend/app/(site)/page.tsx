@@ -1,5 +1,5 @@
-import type { Metadata } from "next";
-
+import { JsonLd } from "@/components/JsonLd";
+import { FAQSection } from "@/components/sections/FAQ";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { Hero } from "@/components/sections/Hero";
 import { HowItWorks } from "@/components/sections/HowItWorks";
@@ -18,12 +18,15 @@ import {
   getTestPreps,
   getTestimonials,
 } from "@/lib/api";
+import { FAQ_ITEMS } from "@/lib/faq";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Best Consultancy in Bagbazar, Kathmandu, Nepal",
   description:
     "Nexture Education is the best consultancy in Bagbazar, Kathmandu, Nepal for studying abroad — counseling, university selection, visa support and test prep for Australia, Canada, the UK, New Zealand, Malta and South Korea.",
-};
+  path: "/",
+});
 
 export default async function Home() {
   const [settings, destinations, services, testPreps, testimonials] = await Promise.all([
@@ -74,6 +77,21 @@ export default async function Home() {
           <TestimonialsSection testimonials={testimonials} />
         </Section>
       ) : null}
+
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: FAQ_ITEMS.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
+        }}
+      />
+      <Section tone={testimonials.length ? "tint" : "paper"}>
+        <FAQSection />
+      </Section>
 
       <FinalCTA destinations={destinations} />
     </>

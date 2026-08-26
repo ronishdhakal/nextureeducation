@@ -1,15 +1,15 @@
-import type { Metadata } from "next";
-
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { TestimonialsSection } from "@/components/sections/TestimonialsSection";
 import { Section } from "@/components/ui/Section";
 import { getDestinations, getTestimonials } from "@/lib/api";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Success Stories",
   description: "Real notes from students Nexture Education has worked with, in their own words.",
-};
+  path: "/success-stories",
+});
 
 export default async function SuccessStoriesPage() {
   const [testimonials, destinations] = await Promise.all([

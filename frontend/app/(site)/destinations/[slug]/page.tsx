@@ -1,14 +1,19 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { JsonLd } from "@/components/JsonLd";
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { InquiryForm } from "@/components/ui/InquiryForm";
+import { Reveal } from "@/components/ui/Reveal";
 import { RichText } from "@/components/ui/RichText";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { UniversityCard } from "@/components/ui/UniversityCard";
 import { getDestination, getDestinations, getUniversities } from "@/lib/api";
 import { getFlagSrc } from "@/lib/destinationFlags";
+import { buildMetadata } from "@/lib/seo";
+
+const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nexture.edu.np";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -16,10 +21,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const destination = await getDestination(slug);
   if (!destination) return {};
-  return {
+  return buildMetadata({
     title: destination.meta_title || `Study in ${destination.name}`,
     description: destination.meta_description || destination.summary,
-  };
+    path: `/destinations/${destination.slug}`,
+  });
 }
 
 const INFO_BLOCKS: { key: "cost_overview" | "intake_overview" | "visa_overview"; label: string }[] = [
@@ -42,6 +48,22 @@ export default async function DestinationDetailPage({ params }: Props) {
 
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            { "@type": "ListItem", position: 1, name: "Home", item: SITE_URL },
+            { "@type": "ListItem", position: 2, name: "Destinations", item: `${SITE_URL}/destinations` },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: destination.name,
+              item: `${SITE_URL}/destinations/${destination.slug}`,
+            },
+          ],
+        }}
+      />
       <PageHeader
         eyebrow={`Study in ${destination.country_code || destination.name}`}
         title={destination.name}
@@ -88,8 +110,10 @@ export default async function DestinationDetailPage({ params }: Props) {
                   Partner universities in {destination.name}
                 </h2>
                 <div className="grid sm:grid-cols-2 gap-4">
-                  {universities.map((u) => (
-                    <UniversityCard key={u.id} university={u} />
+                  {universities.map((u, i) => (
+                    <Reveal key={u.id} delay={i * 50}>
+                      <UniversityCard university={u} />
+                    </Reveal>
                   ))}
                 </div>
               </div>

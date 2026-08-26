@@ -1,17 +1,17 @@
-import type { Metadata } from "next";
-
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { DestinationCard } from "@/components/ui/DestinationCard";
 import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { getDestinations } from "@/lib/api";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Destinations",
   description:
     "Six study destinations for Nepali students — Australia, Canada, the UK, New Zealand, Malta and South Korea — with real cost, intake and visa information.",
-};
+  path: "/destinations",
+});
 
 export default async function DestinationsPage() {
   const destinations = await getDestinations();

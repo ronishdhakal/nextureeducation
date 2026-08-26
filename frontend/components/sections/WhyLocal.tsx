@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/Section";
 import type { SiteSettings } from "@/lib/types";
 
@@ -23,7 +24,7 @@ const REASONS = [
 export function WhyLocal({ settings }: { settings: SiteSettings | null }) {
   return (
     <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-12 items-start">
-      <div className="flex flex-col gap-5">
+      <Reveal className="flex flex-col gap-5">
         <SectionHeading
           eyebrow="Why Nexture"
           title="The best consultancy in Bagbazar, Kathmandu, Nepal for studying abroad — here's why students say that."
@@ -36,9 +37,12 @@ export function WhyLocal({ settings }: { settings: SiteSettings | null }) {
         <Button href="/contact" className="w-fit">
           Visit our Bagbazar office
         </Button>
-      </div>
+      </Reveal>
 
-      <div className="grid gap-px bg-hairline rounded-lg overflow-hidden border border-hairline">
+      <Reveal
+        delay={120}
+        className="grid gap-px bg-hairline rounded-lg overflow-hidden border border-hairline"
+      >
         {REASONS.map((r) => (
           <div key={r.title} className="bg-paper p-6">
             <h3 className="font-display font-bold text-base text-ink mb-1.5">{r.title}</h3>
@@ -56,7 +60,7 @@ export function WhyLocal({ settings }: { settings: SiteSettings | null }) {
             </p>
           ) : null}
         </div>
-      </div>
+      </Reveal>
     </div>
   );
 }

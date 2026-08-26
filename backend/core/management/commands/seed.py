@@ -1,5 +1,6 @@
 from django.core.management.base import BaseCommand
 
+from content.models import Testimonial
 from core.models import Branch, SiteSettings
 from destinations.models import Destination
 from services.models import Service, TestPrep
@@ -148,6 +149,30 @@ TEST_PREPS = [
     ),
 ]
 
+# Unpublished by design: these are examples for the admin to see the shape of a
+# good testimonial entry, not real student quotes. We don't fabricate reviews
+# for a real business — is_published stays False until someone replaces the
+# content with an actual student's words and turns it on in the CRM.
+TESTIMONIAL_TEMPLATES = [
+    dict(
+        student_name="Replace with a real student's name",
+        university="Replace with their university",
+        quote=(
+            "Replace with what they actually said — keep it specific (what they were "
+            "worried about, what actually helped) rather than generic praise."
+        ),
+        order=1,
+        is_published=False,
+    ),
+    dict(
+        student_name="Replace with a real student's name",
+        university="Replace with their university",
+        quote="A second example slot — delete this one if you only have one testimonial ready.",
+        order=2,
+        is_published=False,
+    ),
+]
+
 
 class Command(BaseCommand):
     help = "Seed the database with destinations, services, test prep, site settings and the head office branch."
@@ -207,5 +232,15 @@ class Command(BaseCommand):
             ),
         )
         self.stdout.write("Updated head office branch")
+
+        for data in TESTIMONIAL_TEMPLATES:
+            obj, created = Testimonial.objects.update_or_create(
+                student_name=data["student_name"], order=data["order"], defaults=data
+            )
+            if created:
+                self.stdout.write(
+                    "Added an unpublished example testimonial — edit it with a real "
+                    "quote and publish it from the admin panel when you're ready."
+                )
 
         self.stdout.write(self.style.SUCCESS("Seed complete."))

@@ -53,17 +53,18 @@ export function ServicesAndTestPrep({
           />
 
           <div className="mt-10 grid gap-5 sm:grid-cols-3">
-            {testPreps.map((tp) => (
-              <Link
-                key={tp.id}
-                href="/test-prep"
-                className="rounded-lg border border-hairline bg-paper p-6 transition-colors hover:border-violet/40"
-              >
-                <p className="text-sm font-bold uppercase tracking-wide text-violet-deep mb-2">
-                  {tp.name}
-                </p>
-                <p className="text-sm text-ink/65 leading-relaxed">{tp.description}</p>
-              </Link>
+            {testPreps.map((tp, i) => (
+              <Reveal key={tp.id} delay={i * 60}>
+                <Link
+                  href="/test-prep"
+                  className="block h-full rounded-lg border border-hairline bg-paper p-6 transition-colors hover:border-violet/40"
+                >
+                  <p className="text-sm font-bold uppercase tracking-wide text-violet-deep mb-2">
+                    {tp.name}
+                  </p>
+                  <p className="text-sm text-ink/65 leading-relaxed">{tp.description}</p>
+                </Link>
+              </Reveal>
             ))}
           </div>
         </div>

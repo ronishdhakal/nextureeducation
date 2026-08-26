@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeading } from "@/components/ui/Section";
 
 const STEPS = [
@@ -45,7 +46,11 @@ export function HowItWorks() {
 
         <div className="flex flex-col gap-9 sm:grid sm:grid-cols-5 sm:gap-5">
           {STEPS.map((step, i) => (
-            <div key={step.title} className="relative flex gap-4 sm:flex-col sm:items-center sm:text-center">
+            <Reveal
+              key={step.title}
+              delay={i * 90}
+              className="relative flex gap-4 sm:flex-col sm:items-center sm:text-center"
+            >
               <span className="relative z-10 shrink-0 size-12 rounded-full bg-paper-2 border-2 border-violet flex items-center justify-center font-display font-bold text-violet-deep">
                 {i + 1}
               </span>
@@ -53,7 +58,7 @@ export function HowItWorks() {
                 <h3 className="font-display font-bold text-base text-ink mb-1">{step.title}</h3>
                 <p className="text-sm text-ink/60 leading-relaxed">{step.detail}</p>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>

@@ -7,7 +7,11 @@ export function UniversityCard({ university }: { university: University }) {
     <div className="flex items-center gap-4 rounded-lg border border-hairline bg-paper p-5">
       {logo ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={logo} alt="" className="size-12 rounded-lg object-contain border border-hairline p-1" />
+        <img
+          src={logo}
+          alt={`${university.name} logo`}
+          className="size-12 rounded-lg object-contain border border-hairline p-1"
+        />
       ) : (
         <span className="size-12 rounded-lg bg-violet-pale text-violet-deep font-display font-bold flex items-center justify-center text-lg">
           {university.name[0]}

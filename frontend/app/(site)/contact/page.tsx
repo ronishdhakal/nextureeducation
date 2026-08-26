@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
 import { Mail, MapPin, Phone } from "lucide-react";
 
 import { PageHeader } from "@/components/sections/PageHeader";
 import { InquiryForm } from "@/components/ui/InquiryForm";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { getBranches, getDestinations, getSiteSettings } from "@/lib/api";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Contact Us",
   description:
     "Book a free counseling session with Nexture Education, the best consultancy in Bagbazar, Kathmandu, Nepal.",
-};
+  path: "/contact",
+});
 
 export default async function ContactPage() {
   const [settings, branches, destinations] = await Promise.all([

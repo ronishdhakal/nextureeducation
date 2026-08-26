@@ -1,8 +1,7 @@
-import type { Metadata } from "next";
-
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { StatsBand } from "@/components/sections/StatsBand";
+import { Reveal } from "@/components/ui/Reveal";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import {
   getBranches,
@@ -11,12 +10,14 @@ import {
   getTeamMembers,
   mediaUrl,
 } from "@/lib/api";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "About Us",
   description:
     "Why Nexture Education exists, how we work, and where to find our office in Bagbazar, Kathmandu, Nepal.",
-};
+  path: "/about",
+});
 
 const VALUES = [
   {
@@ -53,11 +54,11 @@ export default async function AboutPage() {
       <Section tone="paper">
         <SectionHeading eyebrow="How we work" title="Three things we don't compromise on." />
         <div className="mt-12 grid gap-6 sm:grid-cols-3">
-          {VALUES.map((v) => (
-            <div key={v.title} className="rounded-lg border border-hairline bg-paper-2 p-6">
+          {VALUES.map((v, i) => (
+            <Reveal key={v.title} delay={i * 80} className="rounded-lg border border-hairline bg-paper-2 p-6">
               <h3 className="font-display font-bold text-lg text-ink mb-2">{v.title}</h3>
               <p className="text-sm text-ink/65 leading-relaxed">{v.detail}</p>
-            </div>
+            </Reveal>
           ))}
         </div>
       </Section>
@@ -68,10 +69,10 @@ export default async function AboutPage() {
         <Section tone="tint">
           <SectionHeading eyebrow="The team" title="Who you'll actually talk to." />
           <div className="mt-12 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {team.map((member) => {
+            {team.map((member, i) => {
               const photo = mediaUrl(member.photo);
               return (
-                <div key={member.id} className="text-center">
+                <Reveal key={member.id} delay={i * 60} className="text-center">
                   {photo ? (
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
@@ -86,7 +87,7 @@ export default async function AboutPage() {
                   )}
                   <p className="mt-4 font-display font-bold text-ink">{member.name}</p>
                   <p className="text-xs text-stone">{member.role}</p>
-                </div>
+                </Reveal>
               );
             })}
           </div>
@@ -97,14 +98,14 @@ export default async function AboutPage() {
         <Section tone="paper">
           <SectionHeading eyebrow="Find us" title="Visit our office." />
           <div className="mt-10 grid gap-6 sm:grid-cols-2">
-            {branches.map((b) => (
-              <div key={b.id} className="rounded-lg border border-hairline bg-paper-2 p-6">
+            {branches.map((b, i) => (
+              <Reveal key={b.id} delay={i * 70} className="rounded-lg border border-hairline bg-paper-2 p-6">
                 <p className="font-display font-bold text-ink">{b.name}</p>
                 <p className="text-sm text-ink/65 mt-2 leading-relaxed">{b.address}</p>
                 <p className="text-sm text-ink/65 mt-1">
                   {b.phone} {b.email ? `· ${b.email}` : ""}
                 </p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </Section>

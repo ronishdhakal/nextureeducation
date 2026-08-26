@@ -12,6 +12,12 @@ const nextConfig: NextConfig = {
         protocol: "https",
         hostname: process.env.NEXT_PUBLIC_MEDIA_HOSTNAME || "localhost",
       },
+      {
+        // Local dev: Django serves media over plain http on the backend port.
+        protocol: "http",
+        hostname: "localhost",
+        port: "8000",
+      },
     ],
   },
 };

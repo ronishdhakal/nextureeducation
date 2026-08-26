@@ -1,15 +1,16 @@
-import type { Metadata } from "next";
-
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { PageHeader } from "@/components/sections/PageHeader";
+import { Reveal } from "@/components/ui/Reveal";
 import { Section } from "@/components/ui/Section";
 import { UniversityCard } from "@/components/ui/UniversityCard";
 import { getDestinations, getUniversities } from "@/lib/api";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Partner Universities",
   description: "Universities we work with across Australia, Canada, the UK, New Zealand, Malta and South Korea.",
-};
+  path: "/universities",
+});
 
 export default async function UniversitiesPage() {
   const [universities, destinations] = await Promise.all([
@@ -28,8 +29,10 @@ export default async function UniversitiesPage() {
       <Section tone="paper">
         {universities.length ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {universities.map((u) => (
-              <UniversityCard key={u.id} university={u} />
+            {universities.map((u, i) => (
+              <Reveal key={u.id} delay={i * 50}>
+                <UniversityCard university={u} />
+              </Reveal>
             ))}
           </div>
         ) : (

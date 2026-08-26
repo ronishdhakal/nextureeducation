@@ -1,16 +1,16 @@
-import type { Metadata } from "next";
-
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { ServicesAndTestPrep } from "@/components/sections/ServicesAndTestPrep";
 import { Section } from "@/components/ui/Section";
 import { getDestinations, getServices, getTestPreps } from "@/lib/api";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Services",
   description:
     "Counseling, university matching, application support, visa support, scholarship guidance and pre-departure orientation — every step of studying abroad, in one place.",
-};
+  path: "/services",
+});
 
 export default async function ServicesPage() {
   const [services, testPreps, destinations] = await Promise.all([

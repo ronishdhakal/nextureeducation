@@ -1,16 +1,17 @@
-import type { Metadata } from "next";
-
 import { FinalCTA } from "@/components/sections/FinalCTA";
 import { PageHeader } from "@/components/sections/PageHeader";
 import { InquiryForm } from "@/components/ui/InquiryForm";
+import { Reveal } from "@/components/ui/Reveal";
 import { Section, SectionHeading } from "@/components/ui/Section";
 import { getDestinations, getTestPreps } from "@/lib/api";
+import { buildMetadata } from "@/lib/seo";
 
-export const metadata: Metadata = {
+export const metadata = buildMetadata({
   title: "Test Prep — IELTS, PTE & SAT",
   description:
     "IELTS, PTE and SAT preparation classes built around the score your target universities actually require.",
-};
+  path: "/test-prep",
+});
 
 export default async function TestPrepPage() {
   const [testPreps, destinations] = await Promise.all([getTestPreps(), getDestinations()]);
@@ -25,9 +26,10 @@ export default async function TestPrepPage() {
 
       <Section tone="paper">
         <div className="grid gap-6 sm:grid-cols-3">
-          {testPreps.map((tp) => (
-            <div
+          {testPreps.map((tp, i) => (
+            <Reveal
               key={tp.id}
+              delay={i * 80}
               className="rounded-lg border border-hairline bg-paper p-7 flex flex-col gap-4"
             >
               <span className="text-sm font-bold uppercase tracking-[0.1em] text-violet-deep">
@@ -54,7 +56,7 @@ export default async function TestPrepPage() {
                   </div>
                 ) : null}
               </dl>
-            </div>
+            </Reveal>
           ))}
         </div>
         {!testPreps.length ? (

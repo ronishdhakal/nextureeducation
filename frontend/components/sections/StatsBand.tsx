@@ -1,3 +1,4 @@
+import { Reveal } from "@/components/ui/Reveal";
 import type { SiteSettings } from "@/lib/types";
 
 export function StatsBand({ settings }: { settings: SiteSettings | null }) {
@@ -11,13 +12,13 @@ export function StatsBand({ settings }: { settings: SiteSettings | null }) {
   return (
     <div className="bg-violet">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 py-14 grid grid-cols-2 sm:grid-cols-4 gap-8">
-        {stats.map((s) => (
-          <div key={s.label} className="text-center sm:text-left">
+        {stats.map((s, i) => (
+          <Reveal key={s.label} delay={i * 70} className="text-center sm:text-left">
             <p className="font-display font-bold text-3xl sm:text-4xl text-white">{s.value}</p>
             <p className="mt-1 text-xs font-medium uppercase tracking-[0.1em] text-violet-pale">
               {s.label}
             </p>
-          </div>
+          </Reveal>
         ))}
       </div>
     </div>
