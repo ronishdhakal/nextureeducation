@@ -19,6 +19,9 @@ class Destination(TimeStamped, SEOFields, Orderable):
     cost_overview = models.TextField(blank=True, help_text="Rich text: tuition & living costs")
     intake_overview = models.TextField(blank=True, help_text="Rich text: intake seasons")
     visa_overview = models.TextField(blank=True, help_text="Rich text: visa process")
+    eligibility_overview = models.TextField(
+        blank=True, help_text="Rich text: entry requirements, eligibility"
+    )
     popular_intakes = models.CharField(
         max_length=200, blank=True, help_text="e.g. February, July, September"
     )

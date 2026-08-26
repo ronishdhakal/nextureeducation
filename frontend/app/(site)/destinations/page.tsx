@@ -6,10 +6,12 @@ import { Section } from "@/components/ui/Section";
 import { getDestinations } from "@/lib/api";
 import { buildMetadata } from "@/lib/seo";
 
+const CURRENT_YEAR = new Date().getFullYear();
+
 export const metadata = buildMetadata({
-  title: "Destinations",
+  title: `Study Abroad from Nepal ${CURRENT_YEAR} — Destinations`,
   description:
-    "Six study destinations for Nepali students — Australia, Canada, the UK, New Zealand, Malta and South Korea — with real cost, intake and visa information.",
+    `Six study destinations for Nepali students in ${CURRENT_YEAR} — Australia, Canada, the UK, New Zealand, Malta and South Korea — with real cost, intake and visa information.`,
   path: "/destinations",
 });
 

@@ -20,7 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const service = await getService(slug);
   if (!service) return {};
   return buildMetadata({
-    title: service.meta_title || service.title,
+    title: service.meta_title || `${service.title} for Nepali Students`,
     description: service.meta_description || service.short_description,
     path: `/services/${service.slug}`,
   });

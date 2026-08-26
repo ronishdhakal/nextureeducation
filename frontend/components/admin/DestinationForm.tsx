@@ -16,6 +16,7 @@ type FormState = {
   cost_overview: string;
   intake_overview: string;
   visa_overview: string;
+  eligibility_overview: string;
   popular_intakes: string;
   order: number;
   is_featured: boolean;
@@ -33,6 +34,7 @@ function toFormState(d?: Destination): FormState {
     cost_overview: d?.cost_overview || "",
     intake_overview: d?.intake_overview || "",
     visa_overview: d?.visa_overview || "",
+    eligibility_overview: d?.eligibility_overview || "",
     popular_intakes: d?.popular_intakes || "",
     order: d?.order ?? 0,
     is_featured: d?.is_featured ?? false,
@@ -129,6 +131,13 @@ export function DestinationForm({ destination }: { destination?: Destination }) 
         <RichTextEditor
           value={form.visa_overview}
           onChange={(html) => set("visa_overview", html)}
+        />
+      </Field>
+
+      <Field label="Eligibility" htmlFor="eligibility_overview" hint="Entry requirements — grades, English test scores, etc.">
+        <RichTextEditor
+          value={form.eligibility_overview}
+          onChange={(html) => set("eligibility_overview", html)}
         />
       </Field>
 

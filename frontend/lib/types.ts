@@ -16,6 +16,7 @@ export interface Destination {
   cost_overview?: string;
   intake_overview?: string;
   visa_overview?: string;
+  eligibility_overview?: string;
   popular_intakes: string;
   is_featured: boolean;
   is_published?: boolean;

@@ -1,3 +1,5 @@
+import Image from "next/image";
+
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { StatCard } from "@/components/ui/StatCard";
@@ -29,30 +31,43 @@ export function Hero({
   return (
     <div className="bg-paper">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 pt-16 sm:pt-20 pb-14 sm:pb-16">
-        <Reveal className="max-w-2xl flex flex-col gap-6">
-          <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-deep">
-            {eyebrow}
-          </span>
+        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+          <Reveal className="max-w-2xl flex flex-col gap-6">
+            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-deep">
+              {eyebrow}
+            </span>
 
-          <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-ink text-balance">
-            {headline}
-          </h1>
+            <h1 className="font-display font-bold text-4xl sm:text-5xl lg:text-6xl leading-[1.1] text-ink text-balance">
+              {headline}
+            </h1>
 
-          <p className="text-lg text-ink/65 max-w-xl leading-relaxed">{subcopy}</p>
+            <p className="text-lg text-ink/65 max-w-xl leading-relaxed">{subcopy}</p>
 
-          <div className="flex flex-wrap gap-3 pt-1">
-            <Button href="/contact" size="lg">
-              Book a free session
-            </Button>
-            <Button href="/destinations" variant="ghost" size="lg">
-              See destinations
-            </Button>
-          </div>
+            <div className="flex flex-wrap gap-3 pt-1">
+              <Button href="/contact" size="lg">
+                Book a free session
+              </Button>
+              <Button href="/destinations" variant="ghost" size="lg">
+                See destinations
+              </Button>
+            </div>
 
-          <p className="text-sm text-stone">
-            Straight answers · No pressure to sign up today · Real timelines
-          </p>
-        </Reveal>
+            <p className="text-sm text-stone">
+              Straight answers · No pressure to sign up today · Real timelines
+            </p>
+          </Reveal>
+
+          <Reveal delay={150} className="hidden lg:flex justify-center">
+            <Image
+              src="/assets/home.png"
+              alt="Illustration of a student with a passport, backpack and airplane, representing studying abroad"
+              width={640}
+              height={450}
+              priority
+              className="w-full max-w-md h-auto"
+            />
+          </Reveal>
+        </div>
       </div>
 
       <div className="border-t border-hairline bg-paper-2">
