@@ -31,7 +31,7 @@ export function Hero({
   return (
     <div className="bg-paper">
       <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 pt-16 sm:pt-20 pb-14 sm:pb-16">
-        <div className="grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+        <div className="grid md:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
           <Reveal className="max-w-2xl flex flex-col gap-6">
             <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-deep">
               {eyebrow}
@@ -57,7 +57,7 @@ export function Hero({
             </p>
           </Reveal>
 
-          <Reveal delay={150} className="hidden lg:flex justify-center">
+          <Reveal delay={150} className="hidden md:flex justify-center">
             <Image
               src="/assets/home.png"
               alt="Illustration of a student with a passport, backpack and airplane, representing studying abroad"
