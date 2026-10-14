@@ -1,5 +1,10 @@
 # Deploying Nexture Education
 
+> **Using Claude on the server?** Open `deploy/RUNBOOK_FOR_CLAUDE.md` there and tell Claude:
+> "Read deploy/RUNBOOK_FOR_CLAUDE.md and walk me through the deployment step by step."
+> It contains the full phase-by-phase instructions, the checks to run after each step, and
+> troubleshooting. This page is the short version.
+
 Two domains, one small Docker stack (Postgres, Django API, Next.js site), bound to
 `127.0.0.1` and fronted by the server's existing nginx. Nothing here touches the other
 projects running on the server (they use other ports and their own databases).
