@@ -18,7 +18,7 @@ Ports 3082 and 8082 are free on the current server (taken: 3000-3003, 3072, 3101
 1. **DNS**: point `nexture.edu.np`, `www.nexture.edu.np` and `api.nexture.edu.np` (A records) at `77.37.47.54`.
 2. **Get the code** on the server:
    ```
-   cd /opt && git clone https://github.com/ronishdhakal/nextureeducation.git nexture
+   cd /var/www && git clone https://github.com/ronishdhakal/nextureeducation.git nexture
    cd nexture
    ```
 3. **Configure**:
@@ -49,7 +49,7 @@ classes, testimonials, branches and site settings (phone, email, stats) in the a
 ## Updating
 
 ```
-cd /opt/nexture && git pull
+cd /var/www/nexture && git pull
 docker compose -f docker-compose.prod.yml up -d --build
 ```
 
