@@ -23,7 +23,7 @@ export default async function UniversitiesPage() {
       <PageHeader
         eyebrow="Universities"
         title="Our partner network."
-        subcopy="Every university here is one we have an active working relationship with — not just a name on a list."
+        subcopy="Every university here is one we have an active working relationship with, not just a name on a list."
       />
 
       <Section tone="paper">
@@ -36,8 +36,8 @@ export default async function UniversitiesPage() {
             ))}
           </div>
         ) : (
-          <div className="rounded-lg border border-hairline p-10 text-center text-ink/60">
-            Our partner university list is being updated — get in touch and we&apos;ll match
+          <div className=" border border-hairline p-10 text-center text-ink/60">
+            Our partner university list is being updated. Get in touch and we&apos;ll match
             you directly.
           </div>
         )}

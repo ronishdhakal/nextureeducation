@@ -6,6 +6,7 @@ import os
 from datetime import timedelta
 from pathlib import Path
 
+from django.core.exceptions import ImproperlyConfigured
 from dotenv import load_dotenv
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -23,6 +24,9 @@ def env_list(name: str, default: str = "") -> list[str]:
 
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "django-insecure-dev-only-change-me")
 DEBUG = env_bool("DJANGO_DEBUG", True)
+
+if not DEBUG and SECRET_KEY.startswith("django-insecure"):
+    raise ImproperlyConfigured("Set DJANGO_SECRET_KEY to a long random value when DJANGO_DEBUG is off.")
 ALLOWED_HOSTS = env_list("DJANGO_ALLOWED_HOSTS", "localhost,127.0.0.1")
 
 CSRF_TRUSTED_ORIGINS = env_list("DJANGO_CSRF_TRUSTED_ORIGINS", "")
@@ -47,10 +51,15 @@ INSTALLED_APPS = [
     "services",
     "leads",
     "content",
+    "events",
+    "accounts",
+    "notifications",
+    "crm",
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "corsheaders.middleware.CorsMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -124,10 +133,12 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 USE_R2_STORAGE = env_bool("USE_R2_STORAGE", False)
 
+STATICFILES_STORAGE_BACKEND = "whitenoise.storage.CompressedStaticFilesStorage"
+
 if USE_R2_STORAGE:
     STORAGES = {
         "default": {"BACKEND": "storages.backends.s3.S3Storage"},
-        "staticfiles": {"BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage"},
+        "staticfiles": {"BACKEND": STATICFILES_STORAGE_BACKEND},
     }
     AWS_ACCESS_KEY_ID = os.environ.get("R2_ACCESS_KEY_ID")
     AWS_SECRET_ACCESS_KEY = os.environ.get("R2_SECRET_ACCESS_KEY")
@@ -139,7 +150,14 @@ if USE_R2_STORAGE:
     AWS_QUERYSTRING_AUTH = False
     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/" if AWS_S3_CUSTOM_DOMAIN else "/media/"
 else:
-    MEDIA_URL = "/media/"
+    STORAGES = {
+        "default": {"BACKEND": "django.core.files.storage.FileSystemStorage"},
+        "staticfiles": {"BACKEND": STATICFILES_STORAGE_BACKEND},
+    }
+    # In production set MEDIA_PUBLIC_URL to the absolute public URL of /media/
+    # (e.g. https://api.example.com/media/). Server-side renders reach this API
+    # over the docker network, so a relative URL would leak the internal host.
+    MEDIA_URL = os.environ.get("MEDIA_PUBLIC_URL", "/media/")
     MEDIA_ROOT = BASE_DIR / "media"
 
 # --- DRF / JWT / CORS / schema --------------------------------------------
@@ -148,7 +166,7 @@ REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": (
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ),
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.IsAuthenticatedOrReadOnly",),
+    "DEFAULT_PERMISSION_CLASSES": ("accounts.permissions.ContentWritePermission",),
     "DEFAULT_FILTER_BACKENDS": (
         "django_filters.rest_framework.DjangoFilterBackend",
         "rest_framework.filters.OrderingFilter",
@@ -160,6 +178,9 @@ REST_FRAMEWORK = {
     "DEFAULT_THROTTLE_RATES": {
         "lead_create": "10/hour",
     },
+    # Behind nginx every request arrives from the proxy; trust one hop of
+    # X-Forwarded-For so the per-IP lead throttle does not lump visitors together.
+    "NUM_PROXIES": int(os.environ.get("DRF_NUM_PROXIES", "0" if DEBUG else "1")),
 }
 
 SIMPLE_JWT = {
@@ -190,3 +211,17 @@ EMAIL_HOST_USER = os.environ.get("EMAIL_HOST_USER", "")
 EMAIL_HOST_PASSWORD = os.environ.get("EMAIL_HOST_PASSWORD", "")
 EMAIL_USE_TLS = env_bool("EMAIL_USE_TLS", True)
 LEAD_NOTIFICATION_EMAIL = os.environ.get("LEAD_NOTIFICATION_EMAIL", "")
+
+# --- Production hardening -------------------------------------------------
+
+if not DEBUG:
+    SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
+    USE_X_FORWARDED_HOST = True
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_REFERRER_POLICY = "same-origin"
+    # nginx terminates TLS and redirects http -> https itself.
+    SECURE_SSL_REDIRECT = env_bool("DJANGO_SSL_REDIRECT", False)
+    # Leave at 0 until HTTPS is confirmed working, then set e.g. 31536000.
+    SECURE_HSTS_SECONDS = int(os.environ.get("DJANGO_HSTS_SECONDS", "0"))

@@ -22,15 +22,15 @@ export default async function SuccessStoriesPage() {
       <PageHeader
         eyebrow="Success Stories"
         title="Students who went through this exact process."
-        subcopy="No actors, no stock photos — just people who sat across the table from us and made it abroad."
+        subcopy="No actors, no stock photos. Just people who sat across the table from us and made it abroad."
       />
 
       <Section tone="paper">
         {testimonials.length ? (
           <TestimonialsSection testimonials={testimonials} showHeading={false} />
         ) : (
-          <div className="rounded-lg border border-hairline p-10 text-center text-ink/60">
-            We&apos;re gathering student stories — check back soon, or ask us directly during
+          <div className=" border border-hairline p-10 text-center text-ink/60">
+            We&apos;re gathering student stories. Check back soon, or ask us directly during
             your session.
           </div>
         )}

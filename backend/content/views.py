@@ -1,12 +1,15 @@
+from django.db.models import Q
+from django.utils import timezone
 from rest_framework import viewsets
 
 from core.permissions import PublishedQuerysetMixin, SlugOrPkLookupMixin
 
-from .models import BlogPost, Page, Testimonial
+from .models import BlogPost, Page, Popup, Testimonial
 from .serializers import (
     BlogPostListSerializer,
     BlogPostSerializer,
     PageSerializer,
+    PopupSerializer,
     TestimonialSerializer,
 )
 
@@ -34,3 +37,23 @@ class PageViewSet(SlugOrPkLookupMixin, PublishedQuerysetMixin, viewsets.ModelVie
     queryset = Page.objects.all()
     serializer_class = PageSerializer
     lookup_field = "slug"
+
+
+class PopupViewSet(viewsets.ModelViewSet):
+    """Public visitors only receive popups that are switched on and inside their date window."""
+
+    queryset = Popup.objects.all()
+    serializer_class = PopupSerializer
+    filterset_fields = ["is_active", "show_on"]
+    ordering_fields = ["created_at"]
+    search_fields = ["title"]
+
+    def get_queryset(self):
+        qs = super().get_queryset()
+        user = self.request.user
+        if user and user.is_authenticated:
+            return qs
+        now = timezone.now()
+        return qs.filter(is_active=True).filter(
+            Q(start_at__isnull=True) | Q(start_at__lte=now)
+        ).filter(Q(end_at__isnull=True) | Q(end_at__gte=now))

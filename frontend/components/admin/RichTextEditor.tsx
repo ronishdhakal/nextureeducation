@@ -1,19 +1,31 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useEditor, EditorContent, type Editor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
+import Image from "@tiptap/extension-image";
+import TextAlign from "@tiptap/extension-text-align";
 import {
+  AlignCenter,
+  AlignJustify,
+  AlignLeft,
+  AlignRight,
   Bold,
+  FileText,
+  Image as ImageIcon,
   Italic,
   List,
   ListOrdered,
+  Loader2,
   Quote,
+  Underline as UnderlineIcon,
   Link as LinkIcon,
   Redo,
   Undo,
 } from "lucide-react";
+
+import { uploadEditorMedia } from "@/lib/adminApi";
 
 function ToolbarButton({
   onClick,
@@ -35,7 +47,7 @@ function ToolbarButton({
       disabled={disabled}
       aria-label={label}
       title={label}
-      className={`inline-flex items-center justify-center size-7 rounded transition-colors disabled:opacity-30 disabled:cursor-not-allowed ${
+      className={`inline-flex items-center justify-center size-7  transition-colors disabled:opacity-30 disabled:cursor-not-allowed ${
         active ? "bg-violet text-white" : "text-stone hover:bg-paper-2 hover:text-ink"
       }`}
     >
@@ -44,9 +56,44 @@ function ToolbarButton({
   );
 }
 
-function Toolbar({ editor }: { editor: Editor }) {
+function Toolbar({
+  editor,
+  onInsertImage,
+  onAttachPdf,
+  uploading,
+}: {
+  editor: Editor;
+  onInsertImage: () => void;
+  onAttachPdf: () => void;
+  uploading: boolean;
+}) {
   return (
-    <div className="flex flex-wrap items-center gap-1 border-b border-hairline bg-paper-2 px-2 py-1.5 rounded-t-lg">
+    <div className="flex flex-wrap items-center gap-1 border-b border-hairline bg-paper-2 px-2 py-1.5">
+      <select
+        aria-label="Text style"
+        value={
+          editor.isActive("heading", { level: 2 })
+            ? "2"
+            : editor.isActive("heading", { level: 3 })
+              ? "3"
+              : editor.isActive("heading", { level: 4 })
+                ? "4"
+                : "p"
+        }
+        onChange={(e) => {
+          const v = e.target.value;
+          const chain = editor.chain().focus();
+          if (v === "p") chain.setParagraph().run();
+          else chain.setHeading({ level: Number(v) as 2 | 3 | 4 }).run();
+        }}
+        className="mr-1 h-7 border border-violet/40 bg-white px-2 text-xs text-ink outline-none"
+      >
+        <option value="p">Paragraph</option>
+        <option value="2">Heading 2</option>
+        <option value="3">Heading 3</option>
+        <option value="4">Heading 4</option>
+      </select>
+      <span className="w-px h-4 bg-hairline mx-1" />
       <ToolbarButton
         label="Bold"
         active={editor.isActive("bold")}
@@ -61,21 +108,31 @@ function Toolbar({ editor }: { editor: Editor }) {
       >
         <Italic className="size-3.5" />
       </ToolbarButton>
+      <ToolbarButton
+        label="Underline"
+        active={editor.isActive("underline")}
+        onClick={() => editor.chain().focus().toggleUnderline().run()}
+      >
+        <UnderlineIcon className="size-3.5" />
+      </ToolbarButton>
       <span className="w-px h-4 bg-hairline mx-1" />
-      <ToolbarButton
-        label="Heading"
-        active={editor.isActive("heading", { level: 2 })}
-        onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
-      >
-        <span className="text-xs font-bold">H2</span>
-      </ToolbarButton>
-      <ToolbarButton
-        label="Subheading"
-        active={editor.isActive("heading", { level: 3 })}
-        onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
-      >
-        <span className="text-xs font-bold">H3</span>
-      </ToolbarButton>
+      {(
+        [
+          ["left", "Align left", AlignLeft],
+          ["center", "Align center", AlignCenter],
+          ["right", "Align right", AlignRight],
+          ["justify", "Justify", AlignJustify],
+        ] as const
+      ).map(([value, label, Icon]) => (
+        <ToolbarButton
+          key={value}
+          label={label}
+          active={editor.isActive({ textAlign: value })}
+          onClick={() => editor.chain().focus().setTextAlign(value).run()}
+        >
+          <Icon className="size-3.5" />
+        </ToolbarButton>
+      ))}
       <span className="w-px h-4 bg-hairline mx-1" />
       <ToolbarButton
         label="Bullet list"
@@ -114,6 +171,17 @@ function Toolbar({ editor }: { editor: Editor }) {
         <LinkIcon className="size-3.5" />
       </ToolbarButton>
       <span className="w-px h-4 bg-hairline mx-1" />
+      <ToolbarButton label="Insert image" disabled={uploading} onClick={onInsertImage}>
+        {uploading ? (
+          <Loader2 className="size-3.5 animate-spin" />
+        ) : (
+          <ImageIcon className="size-3.5" />
+        )}
+      </ToolbarButton>
+      <ToolbarButton label="Attach PDF" disabled={uploading} onClick={onAttachPdf}>
+        <FileText className="size-3.5" />
+      </ToolbarButton>
+      <span className="w-px h-4 bg-hairline mx-1" />
       <ToolbarButton
         label="Undo"
         disabled={!editor.can().undo()}
@@ -141,11 +209,18 @@ export function RichTextEditor({
   onChange: (html: string) => void;
   placeholder?: string;
 }) {
+  const [uploading, setUploading] = useState(false);
+  const [uploadError, setUploadError] = useState("");
+  const imageInputRef = useRef<HTMLInputElement>(null);
+  const pdfInputRef = useRef<HTMLInputElement>(null);
+
   const editor = useEditor({
     immediatelyRender: false,
     extensions: [
-      StarterKit,
+      StarterKit.configure({ link: false }),
       Link.configure({ openOnClick: false, autolink: true }),
+      Image.configure({ HTMLAttributes: { class: "" } }),
+      TextAlign.configure({ types: ["heading", "paragraph"] }),
     ],
     content: value,
     editorProps: {
@@ -166,16 +241,66 @@ export function RichTextEditor({
     }
   }, [value, editor]);
 
+  async function handleFilePicked(file: File | undefined, kind: "image" | "pdf") {
+    if (!file || !editor) return;
+    setUploadError("");
+    setUploading(true);
+    try {
+      const media = await uploadEditorMedia(file);
+      if (kind === "image") {
+        editor.chain().focus().setImage({ src: media.url, alt: media.name }).run();
+      } else {
+        editor
+          .chain()
+          .focus()
+          .insertContent(
+            `<a href="${media.url}" target="_blank" rel="noopener noreferrer">📄 ${media.name}</a> `
+          )
+          .run();
+      }
+    } catch (err) {
+      setUploadError(err instanceof Error ? err.message : "Upload failed.");
+    } finally {
+      setUploading(false);
+    }
+  }
+
   if (!editor) {
     return (
-      <div className="rounded-lg border border-hairline bg-white h-48 animate-pulse" />
+      <div className=" border border-hairline bg-white h-48 animate-pulse" />
     );
   }
 
   return (
-    <div className="rounded-lg border border-hairline bg-white overflow-hidden focus-within:border-violet transition-colors">
-      <Toolbar editor={editor} />
+    <div className=" border border-violet/40 bg-white overflow-hidden focus-within:border-violet transition-colors">
+      <Toolbar
+        editor={editor}
+        uploading={uploading}
+        onInsertImage={() => imageInputRef.current?.click()}
+        onAttachPdf={() => pdfInputRef.current?.click()}
+      />
       <EditorContent editor={editor} placeholder={placeholder} />
+      {uploadError ? <p className="px-4 pb-3 text-xs text-red-600">{uploadError}</p> : null}
+      <input
+        ref={imageInputRef}
+        type="file"
+        accept="image/jpeg,image/png,image/webp,image/gif"
+        className="hidden"
+        onChange={(e) => {
+          void handleFilePicked(e.target.files?.[0], "image");
+          e.target.value = "";
+        }}
+      />
+      <input
+        ref={pdfInputRef}
+        type="file"
+        accept="application/pdf"
+        className="hidden"
+        onChange={(e) => {
+          void handleFilePicked(e.target.files?.[0], "pdf");
+          e.target.value = "";
+        }}
+      />
     </div>
   );
 }

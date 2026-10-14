@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
   title: "Blog",
-  description: "Guides and updates on studying abroad from Nepal — intakes, visas, scholarships and more.",
+  description: "Guides and updates on studying abroad from Nepal: intakes, visas, scholarships and more.",
   path: "/blog",
 });
 
@@ -29,7 +29,7 @@ export default async function BlogPage() {
       <PageHeader
         eyebrow="Blog"
         title="Notes on studying abroad, written plainly."
-        subcopy="Intake deadlines, visa updates, scholarship windows — the practical stuff, without the filler."
+        subcopy="Intake deadlines, visa updates, scholarship windows: the practical stuff, without the filler."
       />
 
       <Section tone="paper">
@@ -41,7 +41,7 @@ export default async function BlogPage() {
                 <Reveal key={post.id} delay={i * 60}>
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="group flex flex-col h-full rounded-lg border border-hairline bg-paper overflow-hidden transition-shadow hover:shadow-md"
+                    className="group flex flex-col h-full border border-hairline bg-paper overflow-hidden transition-shadow hover:shadow-md"
                   >
                     {cover ? (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -74,8 +74,8 @@ export default async function BlogPage() {
             })}
           </div>
         ) : (
-          <div className="rounded-lg border border-hairline p-10 text-center text-ink/60">
-            No posts yet — check back soon.
+          <div className=" border border-hairline p-10 text-center text-ink/60">
+            No posts yet. Check back soon.
           </div>
         )}
       </Section>

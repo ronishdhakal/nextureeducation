@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 import { getFlagSrc } from "@/lib/destinationFlags";
@@ -8,40 +9,54 @@ export function DestinationCard({ destination }: { destination: Destination }) {
 
   return (
     <Link
-      href={`/destinations/${destination.slug}`}
-      className="group flex flex-col rounded-lg bg-paper border border-hairline transition-shadow duration-200 hover:shadow-md hover:border-violet/30"
+      href={`/destination/${destination.slug}`}
+      className="group flex h-full flex-col overflow-hidden border border-hairline bg-paper shadow-soft transition-shadow duration-200 hover:border-violet/30 hover:shadow-md"
     >
-      <div className="p-6 flex-1 flex flex-col gap-3">
+      <div className="flex flex-1 flex-col gap-4 p-6">
         <div className="flex items-center justify-between">
-          <div className="flex items-center gap-2.5">
+          <div className="flex items-center gap-3">
             {flag ? (
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={flag}
                 alt=""
-                className="h-4 w-6 rounded-[2px] object-cover border border-hairline"
+                className="h-10 w-14 border border-hairline object-cover shadow-sm"
               />
             ) : null}
-            <span className="text-xs font-semibold uppercase tracking-wide text-ink/60">
+            <span className="text-[11px] font-bold uppercase tracking-[0.12em] text-stone">
               {destination.country_code}
             </span>
           </div>
           {destination.is_featured ? (
-            <span className="text-xs font-semibold text-violet-deep">Popular</span>
+            <span className="inline-flex bg-violet-pale px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-violet-deep">
+              Popular
+            </span>
           ) : null}
         </div>
 
-        <h3 className="font-display font-bold text-xl text-ink">{destination.name}</h3>
-        <p className="text-sm text-ink/65 leading-relaxed">{destination.summary}</p>
+        <h3 className="font-display text-[1.6rem] font-bold tracking-[-0.01em] text-ink">
+          {destination.name}
+        </h3>
+        {destination.summary ? (
+          <p className="line-clamp-2 text-sm leading-relaxed text-ink/55">
+            {destination.summary}
+          </p>
+        ) : null}
       </div>
 
-      <div className="border-t border-hairline px-6 py-3.5 flex items-center justify-between">
+      <div className="flex items-center justify-between border-t border-hairline bg-paper-2 px-6 py-4 transition-colors group-hover:bg-violet-tint">
         <div className="flex flex-col">
-          <span className="text-[11px] uppercase tracking-wide text-stone">Intakes</span>
-          <span className="text-sm text-ink">{destination.popular_intakes}</span>
+          <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-stone">
+            Intakes
+          </span>
+          <span className="text-sm font-medium text-ink">{destination.popular_intakes}</span>
         </div>
-        <span className="inline-flex items-center gap-1 text-sm font-semibold text-violet-deep">
-          Explore <span aria-hidden className="transition-transform group-hover:translate-x-0.5">→</span>
+        <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-violet-deep">
+          Explore
+          <ArrowRight
+            className="size-4 transition-transform duration-200 group-hover:translate-x-1"
+            strokeWidth={2.5}
+          />
         </span>
       </div>
     </Link>

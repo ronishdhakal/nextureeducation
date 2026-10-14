@@ -1,25 +1,24 @@
 import { InquiryForm } from "@/components/ui/InquiryForm";
+import { Eyebrow } from "@/components/ui/Section";
 import type { Destination } from "@/lib/types";
 
 export function FinalCTA({ destinations }: { destinations: Destination[] }) {
   return (
-    <div className="bg-violet-tint border-t border-hairline">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 py-16 sm:py-20">
-        <div className="grid lg:grid-cols-[1fr_1fr] gap-12 items-center">
+    <div className="border-t border-hairline bg-violet-tint">
+      <div className="mx-auto w-full max-w-6xl px-6 py-16 sm:px-8 sm:py-20">
+        <div className="grid items-center gap-12 lg:grid-cols-2">
           <div className="flex flex-col gap-4">
-            <span className="text-xs font-semibold uppercase tracking-[0.14em] text-violet-deep">
-              Get started
-            </span>
-            <h2 className="font-display font-bold text-3xl sm:text-4xl text-ink leading-tight text-balance">
+            <Eyebrow>Get started</Eyebrow>
+            <h2 className="font-display text-3xl font-bold leading-[1.15] tracking-[-0.01em] text-ink text-balance sm:text-4xl">
               Your next step takes ten minutes to start.
             </h2>
-            <p className="text-ink/65 max-w-md">
-              Tell us where you&apos;re thinking of going — or that you have no idea yet.
+            <p className="max-w-md text-lg leading-relaxed text-ink/70">
+              Tell us where you&apos;re thinking of going, or that you have no idea yet.
               Either way, we&apos;ll call you back with something useful to say.
             </p>
           </div>
 
-          <div className="bg-paper border border-hairline rounded-lg p-6 sm:p-8 shadow-[0_1px_3px_rgba(23,11,34,0.06)]">
+          <div className=" border border-hairline bg-paper p-6 shadow-soft sm:p-8">
             <InquiryForm
               destinations={destinations}
               sourcePage="/#final-cta"

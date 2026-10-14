@@ -72,7 +72,7 @@ export default function SiteSettingsPage() {
     <div>
       <AdminPageHeader
         title="Site Settings"
-        subtitle="Contact details, homepage hero copy, and headline stats — shared across the whole site."
+        subtitle="Contact details, homepage hero copy, and headline stats, shared across the whole site."
       />
 
       <form onSubmit={handleSubmit} className="flex flex-col gap-8 max-w-2xl">
@@ -136,7 +136,7 @@ export default function SiteSettingsPage() {
           <button
             type="submit"
             disabled={saving}
-            className="inline-flex items-center justify-center rounded-md bg-violet text-white font-semibold px-6 py-3 text-sm transition-all hover:bg-violet-deep disabled:opacity-60"
+            className="inline-flex items-center justify-center bg-violet text-white font-semibold px-6 py-3 text-sm transition-all hover:bg-violet-deep disabled:opacity-60"
           >
             {saving ? "Saving…" : "Save settings"}
           </button>

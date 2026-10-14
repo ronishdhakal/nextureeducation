@@ -2,44 +2,40 @@
 
 import { useState } from "react";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
-import { Button } from "@/components/ui/Button";
+import { ConsultationButton } from "@/components/ui/ConsultationProvider";
 import { Logo } from "@/components/ui/Logo";
-import type { SiteSettings } from "@/lib/types";
 
 const NAV_LINKS = [
-  { label: "Destinations", href: "/destinations" },
-  { label: "Services", href: "/services" },
-  { label: "Test Prep", href: "/test-prep" },
-  { label: "Success Stories", href: "/success-stories" },
+  { label: "Home", href: "/" },
   { label: "About", href: "/about" },
+  { label: "Study Abroad", href: "/destination" },
   { label: "Blog", href: "/blog" },
+  { label: "Contact", href: "/contact" },
 ];
 
-export function SiteHeader({ settings }: { settings: SiteSettings | null }) {
+export function SiteHeader() {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  const isActive = (href: string) =>
+    href === "/" ? pathname === "/" : pathname.startsWith(href);
 
   return (
-    <header className="sticky top-0 z-50 bg-paper/90 backdrop-blur border-b border-hairline">
-      <div className="bg-violet-tint border-b border-hairline">
-        <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 flex items-center justify-between py-1.5 text-xs text-ink/60">
-          <span>{settings?.address || "Bagbazar, Kathmandu"}</span>
-          <a
-            href={`tel:${(settings?.phone || "+9779800000000").replace(/\s/g, "")}`}
-            className="hover:text-violet-deep transition-colors"
-          >
-            {settings?.phone || "+977 98-0000-0000"}
-          </a>
-        </div>
-      </div>
-
-      <nav className="mx-auto w-full max-w-6xl px-6 sm:px-8 flex items-center justify-between py-3">
+    <header className="sticky top-0 z-50 border-b border-hairline bg-paper/95 backdrop-blur">
+      <nav className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-3.5 sm:px-8">
         <Logo />
 
-        <ul className="hidden lg:flex items-center gap-7 text-sm font-medium text-ink/80">
+        <ul className="hidden items-center gap-9 lg:flex">
           {NAV_LINKS.map((link) => (
             <li key={link.href}>
-              <Link href={link.href} className="hover:text-violet transition-colors">
+              <Link
+                href={link.href}
+                className={`text-xs font-semibold uppercase tracking-[0.04em] transition-colors hover:text-violet-deep ${
+                  isActive(link.href) ? "text-violet-deep" : "text-ink"
+                }`}
+              >
                 {link.label}
               </Link>
             </li>
@@ -47,7 +43,7 @@ export function SiteHeader({ settings }: { settings: SiteSettings | null }) {
         </ul>
 
         <div className="hidden lg:block">
-          <Button href="/contact">Book a Session</Button>
+          <ConsultationButton arrow>Book Consultation</ConsultationButton>
         </div>
 
         <button
@@ -55,7 +51,7 @@ export function SiteHeader({ settings }: { settings: SiteSettings | null }) {
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
           aria-label="Toggle menu"
-          className="lg:hidden inline-flex flex-col gap-1.5 p-2 -mr-2"
+          className="-mr-2 inline-flex flex-col gap-1.5 p-2 lg:hidden"
         >
           <span
             className={`block h-0.5 w-6 bg-ink transition-transform ${open ? "translate-y-2 rotate-45" : ""}`}
@@ -68,20 +64,22 @@ export function SiteHeader({ settings }: { settings: SiteSettings | null }) {
       </nav>
 
       {open ? (
-        <div className="lg:hidden border-t border-hairline bg-paper px-6 sm:px-8 py-5 flex flex-col gap-4">
+        <div className="flex flex-col gap-4 border-t border-hairline bg-paper px-6 py-5 sm:px-8 lg:hidden">
           {NAV_LINKS.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="text-base font-medium text-ink/80 hover:text-violet"
+              className={`text-sm font-semibold uppercase tracking-[0.04em] ${
+                isActive(link.href) ? "text-violet-deep" : "text-ink"
+              }`}
             >
               {link.label}
             </Link>
           ))}
-          <Button href="/contact" className="mt-2 w-full">
-            Book a Session
-          </Button>
+          <ConsultationButton arrow className="mt-2 w-full">
+            Book Consultation
+          </ConsultationButton>
         </div>
       ) : null}
     </header>

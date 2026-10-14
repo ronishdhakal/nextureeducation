@@ -76,7 +76,7 @@ export default async function BlogPostPage({ params }: Props) {
       <Section tone="paper">
         <div className="max-w-2xl mx-auto flex flex-col gap-8">
           {cover ? (
-            <div className="relative w-full aspect-[16/9] rounded-lg overflow-hidden">
+            <div className="relative w-full aspect-[16/9] overflow-hidden">
               <Image
                 src={cover}
                 alt={post.title}

@@ -7,7 +7,7 @@ const REASONS = [
   {
     title: "Based in Bagbazar, not a call center",
     detail:
-      "Walk in and talk to the counselor who'll actually handle your file — not a rotating desk or a call center reading from a script.",
+      "Walk in and talk to the counselor who'll actually handle your file, not a rotating desk or a call center reading from a script.",
   },
   {
     title: "One point of contact, start to finish",
@@ -27,7 +27,7 @@ export function WhyLocal({ settings }: { settings: SiteSettings | null }) {
       <Reveal className="flex flex-col gap-5">
         <SectionHeading
           eyebrow="Why Nexture"
-          title="The best consultancy in Bagbazar, Kathmandu, Nepal for studying abroad — here's why students say that."
+          title="The best consultancy in Bagbazar, Kathmandu, Nepal for studying abroad. Here's why students say that."
         />
         <p className="text-ink/65 leading-relaxed max-w-md">
           Bagbazar has no shortage of consultancies. What students tell us sets Nexture apart
@@ -39,23 +39,23 @@ export function WhyLocal({ settings }: { settings: SiteSettings | null }) {
         </Button>
       </Reveal>
 
-      <Reveal
-        delay={120}
-        className="grid gap-px bg-hairline rounded-lg overflow-hidden border border-hairline"
-      >
+      <Reveal delay={120} className="flex flex-col gap-4">
         {REASONS.map((r) => (
-          <div key={r.title} className="bg-paper p-6">
-            <h3 className="font-display font-bold text-base text-ink mb-1.5">{r.title}</h3>
-            <p className="text-sm text-ink/60 leading-relaxed">{r.detail}</p>
+          <div
+            key={r.title}
+            className=" border border-hairline bg-paper p-6 shadow-soft"
+          >
+            <h3 className="mb-1.5 font-display text-base font-bold text-ink">{r.title}</h3>
+            <p className="text-sm leading-relaxed text-ink/60">{r.detail}</p>
           </div>
         ))}
-        <div className="bg-paper-2 p-6">
-          <p className="text-sm text-ink/70">
+        <div className=" border border-violet/15 bg-violet-tint p-6">
+          <p className="text-sm text-ink/75">
             <span className="font-semibold text-ink">Address:</span>{" "}
             {settings?.address || "Bagbazar, Kathmandu, Nepal"}
           </p>
           {settings?.phone ? (
-            <p className="text-sm text-ink/70 mt-1">
+            <p className="mt-1 text-sm text-ink/75">
               <span className="font-semibold text-ink">Phone:</span> {settings.phone}
             </p>
           ) : null}

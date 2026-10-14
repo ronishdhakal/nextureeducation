@@ -10,6 +10,7 @@ class University(TimeStamped, Orderable):
         Destination, related_name="universities", on_delete=models.CASCADE
     )
     logo = models.ImageField(upload_to="universities/logos/", blank=True, null=True)
+    cover_image = models.ImageField(upload_to="universities/covers/", blank=True, null=True)
     city = models.CharField(max_length=100, blank=True)
     ranking_note = models.CharField(max_length=150, blank=True)
     programs_summary = models.TextField(blank=True)
@@ -42,4 +43,4 @@ class Program(TimeStamped):
         ordering = ["field_of_study"]
 
     def __str__(self):
-        return f"{self.get_level_display()} — {self.field_of_study}"
+        return f"{self.get_level_display()} ({self.field_of_study})"

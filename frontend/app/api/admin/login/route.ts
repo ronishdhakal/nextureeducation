@@ -4,21 +4,21 @@ import { SERVER_API_BASE } from "@/lib/api";
 import { ACCESS_COOKIE, ACCESS_MAX_AGE, cookieOptions, REFRESH_COOKIE, REFRESH_MAX_AGE } from "@/lib/adminAuth";
 
 export async function POST(request: Request) {
-  const { username, password } = await request.json().catch(() => ({}));
+  const { email, password } = await request.json().catch(() => ({}));
 
-  if (!username || !password) {
-    return NextResponse.json({ detail: "Username and password are required." }, { status: 400 });
+  if (!email || !password) {
+    return NextResponse.json({ detail: "Email and password are required." }, { status: 400 });
   }
 
   const res = await fetch(`${SERVER_API_BASE}/auth/token/`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ username, password }),
+    body: JSON.stringify({ email, password }),
     cache: "no-store",
   });
 
   if (!res.ok) {
-    return NextResponse.json({ detail: "Invalid username or password." }, { status: 401 });
+    return NextResponse.json({ detail: "Invalid email or password." }, { status: 401 });
   }
 
   const data = await res.json();

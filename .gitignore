@@ -1,2 +1,8 @@
 .DS_Store
 *.log
+
+# local secrets and server data
+.env
+.env.*
+!deploy/.env.example
+data/

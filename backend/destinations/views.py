@@ -1,3 +1,4 @@
+from django.db.models import Count
 from rest_framework import viewsets
 
 from core.permissions import PublishedQuerysetMixin, SlugOrPkLookupMixin
@@ -12,6 +13,9 @@ class DestinationViewSet(SlugOrPkLookupMixin, PublishedQuerysetMixin, viewsets.M
     filterset_fields = ["is_featured", "is_published"]
     ordering_fields = ["order", "name"]
     search_fields = ["name", "summary"]
+
+    def get_queryset(self):
+        return super().get_queryset().annotate(university_count=Count("universities"))
 
     def get_serializer_class(self):
         if self.action == "list":

@@ -2,7 +2,7 @@ export const FAQ_ITEMS = [
   {
     question: "How much does counseling cost?",
     answer:
-      "Your first session and ongoing counseling are free. If a paid service makes sense for you — like a test prep batch — we tell you the cost upfront, before you commit to anything.",
+      "Your first session and ongoing counseling are free. If a paid service makes sense for you, like a test prep batch, we tell you the cost upfront, before you commit to anything.",
   },
   {
     question: "How long does the process take, start to finish?",
@@ -12,7 +12,7 @@ export const FAQ_ITEMS = [
   {
     question: "Do you guarantee visa approval?",
     answer:
-      "No one honestly can — the decision belongs to the visa office, not us. What we do guarantee is a complete, accurate file and a real answer about your chances before you apply, not after.",
+      "No one honestly can: the decision belongs to the visa office, not us. What we do guarantee is a complete, accurate file and a real answer about your chances before you apply, not after.",
   },
   {
     question: "Which countries do you work with?",

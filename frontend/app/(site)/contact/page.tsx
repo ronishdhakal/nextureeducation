@@ -25,14 +25,14 @@ export default async function ContactPage() {
       <PageHeader
         eyebrow="Contact"
         title="Let's talk about your next step."
-        subcopy="Fill out the form, call us, or just walk in — whichever is easiest for you."
+        subcopy="Fill out the form, call us, or just walk in, whichever is easiest for you."
       />
 
       <Section tone="paper">
         <div className="grid lg:grid-cols-[0.9fr_1.1fr] gap-16">
           <div className="flex flex-col gap-8">
             <div className="flex items-start gap-4">
-              <span className="inline-flex size-11 items-center justify-center rounded-xl bg-violet-pale text-violet-deep shrink-0">
+              <span className="inline-flex size-11 items-center justify-center bg-violet-pale text-violet-deep shrink-0">
                 <Phone className="size-5" strokeWidth={2.2} />
               </span>
               <div>
@@ -41,29 +41,29 @@ export default async function ContactPage() {
                   href={`tel:${(settings?.phone || "").replace(/\s/g, "")}`}
                   className="text-ink/65 hover:text-violet-deep transition-colors"
                 >
-                  {settings?.phone || "+977 98-0000-0000"}
+                  {settings?.phone || "Not set yet"}
                 </a>
               </div>
             </div>
 
             <div className="flex items-start gap-4">
-              <span className="inline-flex size-11 items-center justify-center rounded-xl bg-violet-pale text-violet-deep shrink-0">
+              <span className="inline-flex size-11 items-center justify-center bg-violet-pale text-violet-deep shrink-0">
                 <Mail className="size-5" strokeWidth={2.2} />
               </span>
               <div>
                 <p className="font-display font-bold text-ink">Email</p>
                 <a
-                  href={`mailto:${settings?.email || "hello@nexture.edu.np"}`}
+                  href={`mailto:${settings?.email || ""}`}
                   className="text-ink/65 hover:text-violet-deep transition-colors"
                 >
-                  {settings?.email || "hello@nexture.edu.np"}
+                  {settings?.email || "Not set yet"}
                 </a>
               </div>
             </div>
 
             {branches.map((b) => (
               <div key={b.id} className="flex items-start gap-4">
-                <span className="inline-flex size-11 items-center justify-center rounded-xl bg-violet-pale text-violet-deep shrink-0">
+                <span className="inline-flex size-11 items-center justify-center bg-violet-pale text-violet-deep shrink-0">
                   <MapPin className="size-5" strokeWidth={2.2} />
                 </span>
                 <div>
@@ -84,10 +84,10 @@ export default async function ContactPage() {
             ))}
           </div>
 
-          <div className="rounded-lg border border-hairline bg-paper-2 p-6 sm:p-8">
+          <div className=" border border-hairline bg-paper-2 p-6 sm:p-8">
             <SectionHeading
               title="Book a free session"
-              subcopy="No obligation, no sales pressure — just a straight conversation about your options."
+              subcopy="No obligation, no sales pressure. Just a straight conversation about your options."
             />
             <div className="mt-8">
               <InquiryForm destinations={destinations} sourcePage="/contact" variant="full" />

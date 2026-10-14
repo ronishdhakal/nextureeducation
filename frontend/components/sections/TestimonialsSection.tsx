@@ -36,8 +36,8 @@ export function TestimonialsSection({
           const photo = mediaUrl(t.photo);
           return (
             <Reveal key={t.id} delay={i * 60}>
-              <div className="h-full rounded-lg bg-paper border border-hairline p-6">
-                <p className="text-ink/75 leading-relaxed">&ldquo;{t.quote}&rdquo;</p>
+              <div className="flex h-full flex-col border border-hairline bg-paper p-6 shadow-soft">
+                <p className="flex-1 leading-relaxed text-ink/75">&ldquo;{t.quote}&rdquo;</p>
                 <div className="mt-5 flex items-center gap-3 border-t border-hairline pt-4">
                   {photo ? (
                     // eslint-disable-next-line @next/next/no-img-element

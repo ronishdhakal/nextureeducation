@@ -3,18 +3,19 @@ import type { SiteSettings } from "@/lib/types";
 
 export function StatsBand({ settings }: { settings: SiteSettings | null }) {
   const stats = [
-    { value: settings?.stat_students_placed || "1,200+", label: "Students placed abroad" },
-    { value: settings?.stat_partner_universities || "85+", label: "Partner universities" },
-    { value: settings?.stat_visa_success_rate || "92%", label: "Visa success rate" },
-    { value: settings?.stat_countries || "07", label: "Destination countries" },
-  ];
+    { value: settings?.stat_students_placed || "", label: "Students placed abroad" },
+    { value: settings?.stat_partner_universities || "", label: "Partner universities" },
+    { value: settings?.stat_visa_success_rate || "", label: "Visa success rate" },
+    { value: settings?.stat_countries || "", label: "Destination countries" },
+  ].filter((s) => s.value);
+  if (!stats.length) return null;
 
   return (
     <div className="bg-violet">
-      <div className="mx-auto w-full max-w-6xl px-6 sm:px-8 py-14 grid grid-cols-2 sm:grid-cols-4 gap-8">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-8 px-6 py-14 sm:grid-cols-4 sm:px-8">
         {stats.map((s, i) => (
           <Reveal key={s.label} delay={i * 70} className="text-center sm:text-left">
-            <p className="font-display font-bold text-3xl sm:text-4xl text-white">{s.value}</p>
+            <p className="font-display text-3xl font-bold text-white sm:text-4xl">{s.value}</p>
             <p className="mt-1 text-xs font-medium uppercase tracking-[0.1em] text-violet-pale">
               {s.label}
             </p>

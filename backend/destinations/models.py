@@ -22,6 +22,31 @@ class Destination(TimeStamped, SEOFields, Orderable):
     eligibility_overview = models.TextField(
         blank=True, help_text="Rich text: entry requirements, eligibility"
     )
+    why_study_overview = models.TextField(
+        blank=True, help_text="Rich text: why study here, what makes it worth choosing"
+    )
+    popular_courses_overview = models.TextField(
+        blank=True, help_text="Rich text: popular fields of study, in-demand courses"
+    )
+    documents_overview = models.TextField(
+        blank=True, help_text="Rich text: documents required for the application"
+    )
+    scholarships_overview = models.TextField(
+        blank=True, help_text="Rich text: scholarships & financial aid options"
+    )
+    additional_info = models.TextField(
+        blank=True,
+        help_text="Rich text: anything else specific to this destination that doesn't fit the other sections",
+    )
+    key_highlights = models.TextField(
+        blank=True, help_text="One highlight per line, shown as cards on the detail page"
+    )
+    why_choose_points = models.TextField(
+        blank=True, help_text="One short point per line, shown as chips under 'Why choose'"
+    )
+    study_areas = models.TextField(
+        blank=True, help_text="One field of study per line, e.g. Engineering"
+    )
     popular_intakes = models.CharField(
         max_length=200, blank=True, help_text="e.g. February, July, September"
     )

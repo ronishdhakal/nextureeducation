@@ -18,24 +18,28 @@ export function FAQSection() {
         subcopy="If yours isn't here, that's what the free session is for."
       />
 
-      <div className="mt-10 max-w-3xl border-t border-hairline">
+      <div className="mt-10 max-w-3xl divide-y divide-hairline overflow-hidden border border-hairline bg-paper shadow-soft">
         {FAQ_ITEMS.map((item, i) => {
           const isOpen = open === i;
           return (
-            <Reveal key={item.question} delay={i * 40} className="border-b border-hairline">
+            <Reveal key={item.question} delay={i * 40}>
               <button
                 type="button"
                 onClick={() => setOpen(isOpen ? null : i)}
                 aria-expanded={isOpen}
-                className="w-full flex items-center justify-between gap-4 py-5 text-left"
+                className={`flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-violet-tint ${isOpen ? "bg-violet-tint" : ""}`}
               >
-                <span className="font-display font-bold text-ink">{item.question}</span>
+                <span className="font-display font-bold tracking-[-0.01em] text-ink">
+                  {item.question}
+                </span>
                 <ChevronDown
-                  className={`size-5 shrink-0 text-violet-deep transition-transform ${isOpen ? "rotate-180" : ""}`}
+                  className={`size-5 shrink-0 text-violet-deep transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`}
                 />
               </button>
               {isOpen ? (
-                <p className="pb-5 text-sm text-ink/65 leading-relaxed max-w-xl">{item.answer}</p>
+                <p className="max-w-xl px-6 pb-5 text-sm leading-relaxed text-ink/65">
+                  {item.answer}
+                </p>
               ) : null}
             </Reveal>
           );

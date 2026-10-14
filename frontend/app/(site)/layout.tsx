@@ -1,14 +1,22 @@
 import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { SiteHeader } from "@/components/sections/SiteHeader";
-import { getBranches, getSiteSettings } from "@/lib/api";
+import { PromoPopup } from "@/components/ui/PromoPopup";
+import { ConsultationProvider } from "@/components/ui/ConsultationProvider";
+import { getActivePopup, getDestinations, getServices, getSiteSettings } from "@/lib/api";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nexture.edu.np";
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const [settings, branches] = await Promise.all([getSiteSettings(), getBranches()]);
+  const [settings, services, destinations, popup] = await Promise.all([
+    getSiteSettings(),
+    getServices(),
+    getDestinations(),
+    getActivePopup(),
+  ]);
 
   return (
+    <ConsultationProvider destinations={destinations}>
     <div className="flex min-h-full flex-col">
       <JsonLd
         data={{
@@ -39,9 +47,11 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
           ].filter(Boolean),
         }}
       />
-      <SiteHeader settings={settings} />
+      <SiteHeader />
       <main className="flex-1">{children}</main>
-      <SiteFooter settings={settings} branches={branches} />
+      <SiteFooter settings={settings} services={services} />
+      <PromoPopup popup={popup} />
     </div>
+    </ConsultationProvider>
   );
 }

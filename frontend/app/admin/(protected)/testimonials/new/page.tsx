@@ -1,3 +1,5 @@
+"use client";
+
 import { AdminPageHeader } from "@/components/admin/AdminPageHeader";
 import { GenericResourceForm } from "@/components/admin/GenericResourceForm";
 import { TESTIMONIAL_CONFIG } from "@/lib/adminResources";

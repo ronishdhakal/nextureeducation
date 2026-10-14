@@ -38,7 +38,9 @@ async function forward(
     cache: "no-store",
   };
   if (!["GET", "HEAD", "DELETE"].includes(request.method)) {
-    init.body = await request.text();
+    // arrayBuffer (not text) so binary bodies like multipart file uploads
+    // pass through unmangled, not just JSON payloads.
+    init.body = await request.arrayBuffer();
   }
   return fetch(`${SERVER_API_BASE}/${path}/${search}`, init);
 }

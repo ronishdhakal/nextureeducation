@@ -9,6 +9,8 @@ import type {
   Testimonial,
   TestPrep,
   BlogPost,
+  EventItem,
+  PopupItem,
   University,
   TeamMember,
 } from "./types";
@@ -37,7 +39,8 @@ async function apiFetch<T>(
 export function mediaUrl(path: string | null | undefined): string | null {
   if (!path) return null;
   if (path.startsWith("http")) return path;
-  const origin = SERVER_API_BASE.replace(/\/api\/?$/, "");
+  // Browser-facing origin: SERVER_API_BASE may be the docker-internal host.
+  const origin = PUBLIC_API_BASE.replace(/\/api\/?$/, "");
   return `${origin}${path}`;
 }
 
@@ -88,6 +91,32 @@ export async function getService(slug: string): Promise<Service | null> {
   }
 }
 
+export async function getTestPrep(slug: string): Promise<TestPrep | null> {
+  try {
+    return await apiFetch<TestPrep>(`/test-prep/${slug}/`);
+  } catch {
+    return null;
+  }
+}
+
+export async function getEvents(): Promise<EventItem[]> {
+  try {
+    const data = await apiFetch<Paginated<EventItem>>("/events/?ordering=event_date&page_size=50");
+    return data.results;
+  } catch (e) {
+    console.error(e);
+    return [];
+  }
+}
+
+export async function getEvent(slug: string): Promise<EventItem | null> {
+  try {
+    return await apiFetch<EventItem>(`/events/${slug}/`);
+  } catch {
+    return null;
+  }
+}
+
 export async function getUniversities(countryId?: number): Promise<University[]> {
   try {
     const query = countryId ? `&country=${countryId}` : "";
@@ -111,15 +140,31 @@ export async function getTestPreps(): Promise<TestPrep[]> {
   }
 }
 
-export async function getTestimonials(): Promise<Testimonial[]> {
+export async function getTestimonials(destinationId?: number): Promise<Testimonial[]> {
   try {
+    const filter = destinationId ? `&destination=${destinationId}` : "";
     const data = await apiFetch<Paginated<Testimonial>>(
-      "/testimonials/?ordering=order&page_size=50"
+      `/testimonials/?ordering=order&page_size=50${filter}`
     );
     return data.results;
   } catch (e) {
     console.error(e);
     return [];
+  }
+}
+
+/** The newest popup that is switched on and inside its date window (the API filters this). */
+export async function getActivePopup(): Promise<PopupItem | null> {
+  try {
+    const data = await apiFetch<Paginated<PopupItem>>("/popups/?ordering=-created_at&page_size=1", {
+      revalidate: 60,
+    });
+    const popup = data.results[0];
+    if (!popup) return null;
+    return { ...popup, image: mediaUrl(popup.image) || "" };
+  } catch (e) {
+    console.error(e);
+    return null;
   }
 }
 
@@ -194,7 +239,7 @@ export async function createLead(payload: LeadPayload): Promise<{ detail: string
         ? Object.values(data).flat().filter(Boolean)[0]
         : null;
     throw new Error(
-      (firstError as string) || "Something went wrong — please try again."
+      (firstError as string) || "Something went wrong, please try again."
     );
   }
   return data;

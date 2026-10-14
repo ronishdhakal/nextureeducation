@@ -41,8 +41,8 @@ export function Eyebrow({
 }) {
   return (
     <span
-      className={`text-xs font-semibold uppercase tracking-[0.14em] ${
-        tone === "violet" ? "text-violet-deep" : "text-paper/75"
+      className={`text-[13px] font-semibold uppercase tracking-[0.14em] ${
+        tone === "violet" ? "text-violet-deep" : "text-paper/80"
       }`}
     >
       {children}
@@ -68,11 +68,13 @@ export function SectionHeading({
       className={`flex flex-col gap-3 max-w-2xl ${align === "center" ? "mx-auto text-center items-center" : ""}`}
     >
       {eyebrow ? <Eyebrow tone={tone}>{eyebrow}</Eyebrow> : null}
-      <h2 className="font-display font-bold text-3xl sm:text-4xl leading-[1.15] text-balance">
+      <h2 className="font-display text-3xl font-bold leading-[1.15] tracking-[-0.01em] text-balance sm:text-4xl">
         {title}
       </h2>
       {subcopy ? (
-        <p className={`text-base ${tone === "paper" ? "text-paper/70" : "text-ink/65"}`}>
+        <p
+          className={`text-base leading-relaxed sm:text-lg ${tone === "paper" ? "text-paper/70" : "text-ink/65"}`}
+        >
           {subcopy}
         </p>
       ) : null}

@@ -1,14 +1,22 @@
 import type { MetadataRoute } from "next";
 
-import { getBlogPosts, getDestinations, getPages, getServices } from "@/lib/api";
+import {
+  getBlogPosts,
+  getDestinations,
+  getEvents,
+  getPages,
+  getServices,
+  getTestPreps,
+} from "@/lib/api";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nexture.edu.np";
 
 const STATIC_ROUTES = [
   "",
-  "/destinations",
+  "/destination",
   "/services",
-  "/test-prep",
+  "/classes",
+  "/events",
   "/universities",
   "/success-stories",
   "/about",
@@ -17,11 +25,13 @@ const STATIC_ROUTES = [
 ];
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const [destinations, services, posts, pages] = await Promise.all([
+  const [destinations, services, posts, pages, classes, events] = await Promise.all([
     getDestinations(),
     getServices(),
     getBlogPosts(),
     getPages(),
+    getTestPreps(),
+    getEvents(),
   ]);
 
   const staticEntries = STATIC_ROUTES.map((route) => ({
@@ -30,7 +40,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   }));
 
   const destinationEntries = destinations.map((d) => ({
-    url: `${SITE_URL}/destinations/${d.slug}`,
+    url: `${SITE_URL}/destination/${d.slug}`,
+    lastModified: new Date(),
+  }));
+
+  const classEntries = classes.map((c) => ({
+    url: `${SITE_URL}/classes/${c.slug}`,
+    lastModified: new Date(),
+  }));
+
+  const eventEntries = events.map((e) => ({
+    url: `${SITE_URL}/events/${e.slug}`,
     lastModified: new Date(),
   }));
 
@@ -49,5 +69,13 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(),
   }));
 
-  return [...staticEntries, ...destinationEntries, ...serviceEntries, ...blogEntries, ...pageEntries];
+  return [
+    ...staticEntries,
+    ...destinationEntries,
+    ...classEntries,
+    ...eventEntries,
+    ...serviceEntries,
+    ...blogEntries,
+    ...pageEntries,
+  ];
 }

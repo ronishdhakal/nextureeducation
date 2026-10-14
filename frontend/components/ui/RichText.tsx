@@ -9,7 +9,7 @@ export function RichText({ html, className = "" }: { html: string; className?: s
   const clean = DOMPurify.sanitize(html);
   return (
     <div
-      className={`prose prose-sm sm:prose-base max-w-none prose-headings:font-display prose-a:text-violet-deep prose-a:no-underline hover:prose-a:underline ${className}`}
+      className={`prose prose-sm sm:prose-base max-w-none prose-headings:font-display prose-h2:text-xl prose-h2:font-semibold prose-h2:text-brand sm:prose-h2:text-2xl prose-h3:text-base prose-h3:font-semibold prose-h3:text-ink sm:prose-h3:text-lg prose-a:text-violet-deep prose-a:no-underline hover:prose-a:underline ${className}`}
       dangerouslySetInnerHTML={{ __html: clean }}
     />
   );

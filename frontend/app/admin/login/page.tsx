@@ -1,16 +1,22 @@
 "use client";
 
-import { useState, Suspense } from "react";
+import { Eye, EyeOff } from "lucide-react";
+import Image from "next/image";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useState } from "react";
 
 import { Logo } from "@/components/ui/Logo";
 import { adminLogin } from "@/lib/adminApi";
 
+const inputClass =
+  "w-full bg-white border border-violet/40 px-3.5 py-2.5 text-sm text-ink placeholder:text-stone-light outline-none transition-colors focus:border-violet focus:ring-2 focus:ring-violet/15";
+
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [show, setShow] = useState(false);
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -19,7 +25,7 @@ function LoginForm() {
     setLoading(true);
     setError("");
     try {
-      await adminLogin(username, password);
+      await adminLogin(email, password);
       router.push(searchParams.get("next") || "/admin/dashboard");
       router.refresh();
     } catch (err) {
@@ -29,49 +35,65 @@ function LoginForm() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#f6f5f8] px-4">
-      <div className="w-full max-w-sm">
-        <div className="flex justify-center mb-8">
-          <Logo />
-        </div>
-        <div className="bg-white border border-hairline rounded-2xl p-7 shadow-sm">
-          <h1 className="font-display font-bold text-xl text-ink mb-1">CRM sign in</h1>
-          <p className="text-sm text-stone mb-6">Staff access only.</p>
+    <div className="flex min-h-screen items-center justify-center bg-admin-bg px-4 py-10">
+      <div className="grid w-full max-w-5xl items-center gap-10 bg-white p-8 shadow-float md:grid-cols-2 md:p-12">
+        <div>
+          <div className="flex items-center gap-4">
+            <Logo />
+            <span className="h-8 w-px bg-hairline" />
+            <span className="text-sm text-ink/70">Admin Panel</span>
+          </div>
 
-          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
+          <h1 className="mt-10 font-display text-3xl font-semibold text-ink">
+            Welcome <span className="text-violet-deep">Back,</span>
+          </h1>
+          <p className="mt-3 max-w-xs text-sm leading-relaxed text-ink/70">
+            Login to your Nexture Education admin account and manage your institution with ease.
+          </p>
+
+          <form onSubmit={handleSubmit} className="mt-8 flex flex-col gap-4">
             <div>
-              <label
-                htmlFor="username"
-                className="block text-xs font-semibold uppercase tracking-wide text-stone mb-1.5"
-              >
-                Username
+              <label htmlFor="email" className="mb-1.5 block text-xs font-medium text-ink">
+                Email Address
               </label>
               <input
-                id="username"
-                name="username"
+                id="email"
+                name="email"
+                type="email"
                 autoFocus
                 required
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-                className="w-full rounded-lg bg-paper-2 border border-hairline px-3.5 py-2.5 text-sm outline-none focus:border-violet"
+                autoComplete="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                placeholder="you@example.com"
+                className={inputClass}
               />
             </div>
             <div>
-              <label
-                htmlFor="password"
-                className="block text-xs font-semibold uppercase tracking-wide text-stone mb-1.5"
-              >
+              <label htmlFor="password" className="mb-1.5 block text-xs font-medium text-ink">
                 Password
               </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                required
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full rounded-lg bg-paper-2 border border-hairline px-3.5 py-2.5 text-sm outline-none focus:border-violet"
-              />
+              <div className="relative">
+                <input
+                  id="password"
+                  name="password"
+                  type={show ? "text" : "password"}
+                  required
+                  autoComplete="current-password"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  placeholder="••••••••••••"
+                  className={`${inputClass} pr-10`}
+                />
+                <button
+                  type="button"
+                  onClick={() => setShow((v) => !v)}
+                  aria-label={show ? "Hide password" : "Show password"}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-violet-deep"
+                >
+                  {show ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
+                </button>
+              </div>
             </div>
 
             {error ? <p className="text-sm text-red-600">{error}</p> : null}
@@ -79,11 +101,21 @@ function LoginForm() {
             <button
               type="submit"
               disabled={loading}
-              className="mt-2 inline-flex items-center justify-center rounded-md bg-violet text-white font-semibold px-5 py-3 text-sm transition-all hover:bg-violet-deep disabled:opacity-60"
+              className="mt-2 inline-flex items-center justify-center bg-violet px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-violet/25 transition-colors hover:bg-violet-deep disabled:opacity-60"
             >
-              {loading ? "Signing in…" : "Sign in"}
+              {loading ? "Logging in…" : "Log In"}
             </button>
           </form>
+        </div>
+
+        <div className="relative hidden aspect-[4/3] overflow-hidden bg-gradient-to-br from-violet-pale via-violet-tint to-violet/30 md:block">
+          <Image
+            src="/assets/home/background.png"
+            alt=""
+            fill
+            sizes="(min-width: 768px) 40vw, 0px"
+            className="object-contain object-bottom p-6 opacity-80"
+          />
         </div>
       </div>
     </div>

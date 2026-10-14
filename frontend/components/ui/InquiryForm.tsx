@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useId, useState } from "react";
 
 import { createLead } from "@/lib/api";
 import type { Destination, PreferredLevel } from "@/lib/types";
@@ -20,11 +20,14 @@ type Props = {
   sourcePage: string;
   variant?: "full" | "compact";
   className?: string;
+  defaultMessage?: string;
+  onSuccess?: () => void;
 };
 
 const inputClass =
-  "w-full rounded-md bg-paper-2 border border-hairline px-4 py-2.5 text-sm text-ink placeholder:text-stone-light focus:border-violet outline-none transition-colors";
-const labelClass = "block text-xs font-semibold uppercase tracking-wide mb-1.5 text-stone";
+  "w-full bg-white border border-violet/40 px-3.5 py-2.5 text-sm text-ink placeholder:text-stone-light focus:border-violet focus:ring-2 focus:ring-violet/15 outline-none transition-colors";
+const labelClass =
+  "block text-xs font-medium mb-1.5 text-ink";
 
 export function InquiryForm({
   destinations = [],
@@ -32,7 +35,10 @@ export function InquiryForm({
   sourcePage,
   variant = "full",
   className = "",
+  defaultMessage = "",
+  onSuccess,
 }: Props) {
+  const uid = useId();
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const [error, setError] = useState("");
 
@@ -56,18 +62,19 @@ export function InquiryForm({
         website: String(form.get("website") || ""),
       });
       setStatus("success");
+      onSuccess?.();
     } catch (err) {
       setStatus("error");
-      setError(err instanceof Error ? err.message : "Something went wrong — please try again.");
+      setError(err instanceof Error ? err.message : "Something went wrong. Please try again.");
     }
   }
 
   if (status === "success") {
     return (
-      <div className={`rounded-lg px-6 py-8 text-center bg-violet-pale ${className}`}>
+      <div className={` px-6 py-8 text-center bg-violet-pale ${className}`}>
         <p className="font-display font-bold text-xl mb-1 text-ink">You&apos;re on the list.</p>
         <p className="text-ink/65">
-          We&apos;ll call or email you within one business day — no spam, no sales calls in
+          We&apos;ll call or email you within one business day. No spam, no sales calls in
           between.
         </p>
       </div>
@@ -88,23 +95,23 @@ export function InquiryForm({
 
       <div className={variant === "full" ? "grid sm:grid-cols-2 gap-4" : "flex flex-col gap-4"}>
         <div>
-          <label className={labelClass} htmlFor="name">
-            Full name
+          <label className={labelClass} htmlFor={`${uid}-name`}>
+            Full Name
           </label>
           <input
-            id="name"
+            id={`${uid}-name`}
             name="name"
             required
             className={inputClass}
-            placeholder="Your name"
+            placeholder="Your Full Name"
           />
         </div>
         <div>
-          <label className={labelClass} htmlFor="phone">
-            Phone
+          <label className={labelClass} htmlFor={`${uid}-phone`}>
+            Phone No
           </label>
           <input
-            id="phone"
+            id={`${uid}-phone`}
             name="phone"
             type="tel"
             required
@@ -116,11 +123,11 @@ export function InquiryForm({
 
       {variant === "full" ? (
         <div>
-          <label className={labelClass} htmlFor="email">
-            Email (optional)
+          <label className={labelClass} htmlFor={`${uid}-email`}>
+            Email
           </label>
           <input
-            id="email"
+            id={`${uid}-email`}
             name="email"
             type="email"
             className={inputClass}
@@ -131,11 +138,11 @@ export function InquiryForm({
 
       <div className={variant === "full" ? "grid sm:grid-cols-2 gap-4" : "flex flex-col gap-4"}>
         <div>
-          <label className={labelClass} htmlFor="preferred_destination">
-            Interested in
+          <label className={labelClass} htmlFor={`${uid}-preferred_destination`}>
+            Preferred Destination
           </label>
           <select
-            id="preferred_destination"
+            id={`${uid}-preferred_destination`}
             name="preferred_destination"
             defaultValue={defaultDestinationId ?? ""}
             className={inputClass}
@@ -149,10 +156,10 @@ export function InquiryForm({
           </select>
         </div>
         <div>
-          <label className={labelClass} htmlFor="preferred_level">
-            Level
+          <label className={labelClass} htmlFor={`${uid}-preferred_level`}>
+            Interested Study Level
           </label>
-          <select id="preferred_level" name="preferred_level" className={inputClass}>
+          <select id={`${uid}-preferred_level`} name="preferred_level" className={inputClass}>
             {LEVELS.map((l) => (
               <option key={l.value} value={l.value}>
                 {l.label}
@@ -164,15 +171,16 @@ export function InquiryForm({
 
       {variant === "full" ? (
         <div>
-          <label className={labelClass} htmlFor="message">
-            Anything else we should know? (optional)
+          <label className={labelClass} htmlFor={`${uid}-message`}>
+            Message
           </label>
           <textarea
-            id="message"
+            id={`${uid}-message`}
             name="message"
-            rows={4}
+            rows={3}
+            defaultValue={defaultMessage}
             className={inputClass}
-            placeholder="Your grades, budget range, target intake — whatever helps us prep before we call."
+            placeholder="Tell us about your goals or any questions..."
           />
         </div>
       ) : null}
@@ -182,9 +190,9 @@ export function InquiryForm({
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex items-center justify-center rounded-md bg-violet text-white font-semibold px-6 py-3 text-sm transition-colors duration-150 hover:bg-violet-deep disabled:opacity-60"
+        className="inline-flex items-center justify-center self-center bg-violet text-white font-semibold px-14 py-3 text-sm shadow-sm shadow-violet/25 transition-colors duration-150 hover:bg-violet-deep disabled:opacity-60"
       >
-        {status === "submitting" ? "Sending…" : "Book a free session"}
+        {status === "submitting" ? "Sending…" : "Request a Consultation"}
       </button>
     </form>
   );

@@ -1,3 +1,4 @@
+import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 
 import { Reveal } from "@/components/ui/Reveal";
@@ -18,25 +19,29 @@ export function ServicesAndTestPrep({
         <SectionHeading
           eyebrow="What we actually do"
           title="Six services. Zero upsells."
-          subcopy="Every service exists because a real step in the process needed it — not because it sounded good on a brochure."
+          subcopy="Every service exists because a real step in the process needed it, not because it sounded good on a brochure."
         />
 
-        <div className="mt-12 grid gap-px bg-hairline sm:grid-cols-2 lg:grid-cols-3 rounded-lg overflow-hidden border border-hairline">
+        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {services.map((service, i) => (
-            <Reveal key={service.id} delay={i * 50}>
+            <Reveal key={service.id} delay={i * 50} className="h-full">
               <Link
                 href={`/services/${service.slug}`}
-                className="group flex flex-col gap-3 h-full bg-paper p-6 transition-colors hover:bg-paper-2"
+                className="group flex h-full flex-col gap-3.5 border border-hairline bg-paper p-7 shadow-soft transition-shadow duration-200 hover:border-violet/30 hover:shadow-md"
               >
-                <span className="inline-flex size-10 items-center justify-center rounded-full bg-violet-pale text-violet-deep">
-                  <ServiceIcon name={service.icon} className="size-4.5" />
+                <span className="inline-flex size-11 items-center justify-center bg-violet-pale text-violet-deep">
+                  <ServiceIcon name={service.icon} className="size-5" />
                 </span>
-                <h3 className="font-display font-bold text-lg text-ink">{service.title}</h3>
-                <p className="text-sm text-ink/60 leading-relaxed flex-1">
+                <h3 className="font-display text-lg font-bold text-ink">{service.title}</h3>
+                <p className="flex-1 text-sm leading-relaxed text-ink/60">
                   {service.short_description}
                 </p>
-                <span className="text-sm font-semibold text-violet-deep inline-flex items-center gap-1">
-                  Learn more <span aria-hidden>→</span>
+                <span className="inline-flex items-center gap-1.5 pt-1 text-sm font-semibold text-violet-deep">
+                  Learn more
+                  <ArrowRight
+                    className="size-4 transition-transform duration-200 group-hover:translate-x-1"
+                    strokeWidth={2.5}
+                  />
                 </span>
               </Link>
             </Reveal>
@@ -48,7 +53,7 @@ export function ServicesAndTestPrep({
         <div>
           <SectionHeading
             eyebrow="Test prep"
-            title="IELTS, PTE & SAT — taught for your target score."
+            title="IELTS, PTE & SAT, taught for your target score."
             subcopy="Not generic classes. Batches built around the band score or score range your shortlist actually needs."
           />
 
@@ -56,13 +61,13 @@ export function ServicesAndTestPrep({
             {testPreps.map((tp, i) => (
               <Reveal key={tp.id} delay={i * 60}>
                 <Link
-                  href="/test-prep"
-                  className="block h-full rounded-lg border border-hairline bg-paper p-6 transition-colors hover:border-violet/40"
+                  href="/classes"
+                  className="flex h-full flex-col border border-hairline bg-paper p-6 shadow-soft transition-shadow duration-200 hover:border-violet/30 hover:shadow-md"
                 >
-                  <p className="text-sm font-bold uppercase tracking-wide text-violet-deep mb-2">
+                  <p className="mb-2 text-[12px] font-bold uppercase tracking-[0.12em] text-violet-deep">
                     {tp.name}
                   </p>
-                  <p className="text-sm text-ink/65 leading-relaxed">{tp.description}</p>
+                  <p className="text-sm leading-relaxed text-ink/65">{tp.description}</p>
                 </Link>
               </Reveal>
             ))}

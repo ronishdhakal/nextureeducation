@@ -8,7 +8,7 @@ import { buildMetadata } from "@/lib/seo";
 export const metadata = buildMetadata({
   title: "Services",
   description:
-    "Counseling, university matching, application support, visa support, scholarship guidance and pre-departure orientation — every step of studying abroad, in one place.",
+    "Counseling, university matching, application support, visa support, scholarship guidance and pre-departure orientation: every step of studying abroad, in one place.",
   path: "/services",
 });
 

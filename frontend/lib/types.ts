@@ -13,10 +13,20 @@ export interface Destination {
   flag_image: string | null;
   hero_image?: string | null;
   summary: string;
+  university_count?: number;
   cost_overview?: string;
   intake_overview?: string;
   visa_overview?: string;
   eligibility_overview?: string;
+  why_study_overview?: string;
+  popular_courses_overview?: string;
+  documents_overview?: string;
+  scholarships_overview?: string;
+  additional_info?: string;
+  key_highlights?: string;
+  why_choose_points?: string;
+  study_areas?: string;
+  updated_at?: string;
   popular_intakes: string;
   is_featured: boolean;
   is_published?: boolean;
@@ -41,6 +51,17 @@ export interface TestPrep {
   id: number;
   name: string;
   slug: string;
+  tagline?: string;
+  meta_title?: string;
+  meta_description?: string;
+  hero_image?: string | null;
+  about?: string;
+  key_highlights?: string;
+  why_choose_points?: string;
+  course_structure?: string;
+  duration?: string;
+  class_mode?: string;
+  batch_size?: string;
   description: string;
   format_note: string;
   schedule_note: string;
@@ -54,6 +75,7 @@ export interface University {
   country: number;
   country_name: string;
   logo: string | null;
+  cover_image: string | null;
   city: string;
   ranking_note: string;
   programs_summary: string;
@@ -69,6 +91,7 @@ export interface Testimonial {
   destination: number | null;
   destination_name: string;
   university: string;
+  rating?: number;
   quote: string;
   year: number | null;
   is_featured: boolean;
@@ -158,6 +181,24 @@ export interface LeadPayload {
 }
 
 export type LeadStatus = "new" | "contacted" | "qualified" | "closed";
+export type LeadTemperature = "hot" | "warm" | "cold";
+
+export type CallOutcome =
+  | "connected"
+  | "no_answer"
+  | "voicemail"
+  | "wrong_number"
+  | "follow_up_scheduled";
+
+export interface CallLog {
+  id: number;
+  lead: number;
+  outcome: CallOutcome;
+  notes: string;
+  follow_up_at: string | null;
+  created_by_username: string;
+  created_at: string;
+}
 
 export interface Lead {
   id: number;
@@ -170,6 +211,64 @@ export interface Lead {
   message: string;
   source_page: string;
   status: LeadStatus;
+  temperature: LeadTemperature;
+  assigned_to: number | null;
+  assigned_to_name: string;
+  next_follow_up: string | null;
   created_at: string;
+  updated_at: string;
+}
+
+export interface EventItem {
+  id: number;
+  title: string;
+  slug: string;
+  category: string;
+  category_display: string;
+  cover_image: string | null;
+  summary: string;
+  about: string;
+  event_date: string;
+  start_time: string | null;
+  end_time: string | null;
+  venue: string;
+  mode?: string;
+  organizer?: string;
+  registration_type?: string;
+  what_youll_discover: string;
+  why_attend: string;
+  who_should_attend: string;
+  what_to_expect: string;
+  meta_title?: string;
+  meta_description?: string;
+}
+
+export interface LeadSummary {
+  total: number;
+  new: number;
+  contacted: number;
+  qualified: number;
+  closed: number;
+  hot: number;
+  overdue: number;
+  today: number;
+  unassigned: number;
+}
+
+export interface AssignableUser {
+  id: number;
+  name: string;
+  role: string;
+}
+
+export interface PopupItem {
+  id: number;
+  title: string;
+  image: string;
+  link_url: string;
+  open_in_new_tab: boolean;
+  delay_seconds: number;
+  frequency: "session" | "daily" | "always";
+  show_on: "all" | "home";
   updated_at: string;
 }
