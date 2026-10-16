@@ -1,6 +1,4 @@
 import { Eye, Gem, Globe2, Handshake, Heart, Landmark, Target, Users, type LucideIcon } from "lucide-react";
-import { existsSync } from "node:fs";
-import path from "node:path";
 import Image from "next/image";
 
 import { Button } from "@/components/ui/Button";
@@ -17,8 +15,7 @@ export const metadata = buildMetadata({
   path: "/about",
 });
 
-const OFFICE_IMAGE = "/assets/about/office.jpg";
-const hasOfficeImage = existsSync(path.join(process.cwd(), "public", OFFICE_IMAGE));
+const OFFICE_IMAGE = "/assets/nextureedu.png";
 
 const WRAP = "mx-auto w-full max-w-6xl px-6 sm:px-8";
 
@@ -84,16 +81,14 @@ export default async function AboutPage() {
             </div>
           </div>
           <div className="relative min-h-64 bg-gradient-to-br from-violet-pale to-violet/30 md:min-h-[26rem]">
-            {hasOfficeImage ? (
-              <Image
-                src={OFFICE_IMAGE}
-                alt="The Nexture Education office in Bagbazar, Kathmandu"
-                fill
-                priority
-                sizes="(min-width: 768px) 50vw, 100vw"
-                className="object-cover"
-              />
-            ) : null}
+            <Image
+              src={OFFICE_IMAGE}
+              alt="The Nexture Education office in Bagbazar, Kathmandu"
+              fill
+              priority
+              sizes="(min-width: 768px) 50vw, 100vw"
+              className="object-cover object-top"
+            />
           </div>
         </div>
       </section>
