@@ -3,6 +3,7 @@ import Image from "next/image";
 
 import { Button } from "@/components/ui/Button";
 import { ConsultationButton } from "@/components/ui/ConsultationProvider";
+import { SITE_STATS } from "@/lib/siteStats";
 import type { SiteSettings } from "@/lib/types";
 
 /** Colour everything after " with " in the brand violet, as in the design. */
@@ -29,15 +30,11 @@ export function Hero({ settings }: { settings: SiteSettings | null }) {
     "Secure your spot at world-class universities with step-by-step guidance, offer letter assurance, and complete visa clarity.";
 
   const stats: { Icon: LucideIcon; value: string; label: string }[] = [
-    { Icon: Users, value: settings?.stat_students_placed || "", label: settings?.stat_students_label || "Student Guided" },
-    { Icon: BadgeCheck, value: settings?.stat_visa_success_rate || "", label: settings?.stat_visa_success_rate_label || "Visa Success" },
-    {
-      Icon: Landmark,
-      value: settings?.stat_partner_universities || "",
-      label: settings?.stat_partner_universities_label || "University Partners",
-    },
-    { Icon: Globe2, value: settings?.stat_countries || "", label: settings?.stat_countries_label || "Global Destinations" },
-  ].filter((st) => st.value);
+    { Icon: Users, ...SITE_STATS.students },
+    { Icon: BadgeCheck, ...SITE_STATS.visa },
+    { Icon: Landmark, ...SITE_STATS.universities },
+    { Icon: Globe2, ...SITE_STATS.destinations },
+  ];
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-violet-pale/70 via-violet-tint to-paper">

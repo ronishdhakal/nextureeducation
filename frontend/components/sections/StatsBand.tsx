@@ -1,14 +1,13 @@
 import { Reveal } from "@/components/ui/Reveal";
-import type { SiteSettings } from "@/lib/types";
+import { SITE_STATS } from "@/lib/siteStats";
 
-export function StatsBand({ settings }: { settings: SiteSettings | null }) {
+export function StatsBand() {
   const stats = [
-    { value: settings?.stat_students_placed || "", label: "Students placed abroad" },
-    { value: settings?.stat_partner_universities || "", label: "Partner universities" },
-    { value: settings?.stat_visa_success_rate || "", label: "Visa success rate" },
-    { value: settings?.stat_countries || "", label: "Destination countries" },
-  ].filter((s) => s.value);
-  if (!stats.length) return null;
+    SITE_STATS.students,
+    SITE_STATS.universities,
+    SITE_STATS.visa,
+    SITE_STATS.destinations,
+  ];
 
   return (
     <div className="bg-violet">

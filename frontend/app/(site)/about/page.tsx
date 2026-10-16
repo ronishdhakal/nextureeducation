@@ -6,8 +6,9 @@ import { ConsultationButton } from "@/components/ui/ConsultationProvider";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { SocialIcons } from "@/components/ui/SocialIcons";
-import { getSiteSettings, getTeamMembers, mediaUrl } from "@/lib/api";
+import { getTeamMembers, mediaUrl } from "@/lib/api";
 import { buildMetadata } from "@/lib/seo";
+import { SITE_STATS } from "@/lib/siteStats";
 
 export const metadata = buildMetadata({
   title: "About Us",
@@ -53,13 +54,13 @@ const MILESTONES = [
 ];
 
 export default async function AboutPage() {
-  const [settings, team] = await Promise.all([getSiteSettings(), getTeamMembers()]);
+  const team = await getTeamMembers();
 
   const stats: { Icon: LucideIcon; value: string; label: string }[] = [
-    { Icon: Users, value: settings?.stat_students_placed || "", label: settings?.stat_students_label || "Student Guided" },
-    { Icon: Landmark, value: settings?.stat_partner_universities || "", label: settings?.stat_partner_universities_label || "University Partners" },
-    { Icon: Globe2, value: settings?.stat_countries || "", label: settings?.stat_countries_label || "Global Destinations" },
-  ].filter((st) => st.value);
+    { Icon: Users, ...SITE_STATS.students },
+    { Icon: Landmark, ...SITE_STATS.universities },
+    { Icon: Globe2, ...SITE_STATS.destinations },
+  ];
 
   return (
     <>
