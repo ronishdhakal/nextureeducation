@@ -153,7 +153,7 @@ export function ConsultationButton({
       {children}
       {arrow ? (
         <ArrowRight
-          className={`transition-transform duration-200 group-hover:translate-x-0.5 ${size === "xl" ? "size-5" : "size-4"}`}
+          className={`transition-transform duration-200 group-hover:translate-x-0.5 ${size === "xl" ? "size-4 sm:size-5" : "size-4"}`}
           strokeWidth={2.2}
         />
       ) : null}

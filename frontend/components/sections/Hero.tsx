@@ -41,14 +41,14 @@ export function Hero({ settings }: { settings: SiteSettings | null }) {
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-violet-pale/70 via-violet-tint to-paper">
-      <div className="relative z-10 mx-auto w-full max-w-6xl px-6 pb-8 pt-12 sm:px-8 md:pb-36 md:pt-20">
-        <div className="flex max-w-[40rem] flex-col gap-5 md:max-w-[52%] lg:max-w-[40rem]">
-          <p className="text-sm uppercase tracking-[0.03em] text-violet sm:text-base">{eyebrow}</p>
-          <h1 className="font-display text-[2rem] font-semibold leading-[1.3] text-ink sm:text-[2.4rem] lg:text-[2.8rem]">
+      <div className="relative z-10 mx-auto w-full max-w-6xl px-5 pb-10 pt-9 sm:px-8 sm:pb-12 sm:pt-12 md:pb-36 md:pt-20">
+        <div className="flex max-w-[40rem] flex-col gap-3.5 sm:gap-5 md:max-w-[52%] lg:max-w-[40rem]">
+          <p className="text-xs uppercase tracking-[0.03em] text-violet sm:text-base">{eyebrow}</p>
+          <h1 className="font-display text-[1.65rem] font-semibold leading-[1.35] text-ink sm:text-[2.4rem] sm:leading-[1.3] lg:text-[2.8rem]">
             {renderHeadline(headline)}
           </h1>
-          <p className="max-w-md text-base leading-relaxed text-ink/70 lg:text-lg">{subcopy}</p>
-          <div className="flex flex-wrap gap-3 pt-4 sm:gap-4">
+          <p className="max-w-md text-sm leading-relaxed text-ink/70 sm:text-base lg:text-lg">{subcopy}</p>
+          <div className="flex flex-wrap gap-2.5 pt-2 sm:gap-4 sm:pt-4">
             <ConsultationButton size="xl" arrow>
               Start Your Journey
             </ConsultationButton>
@@ -59,8 +59,8 @@ export function Hero({ settings }: { settings: SiteSettings | null }) {
         </div>
       </div>
 
-      {/* Artwork: stacked under the copy on phones, anchored to the right edge from md up. */}
-      <div className="pointer-events-none relative h-[300px] sm:h-[360px] md:absolute md:inset-y-0 md:right-0 md:h-auto md:w-[48%]">
+      {/* Artwork: not shown on phones; anchored to the right edge from md up. */}
+      <div className="pointer-events-none absolute inset-y-0 right-0 hidden w-[48%] md:block">
         <Image
           src="/assets/home/background.png"
           alt=""
@@ -83,12 +83,12 @@ export function Hero({ settings }: { settings: SiteSettings | null }) {
       </div>
 
       {stats.length ? (
-        <div className="relative z-10 mx-auto -mt-px w-full max-w-6xl px-6 pb-2 sm:px-8 md:-mt-14 md:pb-0">
-          <dl className="grid grid-cols-2 gap-y-6 border border-hairline bg-paper p-6 shadow-float md:grid-flow-col md:auto-cols-fr md:divide-x md:divide-hairline md:p-0 md:py-6 rounded-box">
+        <div className="relative z-10 mx-auto w-full max-w-6xl px-5 pb-1 sm:px-8 md:-mt-14 md:pb-0">
+          <dl className="grid grid-cols-2 gap-x-3 gap-y-5 border border-hairline bg-paper p-4 shadow-float sm:p-6 md:grid-flow-col md:auto-cols-fr md:divide-x md:divide-hairline md:p-0 md:py-6 rounded-box">
             {stats.map(({ Icon, value, label }) => (
               <div key={label} className="flex items-center gap-3 md:justify-center md:px-4">
-                <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-violet-pale text-violet-deep">
-                  <Icon className="size-5" strokeWidth={2} />
+                <span className="inline-flex size-9 shrink-0 items-center justify-center rounded-full bg-violet-pale text-violet-deep sm:size-11">
+                  <Icon className="size-4 sm:size-5" strokeWidth={2} />
                 </span>
                 <div>
                   <dd className="text-sm font-semibold text-ink">{value}</dd>

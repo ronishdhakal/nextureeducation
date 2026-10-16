@@ -16,7 +16,7 @@ const cardClass = "bg-white shadow-float rounded-box";
 export function ServicesBlock({ services }: { services: Service[] }) {
   return (
     <section className="bg-paper-2">
-      <div className={`${WRAP} grid items-center gap-10 py-14 md:grid-cols-[0.8fr_1.2fr] md:gap-14 md:py-20`}>
+      <div className={`${WRAP} grid items-center gap-8 py-11 md:grid-cols-[0.8fr_1.2fr] md:gap-14 md:py-20`}>
         <Reveal className="flex flex-col items-start gap-5">
           <SectionHeader
             eyebrow="Our Services"
@@ -35,7 +35,7 @@ export function ServicesBlock({ services }: { services: Service[] }) {
                 href={`/services/${s.slug}`}
                 className={`${cardClass} block h-full p-6 transition-transform duration-300 hover:-translate-y-1`}
               >
-                <h3 className="text-lg font-normal text-ink">{s.title}</h3>
+                <h3 className="text-base font-normal text-ink sm:text-lg">{s.title}</h3>
                 <p className="mt-3 line-clamp-3 text-[11px] leading-relaxed text-ink/70">
                   {s.short_description}
                 </p>
@@ -58,7 +58,7 @@ const STEPS = [
 export function JourneySteps() {
   return (
     <section className="bg-paper">
-      <div className={`${WRAP} py-14 md:py-20`}>
+      <div className={`${WRAP} py-11 md:py-20`}>
         <SectionHeader
           eyebrow="Your Journey"
           title="A Simple Path To Your Global Future"
@@ -85,7 +85,7 @@ export function JourneySteps() {
 export function TestPrepBlock({ testPreps }: { testPreps: TestPrep[] }) {
   return (
     <section className="bg-paper-2">
-      <div className={`${WRAP} grid items-center gap-10 py-14 md:grid-cols-[1fr_1fr] md:gap-14 md:py-20`}>
+      <div className={`${WRAP} grid items-center gap-8 py-11 md:grid-cols-[1fr_1fr] md:gap-14 md:py-20`}>
         <Reveal className="flex flex-col items-start gap-5">
           <SectionHeader
             eyebrow="Test Preparation"
@@ -133,7 +133,7 @@ export function StoriesBlock({ testimonials }: { testimonials: Testimonial[] }) 
   if (!testimonials.length) return null;
   return (
     <section className="bg-violet-pale/60">
-      <div className={`${WRAP} py-14 md:py-20`}>
+      <div className={`${WRAP} py-11 md:py-20`}>
         <SectionHeader
           eyebrow="Student Success Stories"
           title="Real People. Real Dreams. Real Success."
@@ -190,7 +190,7 @@ export function ContactBlock({ destinations }: { destinations: Destination[] }) 
   const points = ["Personalized Counselling", "Quick Response", "Trusted By Thousands Of Students"];
   return (
     <section className="bg-violet-tint" id="get-in-touch">
-      <div className={`${WRAP} grid items-center gap-10 py-14 md:grid-cols-[0.8fr_1.2fr] md:gap-14 md:py-20`}>
+      <div className={`${WRAP} grid items-center gap-8 py-11 md:grid-cols-[0.8fr_1.2fr] md:gap-14 md:py-20`}>
         <div className="flex flex-col gap-4">
           <p className="text-xs font-medium uppercase tracking-[0.06em] text-violet-deep">
             Get In Touch
@@ -266,7 +266,7 @@ export function BlogBlock({ posts }: { posts: BlogPost[] }) {
   if (!posts.length) return null;
   return (
     <section className="bg-paper">
-      <div className={`${WRAP} py-14 md:py-20`}>
+      <div className={`${WRAP} py-11 md:py-20`}>
         <SectionHeader
           eyebrow="Our Blog"
           title="Latest From Our Blog"

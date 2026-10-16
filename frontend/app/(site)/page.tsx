@@ -42,7 +42,7 @@ export default async function Home() {
       <Hero settings={settings} />
 
       <section className="bg-paper" id="destinations">
-        <div className="mx-auto w-full max-w-6xl px-6 pb-14 pt-14 sm:px-8 md:pb-16">
+        <div className="mx-auto w-full max-w-6xl px-6 pb-11 pt-11 sm:px-8 md:pb-16 md:pt-14">
           <SectionHeader
             eyebrow="Popular Destinations"
             title="Explore Your Dream Destination"

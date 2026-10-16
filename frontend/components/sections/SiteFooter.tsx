@@ -65,8 +65,8 @@ export function SiteFooter({
 
   return (
     <footer className="mt-auto border-t border-hairline bg-paper text-ink">
-      <div className="mx-auto grid w-full max-w-6xl gap-10 px-6 pb-12 pt-14 sm:grid-cols-2 sm:px-8 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
-        <div className="sm:col-span-2 lg:col-span-1">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-x-6 gap-y-8 px-6 pb-10 pt-11 sm:gap-10 sm:px-8 sm:pb-12 sm:pt-14 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
+        <div className="col-span-2 lg:col-span-1">
           <Logo className="mb-4" />
           <p className="max-w-xs text-sm leading-relaxed text-ink/65">
             Your trusted partner in international education. We help students achieve their

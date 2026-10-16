@@ -21,7 +21,7 @@ export function SectionHeader({
   titleClassName?: string;
 }) {
   return (
-    <div className="flex items-start justify-between gap-6">
+    <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
       <div className={`flex flex-col gap-2 ${align === "center" ? "mx-auto text-center" : ""}`}>
         {eyebrow ? (
           <p className="text-xs font-medium uppercase tracking-[0.06em] text-violet-deep">
@@ -38,7 +38,7 @@ export function SectionHeader({
       {linkLabel && linkHref ? (
         <Link
           href={linkHref}
-          className="group hidden shrink-0 items-center gap-2 text-sm font-medium text-violet-deep sm:inline-flex"
+          className="group inline-flex shrink-0 items-center gap-2 text-sm font-medium text-violet-deep"
         >
           {linkLabel}
           <ArrowRight
