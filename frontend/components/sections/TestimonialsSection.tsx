@@ -43,7 +43,7 @@ export function TestimonialsSection({
                     // eslint-disable-next-line @next/next/no-img-element
                     <img
                       src={photo}
-                      alt={t.student_name}
+                      alt={`${t.student_name}${t.destination_name ? `, student in ${t.destination_name}` : ""}`}
                       className="size-10 rounded-full object-cover border border-hairline"
                     />
                   ) : (

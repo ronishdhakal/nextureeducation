@@ -22,8 +22,10 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
         data={{
           "@context": "https://schema.org",
           "@type": ["EducationalOrganization", "LocalBusiness"],
+          "@id": `${SITE_URL}/#organization`,
           name: "Nexture Education",
           alternateName: "Nexture Education - Best Consultancy in Bagbazar, Kathmandu, Nepal",
+          slogan: "Your next step to a bright future",
           url: SITE_URL,
           logo: `${SITE_URL}/assets/nexture-logo.png`,
           image: `${SITE_URL}/assets/nexture-logo.png`,
@@ -35,7 +37,12 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
             addressLocality: "Kathmandu",
             addressCountry: "NP",
           },
-          areaServed: "Kathmandu, Nepal",
+          areaServed: [
+            { "@type": "Country", name: "Nepal" },
+            { "@type": "City", name: "Kathmandu" },
+          ],
+          serviceType: "Study abroad consultancy",
+          knowsAbout: destinations.map((d) => `Studying in ${d.name} from Nepal`),
           telephone: settings?.phone || undefined,
           email: settings?.email || undefined,
           sameAs: [
@@ -47,9 +54,19 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
           ].filter(Boolean),
         }}
       />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "WebSite",
+          name: "Nexture Education",
+          url: SITE_URL,
+          publisher: { "@id": `${SITE_URL}/#organization` },
+          inLanguage: "en",
+        }}
+      />
       <SiteHeader />
       <main className="flex-1">{children}</main>
-      <SiteFooter settings={settings} services={services} />
+      <SiteFooter settings={settings} services={services} destinations={destinations} />
       <PromoPopup popup={popup} />
     </div>
     </ConsultationProvider>

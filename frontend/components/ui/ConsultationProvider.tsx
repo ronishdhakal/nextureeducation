@@ -90,12 +90,12 @@ export function ConsultationProvider({
               <p className="text-xs font-medium uppercase tracking-[0.06em] text-violet-deep">
                 Free consultation
               </p>
-              <h2
+              <p
                 id="consultation-title"
                 className="mt-1 font-display text-2xl font-semibold text-ink"
               >
                 {options.title || "Book Your Free Consultation"}
-              </h2>
+              </p>
               <p className="mt-2 max-w-md text-sm leading-relaxed text-ink/65">
                 Tell us a little about your plans and an expert counsellor will get back to you
                 within one business day.

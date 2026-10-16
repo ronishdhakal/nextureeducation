@@ -25,10 +25,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const destination = await getDestination(slug);
   if (!destination) return {};
   return buildMetadata({
-    title: destination.meta_title || `Study in ${destination.name} from Nepal ${CURRENT_YEAR}`,
+    title:
+      destination.meta_title ||
+      `Best Consultancy in Nepal for ${destination.name} (${CURRENT_YEAR}) | Nexture`,
+    absoluteTitle: !destination.meta_title,
     description:
       destination.meta_description ||
-      `A straight guide to studying in ${destination.name} from Nepal in ${CURRENT_YEAR}: real costs, intakes, and the visa process, from Nexture Education in Bagbazar, Kathmandu.`,
+      `Looking for the best consultancy in Bagbazar, Nepal for ${destination.name}? Nexture Education guides students on ${destination.name} universities, costs, intakes and visas. Book a free consultation.`,
     path: `/destination/${destination.slug}`,
   });
 }
@@ -106,6 +109,18 @@ export default async function DestinationDetailPage({ params }: Props) {
           ],
         }}
       />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Service",
+          name: `Study in ${name} consultancy from Nepal`,
+          serviceType: `Study abroad consultancy for ${name}`,
+          description: destination.summary,
+          provider: { "@type": "EducationalOrganization", name: "Nexture Education", url: SITE_URL },
+          areaServed: { "@type": "Country", name: "Nepal" },
+          url: `${SITE_URL}/destination/${destination.slug}`,
+        }}
+      />
       {faq.length ? (
         <JsonLd
           data={{
@@ -127,12 +142,15 @@ export default async function DestinationDetailPage({ params }: Props) {
       <DetailHero
         title={
           <>
+            <span className="mb-2 block font-sans text-xs font-medium uppercase leading-normal tracking-[0.06em] text-violet-deep sm:text-sm">
+              Best Consultancy in Nepal for {name}
+            </span>
             Study in <span className="text-violet-deep">{name}</span>
           </>
         }
         summary={destination.summary}
         image={mediaUrl(destination.hero_image)}
-        imageAlt={`Studying in ${name}`}
+        imageAlt={`Study in ${name} from Nepal with Nexture Education, the consultancy in Bagbazar, Kathmandu`}
       >
         <ConsultationButton
           arrow
@@ -152,7 +170,7 @@ export default async function DestinationDetailPage({ params }: Props) {
       <div className={`${WRAP} flex flex-col gap-12 py-12`}>
         {destination.why_study_overview ? (
           <section>
-            <DetailHeading large>Why Study in {name}?</DetailHeading>
+            <DetailHeading large>Why Study in {name} from Nepal?</DetailHeading>
             <RichText html={destination.why_study_overview} className="max-w-3xl text-ink/75" />
           </section>
         ) : null}
@@ -245,17 +263,22 @@ export default async function DestinationDetailPage({ params }: Props) {
                     <div className="h-32 bg-gradient-to-br from-violet-pale to-violet/30">
                       {cover ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={cover} alt="" loading="lazy" className="size-full object-cover" />
+                        <img
+                          src={cover}
+                          alt={`${u.name} campus${u.city ? ` in ${u.city}` : ""}, ${name}`}
+                          loading="lazy"
+                          className="size-full object-cover"
+                        />
                       ) : null}
                     </div>
                     <div className="bg-violet-pale/60 p-3.5">
                       <div className="flex items-center gap-2.5">
                         {logo ? (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img src={logo} alt="" className="size-7  object-contain" />
+                          <img src={logo} alt={`${u.name} logo`} className="size-7 object-contain" />
                         ) : null}
                         <div className="min-w-0">
-                          <p className="text-sm font-medium leading-tight text-violet-dark">{u.name}</p>
+                          <h3 className="text-sm font-medium leading-tight text-violet-dark">{u.name}</h3>
                           {u.city ? <p className="text-[11px] text-ink/60">{u.city}</p> : null}
                         </div>
                       </div>
@@ -269,10 +292,12 @@ export default async function DestinationDetailPage({ params }: Props) {
         ) : null}
 
         <section>
-          <DetailHeading large>Still Have Questions?</DetailHeading>
-          <p className="max-w-xl text-sm leading-relaxed text-ink/75">
-            Get expert guidance on courses, universities, costs and visa process. We&apos;re here
-            to help you make the right decision.
+          <DetailHeading large>Best Consultancy in Bagbazar, Nepal for {name}</DetailHeading>
+          <p className="max-w-2xl text-sm leading-relaxed text-ink/75">
+            Nexture Education, in Bagbazar, Kathmandu, helps students from Nepal choose a{" "}
+            {name} university and course, prepare their application and documents, and apply for
+            the visa. Get expert guidance on universities, costs, intakes and the visa process, then
+            decide with a clear picture.
           </p>
           <div className="mt-5">
             <ConsultationButton

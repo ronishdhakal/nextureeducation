@@ -10,18 +10,21 @@ export function buildMetadata({
   path,
   image,
   type = "website",
+  absoluteTitle = false,
 }: {
   title: string;
   description: string;
   path: string;
   image?: string;
   type?: "website" | "article";
+  /** Use the title exactly as written, without the site-wide " | Nexture Education" suffix. */
+  absoluteTitle?: boolean;
 }): Metadata {
   const url = `${SITE_URL}${path}`;
   const ogImage = image || DEFAULT_OG_IMAGE;
 
   return {
-    title,
+    title: absoluteTitle ? { absolute: title } : title,
     description,
     alternates: {
       canonical: url,

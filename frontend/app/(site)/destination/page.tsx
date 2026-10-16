@@ -6,8 +6,9 @@ import { buildMetadata } from "@/lib/seo";
 const CURRENT_YEAR = new Date().getFullYear();
 
 export const metadata = buildMetadata({
-  title: `Study Abroad from Nepal ${CURRENT_YEAR}: Destinations`,
-  description: `Popular study abroad destinations for Nepali students in ${CURRENT_YEAR}, with detailed information about costs, intakes and visas for each country.`,
+  title: `Best Consultancy in Nepal for Study Abroad | Nexture`,
+  absoluteTitle: true,
+  description: `Compare study abroad destinations for Nepali students in ${CURRENT_YEAR}: universities, costs, intakes and visas, with Nexture Education in Bagbazar, Kathmandu.`,
   path: "/destination",
 });
 
@@ -17,7 +18,7 @@ export default async function DestinationsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Study Abroad"
+        eyebrow="Best Consultancy in Nepal for Study Abroad"
         lead="Popular Study"
         accent="Destinations"
         upper

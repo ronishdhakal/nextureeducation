@@ -17,7 +17,7 @@ export default async function TestPrepPage() {
   return (
     <>
       <PageHero
-        eyebrow="Test Prep"
+        eyebrow="IELTS, PTE & Duolingo Classes in Kathmandu"
         lead="Prepare for a Better"
         accent="Tomorrow"
         subcopy="Get expert guidance and structured preparation for IELTS, PTE and Duolingo, and take the next step towards your global education journey."

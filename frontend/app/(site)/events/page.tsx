@@ -16,7 +16,7 @@ export default async function EventsPage() {
   return (
     <>
       <PageHero
-        eyebrow="Event"
+        eyebrow="Education Fairs & Sessions in Kathmandu"
         lead="Upcoming"
         accent="Events"
         upper

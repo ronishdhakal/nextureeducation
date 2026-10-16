@@ -7,8 +7,9 @@ import { getDestinations, getUniversities } from "@/lib/api";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Partner Universities",
-  description: "Universities we work with across Australia, Canada, the UK, New Zealand, Malta and South Korea.",
+  title: "Partner Universities for Nepali Students",
+  description:
+    "Explore the partner universities Nexture Education works with, a study abroad consultancy in Bagbazar, Kathmandu, for Nepali students applying overseas.",
   path: "/universities",
 });
 

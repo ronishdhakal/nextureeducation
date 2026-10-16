@@ -6,7 +6,7 @@ import { getDestinations, getServices, getTestPreps } from "@/lib/api";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Services",
+  title: "Study Abroad Services in Kathmandu",
   description:
     "Counseling, university matching, application support, visa support, scholarship guidance and pre-departure orientation: every step of studying abroad, in one place.",
   path: "/services",

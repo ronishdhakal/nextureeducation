@@ -248,7 +248,16 @@ export function RichTextEditor({
     try {
       const media = await uploadEditorMedia(file);
       if (kind === "image") {
-        editor.chain().focus().setImage({ src: media.url, alt: media.name }).run();
+        const suggested = media.name
+          .replace(/\.[^.]+$/, "")
+          .replace(/[-_]+/g, " ")
+          .trim();
+        const alt =
+          window.prompt(
+            "Describe this image in a few words (alt text, used by search engines and screen readers):",
+            suggested
+          ) ?? suggested;
+        editor.chain().focus().setImage({ src: media.url, alt: alt.trim() || suggested }).run();
       } else {
         editor
           .chain()

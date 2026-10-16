@@ -11,7 +11,7 @@ import { buildMetadata } from "@/lib/seo";
 import { SITE_STATS } from "@/lib/siteStats";
 
 export const metadata = buildMetadata({
-  title: "About Us",
+  title: "About Us: Consultancy in Bagbazar",
   description:
     "Nexture Education is a trusted international education consultancy in Bagbazar, Kathmandu, helping Nepali students turn global aspirations into reality.",
   path: "/about",
@@ -181,7 +181,7 @@ export default async function AboutPage() {
                     <div className="flex h-full flex-col items-center bg-white p-6 text-center shadow-float rounded-box">
                       {photo ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={photo} alt={m.name} className="size-20 rounded-full object-cover" />
+                        <img src={photo} alt={`${m.name}, ${m.role} at Nexture Education`} className="size-20 rounded-full object-cover" />
                       ) : (
                         <span className="flex size-20 items-center justify-center rounded-full bg-violet-pale text-xl font-semibold text-violet-deep">
                           {m.name[0]}

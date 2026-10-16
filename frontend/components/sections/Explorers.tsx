@@ -176,7 +176,7 @@ export function EventsExplorer({ events }: { events: EventItem[] }) {
                   <div className="h-48 bg-gradient-to-br from-violet-pale to-violet/30 sm:h-auto sm:min-h-52">
                     {cover ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={cover} alt="" loading="lazy" className="size-full object-cover" />
+                      <img src={cover} alt={`${e.title}: ${e.category_display} by Nexture Education`} loading="lazy" className="size-full object-cover" />
                     ) : null}
                   </div>
                   <div className="flex flex-col items-start gap-3 p-6">

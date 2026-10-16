@@ -31,16 +31,16 @@ export function PageHero({
         className="pointer-events-none absolute right-0 top-0 hidden h-auto w-[52%] max-w-2xl opacity-40 [mask-image:linear-gradient(to_left,black_40%,transparent),linear-gradient(to_bottom,black_55%,transparent)] [mask-composite:intersect] md:block"
       />
       <div className={`${WRAP} relative pb-10 pt-12 md:pt-16`}>
-        {eyebrow ? (
-          <p className="text-xs font-medium uppercase tracking-[0.06em] text-violet-deep">
-            {eyebrow}
-          </p>
-        ) : null}
         <h1
-          className={`mt-3 font-display text-3xl font-semibold leading-snug text-ink sm:text-[2.4rem] ${
+          className={`font-display text-3xl font-semibold leading-snug text-ink sm:text-[2.4rem] ${
             upper ? "uppercase" : ""
           }`}
         >
+          {eyebrow ? (
+            <span className="mb-3 block font-sans text-xs font-medium uppercase leading-normal tracking-[0.06em] text-violet-deep">
+              {eyebrow}
+            </span>
+          ) : null}
           {lead}
           <br />
           <span className="text-violet-deep">{accent}</span>

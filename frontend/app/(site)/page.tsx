@@ -1,8 +1,13 @@
+import type { Metadata } from "next";
+
+import { JsonLd } from "@/components/JsonLd";
 import { DestinationsCarousel } from "@/components/sections/DestinationsCarousel";
 import { Hero } from "@/components/sections/Hero";
 import {
+  BestConsultancyBlock,
   BlogBlock,
   ContactBlock,
+  HomeFaq,
   JourneySteps,
   ServicesBlock,
   StoriesBlock,
@@ -18,14 +23,20 @@ import {
   getTestPreps,
   getTestimonials,
 } from "@/lib/api";
+import { buildHomeFaq, joinNames } from "@/lib/faq";
 import { buildMetadata } from "@/lib/seo";
 
-export const metadata = buildMetadata({
-  title: "Best Consultancy in Bagbazar, Kathmandu, Nepal",
-  description:
-    "Nexture Education is the best consultancy in Bagbazar, Kathmandu, Nepal for studying abroad. Counseling, university selection, visa support and test prep for Nepali students.",
-  path: "/",
-});
+export async function generateMetadata(): Promise<Metadata> {
+  const destinations = await getDestinations();
+  const names = destinations.slice(0, 3).map((d) => d.name);
+  const where = names.length ? ` for ${joinNames(names)}` : " for studying abroad";
+  return buildMetadata({
+    title: "Best Consultancy in Bagbazar, Nepal | Nexture Education",
+    absoluteTitle: true,
+    description: `Best consultancy in Bagbazar, Nepal${where}: free counselling, university selection, visa help and IELTS/PTE classes at Nexture Education.`,
+    path: "/",
+  });
+}
 
 export default async function Home() {
   const [settings, destinations, services, testPreps, testimonials, posts] = await Promise.all([
@@ -37,8 +48,21 @@ export default async function Home() {
     getBlogPosts(),
   ]);
 
+  const faq = buildHomeFaq(destinations);
+
   return (
     <>
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          mainEntity: faq.map((item) => ({
+            "@type": "Question",
+            name: item.question,
+            acceptedAnswer: { "@type": "Answer", text: item.answer },
+          })),
+        }}
+      />
       <Hero settings={settings} />
 
       <section className="bg-paper" id="destinations">
@@ -58,8 +82,10 @@ export default async function Home() {
 
       <ServicesBlock services={services} />
       <JourneySteps />
+      <BestConsultancyBlock destinations={destinations} />
       <TestPrepBlock testPreps={testPreps} />
       <StoriesBlock testimonials={testimonials} />
+      <HomeFaq items={faq} />
       <ContactBlock destinations={destinations} />
       <BlogBlock posts={posts} />
     </>

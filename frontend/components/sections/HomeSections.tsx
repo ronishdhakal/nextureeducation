@@ -6,6 +6,7 @@ import { InquiryForm } from "@/components/ui/InquiryForm";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
 import { mediaUrl } from "@/lib/api";
+import { joinNames, type FaqItem } from "@/lib/faq";
 import type { BlogPost, Destination, Service, Testimonial, TestPrep } from "@/lib/types";
 
 const WRAP = "mx-auto w-full max-w-6xl px-6 sm:px-8";
@@ -150,7 +151,11 @@ export function StoriesBlock({ testimonials }: { testimonials: Testimonial[] }) 
                   <div className="flex items-center gap-3">
                     {photo ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img src={photo} alt={t.student_name} className="size-10 rounded-full object-cover" />
+                      <img
+                        src={photo}
+                        alt={`${t.student_name}${t.destination_name ? `, student in ${t.destination_name}` : ""}`}
+                        className="size-10 rounded-full object-cover"
+                      />
                     ) : (
                       <span className="flex size-10 items-center justify-center rounded-full bg-violet-pale text-xs font-semibold text-violet-deep">
                         {initials(t.student_name)}
@@ -240,7 +245,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
     >
       {cover ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img src={cover} alt="" loading="lazy" className="h-32 w-full object-cover" />
+        <img src={cover} alt={post.title} loading="lazy" className="h-32 w-full object-cover" />
       ) : (
         <div className="flex h-32 w-full items-center justify-center bg-violet-pale text-2xl font-semibold text-violet-deep">
           N
@@ -280,6 +285,81 @@ export function BlogBlock({ posts }: { posts: BlogPost[] }) {
             <Reveal key={post.id} delay={i * 70}>
               <BlogCard post={post} />
             </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/**
+ * Keyword-focused block: one H3 per destination ("Best Consultancy in Nepal for X"), each
+ * linking to that destination page. Built from the live destinations list.
+ */
+export function BestConsultancyBlock({ destinations }: { destinations: Destination[] }) {
+  if (!destinations.length) return null;
+  const names = joinNames(destinations.map((d) => d.name));
+  return (
+    <section className="bg-paper-2">
+      <div className={`${WRAP} py-11 md:py-20`}>
+        <SectionHeader
+          eyebrow="Study Abroad From Bagbazar, Kathmandu"
+          title="Best Consultancy in Bagbazar, Nepal for Studying Abroad"
+          subcopy={`Nexture Education is a study abroad consultancy in Bagbazar, Kathmandu. We help students from Nepal choose a university, apply, prepare for IELTS or PTE and get their visa for ${names}.`}
+        />
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {destinations.map((d, i) => (
+            <Reveal key={d.id} delay={(i % 3) * 60}>
+              <Link
+                href={`/destination/${d.slug}`}
+                className={`${cardClass} group flex h-full flex-col p-5 transition-transform duration-300 hover:-translate-y-1`}
+              >
+                <h3 className="text-lg font-medium leading-snug text-ink">
+                  Best Consultancy in Nepal for {d.name}
+                </h3>
+                <p className="mt-2 line-clamp-3 flex-1 text-xs leading-relaxed text-ink/70">
+                  {d.summary}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs text-violet-deep">
+                  Study in {d.name} from Bagbazar
+                  <ArrowRight
+                    className="size-3.5 transition-transform group-hover:translate-x-0.5"
+                    strokeWidth={1.8}
+                  />
+                </span>
+              </Link>
+            </Reveal>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** Crawlable FAQ (native <details>, no JavaScript needed). Matches the FAQPage JSON-LD. */
+export function HomeFaq({ items }: { items: FaqItem[] }) {
+  return (
+    <section className="bg-paper">
+      <div className={`${WRAP} py-11 md:py-20`}>
+        <SectionHeader
+          eyebrow="FAQ"
+          title="Studying Abroad From Nepal: Your Questions Answered"
+          subcopy="Straight answers about choosing a consultancy, costs, timelines and visas."
+        />
+        <div className="mt-8 max-w-3xl divide-y divide-hairline border border-hairline bg-white shadow-soft rounded-box">
+          {items.map((item) => (
+            <details key={item.question} className="group">
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-4 px-5 py-4 transition-colors hover:bg-violet-tint [&::-webkit-details-marker]:hidden">
+                <h3 className="text-sm font-medium text-ink sm:text-base">{item.question}</h3>
+                <span
+                  aria-hidden
+                  className="text-xl leading-none text-violet-deep transition-transform group-open:rotate-45"
+                >
+                  +
+                </span>
+              </summary>
+              <p className="px-5 pb-5 text-sm leading-relaxed text-ink/75">{item.answer}</p>
+            </details>
           ))}
         </div>
       </div>

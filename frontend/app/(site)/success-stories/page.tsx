@@ -6,8 +6,9 @@ import { getDestinations, getTestimonials } from "@/lib/api";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Success Stories",
-  description: "Real notes from students Nexture Education has worked with, in their own words.",
+  title: "Student Success Stories",
+  description:
+    "Read real stories from Nepali students who studied abroad with Nexture Education, the study abroad consultancy in Bagbazar, Kathmandu, in their own words.",
   path: "/success-stories",
 });
 

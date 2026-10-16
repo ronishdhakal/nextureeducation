@@ -19,7 +19,7 @@ export function DestinationCard({ destination }: { destination: Destination }) {
               // eslint-disable-next-line @next/next/no-img-element
               <img
                 src={flag}
-                alt=""
+                alt={`${destination.name} flag`}
                 className="h-10 w-14 border border-hairline object-cover shadow-sm"
               />
             ) : null}

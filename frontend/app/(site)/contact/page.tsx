@@ -7,9 +7,9 @@ import { getBranches, getDestinations, getSiteSettings } from "@/lib/api";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Contact Us",
+  title: "Contact Our Bagbazar Consultancy",
   description:
-    "Book a free counseling session with Nexture Education, the best consultancy in Bagbazar, Kathmandu, Nepal.",
+    "Contact Nexture Education, a study abroad consultancy in Bagbazar, Kathmandu, Nepal. Call, visit or send a message to book a free counselling session.",
   path: "/contact",
 });
 

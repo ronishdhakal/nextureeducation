@@ -10,9 +10,9 @@ const inter = Inter({
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nexture.edu.np";
 
-const DEFAULT_TITLE = "Nexture Education | Your Next Step to a Bright Future";
+const DEFAULT_TITLE = "Best Consultancy in Bagbazar, Nepal | Nexture Education";
 const DEFAULT_DESCRIPTION =
-  "Nexture Education guides Nepali students to study in Australia, Canada, the UK, New Zealand, Malta and South Korea. Counseling, university matching, applications, visas, and test prep, straight talk only.";
+  "Nexture Education is a study abroad consultancy in Bagbazar, Kathmandu, Nepal. Free counselling, university selection, applications, visas and IELTS/PTE preparation. Book a free consultation.";
 const DEFAULT_OG_IMAGE = `${SITE_URL}/assets/nexture-logo.png`;
 
 export const metadata: Metadata = {

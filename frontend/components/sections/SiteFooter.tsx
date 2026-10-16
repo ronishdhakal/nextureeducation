@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Logo } from "@/components/ui/Logo";
-import type { Service, SiteSettings } from "@/lib/types";
+import type { Destination, Service, SiteSettings } from "@/lib/types";
 
 const SOCIALS: { key: keyof SiteSettings; label: string }[] = [
   { key: "facebook_url", label: "Facebook" },
@@ -44,13 +44,26 @@ const COLUMNS = [
 export function SiteFooter({
   settings,
   services,
+  destinations,
 }: {
   settings: SiteSettings | null;
   services: Service[];
+  destinations: Destination[];
 }) {
   const columns = [
     COLUMNS[0],
     COLUMNS[1],
+    ...(destinations.length
+      ? [
+          {
+            title: "Study Abroad",
+            links: destinations.slice(0, 7).map((d) => ({
+              label: `Study in ${d.name}`,
+              href: `/destination/${d.slug}`,
+            })),
+          },
+        ]
+      : []),
     ...(services.length
       ? [
           {
@@ -65,7 +78,7 @@ export function SiteFooter({
 
   return (
     <footer className="mt-auto border-t border-hairline bg-paper text-ink">
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-x-6 gap-y-8 px-6 pb-10 pt-11 sm:gap-10 sm:px-8 sm:pb-12 sm:pt-14 lg:grid-cols-[1.4fr_repeat(4,1fr)]">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-x-6 gap-y-8 px-6 pb-10 pt-11 sm:gap-10 sm:px-8 sm:pb-12 sm:pt-14 lg:grid-cols-[1.3fr_repeat(5,1fr)]">
         <div className="col-span-2 lg:col-span-1">
           <Logo className="mb-4" />
           <p className="max-w-xs text-sm leading-relaxed text-ink/65">

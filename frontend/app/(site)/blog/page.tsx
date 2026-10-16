@@ -7,8 +7,9 @@ import { getBlogPosts, mediaUrl } from "@/lib/api";
 import { buildMetadata } from "@/lib/seo";
 
 export const metadata = buildMetadata({
-  title: "Blog",
-  description: "Guides and updates on studying abroad from Nepal: intakes, visas, scholarships and more.",
+  title: "Study Abroad Blog: Guides for Nepali Students",
+  description:
+    "Guides and updates on studying abroad from Nepal by Nexture Education, a consultancy in Bagbazar, Kathmandu: intakes, visas, scholarships, costs and more.",
   path: "/blog",
 });
 
