@@ -142,7 +142,7 @@ export default async function DestinationDetailPage({ params }: Props) {
           Free Consultation
         </ConsultationButton>
         {updated ? (
-          <span className="inline-flex items-center gap-1.5 border border-hairline bg-paper px-2.5 py-1 text-[11px] text-ink/70">
+          <span className="inline-flex items-center gap-1.5 border border-hairline bg-paper px-2.5 py-1 text-[11px] text-ink/70 rounded-md">
             <CalendarDays className="size-3 text-violet-deep" />
             {updated}
           </span>
@@ -173,7 +173,7 @@ export default async function DestinationDetailPage({ params }: Props) {
             <DetailHeading large>Key Highlights</DetailHeading>
             <div className="grid gap-4 sm:grid-cols-3">
               {highlights.map((h, i) => (
-                <div key={h} className="border border-hairline border-t-2 border-t-brand bg-paper p-4">
+                <div key={h} className="border border-hairline border-t-2 border-t-brand bg-paper p-4 rounded-box">
                   <Index n={i + 1} />
                   <p className="mt-2 text-sm leading-snug text-ink/80">{h}</p>
                 </div>
@@ -240,7 +240,7 @@ export default async function DestinationDetailPage({ params }: Props) {
                     href={href}
                     target={u.external_link ? "_blank" : undefined}
                     rel={u.external_link ? "noopener noreferrer" : undefined}
-                    className="group overflow-hidden border border-hairline bg-paper shadow-float transition-transform hover:-translate-y-1"
+                    className="group overflow-hidden border border-hairline bg-paper shadow-float transition-transform hover:-translate-y-1 rounded-box"
                   >
                     <div className="h-32 bg-gradient-to-br from-violet-pale to-violet/30">
                       {cover ? (

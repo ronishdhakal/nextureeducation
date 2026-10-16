@@ -43,7 +43,7 @@ export function HowItWorks() {
           <Reveal
             key={step.title}
             delay={i * 80}
-            className="flex h-full flex-col gap-4 border border-hairline bg-paper p-6 shadow-soft"
+            className="flex h-full flex-col gap-4 border border-hairline bg-paper p-6 shadow-soft rounded-box"
           >
             <span className="inline-flex size-10 items-center justify-center rounded-full bg-violet font-display text-base font-bold text-white">
               {i + 1}

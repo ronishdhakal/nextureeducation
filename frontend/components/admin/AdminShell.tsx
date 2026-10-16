@@ -147,7 +147,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
                       key={item.href}
                       href={item.href}
                       onClick={() => setMobileOpen(false)}
-                      className={`flex items-center gap-3 px-3.5 py-2 text-[13px] transition-colors ${
+                      className={`rounded-box flex items-center gap-3 px-3.5 py-2 text-[13px] transition-colors ${
                         active
                           ? "bg-violet-pale font-medium text-violet-deep"
                           : "text-ink/65 hover:bg-violet-tint hover:text-violet-deep"
@@ -217,7 +217,7 @@ export function AdminShell({ children }: { children: ReactNode }) {
           {!loaded ? null : allowed ? (
             children
           ) : (
-            <div className="max-w-md border border-hairline p-8">
+            <div className="max-w-md border border-hairline p-8 rounded-box">
               <h1 className="font-display text-lg font-semibold text-ink">No access</h1>
               <p className="mt-2 text-sm text-ink/65">
                 Your role ({user ? ROLE_LABELS[user.role] : "unknown"}) doesn&apos;t include this

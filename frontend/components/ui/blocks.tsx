@@ -65,7 +65,7 @@ export function SearchBox({
 }) {
   return (
     <label
-      className={`flex items-center gap-3 border border-violet/30 bg-white px-5 py-2.5 shadow-soft focus-within:border-violet ${className}`}
+      className={`flex items-center gap-3 rounded-full border border-violet/30 bg-white px-5 py-2.5 shadow-soft focus-within:border-violet ${className}`}
     >
       <Search className="size-4 shrink-0 text-violet-deep" strokeWidth={2} />
       <input
@@ -103,7 +103,7 @@ export function DetailHero({
           {summary ? <p className="max-w-sm text-sm leading-relaxed text-ink/70">{summary}</p> : null}
           {children}
         </div>
-        <div className="aspect-[16/9] overflow-hidden bg-gradient-to-br from-violet-pale to-violet/30 shadow-float">
+        <div className="aspect-[16/9] overflow-hidden bg-gradient-to-br from-violet-pale to-violet/30 shadow-float rounded-box">
           {image ? (
             // eslint-disable-next-line @next/next/no-img-element
             <img src={image} alt={imageAlt} className="size-full object-cover" />
@@ -157,7 +157,7 @@ export function CheckList({ items }: { items: string[] }) {
 
 export function Chip({ label }: { label: string }) {
   return (
-    <span className="inline-flex items-center gap-2.5 border border-hairline bg-paper px-4 py-2.5 text-sm text-ink/85">
+    <span className="inline-flex items-center gap-2.5 border border-hairline bg-paper px-4 py-2.5 text-sm text-ink/85 rounded-box">
       <span className="size-1.5 bg-brand" aria-hidden />
       {label}
     </span>
@@ -183,7 +183,7 @@ export function CallToActionCard({
   children: ReactNode;
 }) {
   return (
-    <div className=" border border-hairline bg-paper p-6 shadow-float sm:p-8">
+    <div className=" border border-hairline bg-paper p-6 shadow-float sm:p-8 rounded-box">
       <h2 className="text-sm font-medium uppercase text-violet-dark">{title}</h2>
       <p className="mt-2 max-w-xl text-sm leading-relaxed text-ink/70">{text}</p>
       <div className="mt-5">{children}</div>

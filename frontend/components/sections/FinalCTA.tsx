@@ -18,7 +18,7 @@ export function FinalCTA({ destinations }: { destinations: Destination[] }) {
             </p>
           </div>
 
-          <div className=" border border-hairline bg-paper p-6 shadow-soft sm:p-8">
+          <div className=" border border-hairline bg-paper p-6 shadow-soft sm:p-8 rounded-box">
             <InquiryForm
               destinations={destinations}
               sourcePage="/#final-cta"

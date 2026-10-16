@@ -114,7 +114,7 @@ export function GenericResourceForm({ config, row }: { config: ResourceConfig; r
   return (
     <form
       onSubmit={handleSubmit}
-      className="grid max-w-4xl gap-x-6 gap-y-5 border border-hairline bg-white p-6 sm:grid-cols-2 sm:p-8"
+      className="grid max-w-4xl gap-x-6 gap-y-5 border border-hairline bg-white p-6 sm:grid-cols-2 sm:p-8 rounded-box"
     >
       {config.fields
         .filter((f) => f.type !== "boolean")
@@ -285,7 +285,7 @@ export function GenericResourceForm({ config, row }: { config: ResourceConfig; r
           </div>
         ))}
 
-      <div className="flex items-center gap-6 bg-paper-2 px-4 py-3.5 sm:col-span-2">
+      <div className="flex items-center gap-6 bg-paper-2 px-4 py-3.5 sm:col-span-2 rounded-box">
         {config.fields
           .filter((f) => f.type === "boolean")
           .map((field) => (
@@ -304,7 +304,7 @@ export function GenericResourceForm({ config, row }: { config: ResourceConfig; r
         <button
           type="submit"
           disabled={saving}
-          className="mt-5 inline-flex items-center justify-center bg-violet text-white font-semibold px-8 py-3 text-sm shadow-sm shadow-violet/20 transition-all hover:bg-violet-deep disabled:opacity-60"
+          className="mt-5 inline-flex items-center justify-center bg-violet text-white font-semibold px-8 py-3 text-sm shadow-sm shadow-violet/20 transition-all hover:bg-violet-deep disabled:opacity-60 rounded-box"
         >
           {saving ? "Saving…" : row ? "Save changes" : `Create ${config.singularLabel.toLowerCase()}`}
         </button>

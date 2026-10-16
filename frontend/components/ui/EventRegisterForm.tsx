@@ -14,7 +14,7 @@ const LEVELS: { value: PreferredLevel; label: string }[] = [
 ];
 
 const inputClass =
-  "w-full bg-white border border-violet/40 px-3.5 py-2.5 text-sm text-ink placeholder:text-stone-light focus:border-violet focus:ring-2 focus:ring-violet/15 outline-none transition-colors";
+  "w-full bg-white border border-violet/40 px-3.5 py-2.5 text-sm text-ink placeholder:text-stone-light focus:border-violet focus:ring-2 focus:ring-violet/15 outline-none transition-colors rounded-box";
 const labelClass = "block text-xs font-medium mb-1.5 text-ink";
 
 export function EventRegisterForm({
@@ -51,7 +51,7 @@ export function EventRegisterForm({
 
   if (status === "success") {
     return (
-      <div className="max-w-xl bg-violet-pale px-6 py-8">
+      <div className="max-w-xl bg-violet-pale px-6 py-8 rounded-box">
         <p className="font-display text-lg font-semibold text-ink">You&apos;re registered.</p>
         <p className="mt-1 text-sm text-ink/70">
           We&apos;ll confirm your seat for {eventTitle} by phone or email shortly.
@@ -89,7 +89,7 @@ export function EventRegisterForm({
         <button
           type="submit"
           disabled={status === "submitting"}
-          className=" bg-violet px-8 py-3 text-sm font-semibold text-white shadow-sm shadow-violet/25 transition-colors hover:bg-violet-deep disabled:opacity-60"
+          className=" bg-violet px-8 py-3 text-sm font-semibold text-white shadow-sm shadow-violet/25 transition-colors hover:bg-violet-deep disabled:opacity-60 rounded-box"
         >
           {status === "submitting" ? "Registering…" : "Register Now"}
         </button>

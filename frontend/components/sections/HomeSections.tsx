@@ -10,7 +10,7 @@ import type { BlogPost, Destination, Service, Testimonial, TestPrep } from "@/li
 
 const WRAP = "mx-auto w-full max-w-6xl px-6 sm:px-8";
 
-const cardClass = " border border-hairline bg-paper p-5 shadow-soft";
+const cardClass = " border border-hairline bg-paper p-5 shadow-soft rounded-box";
 
 export function ServicesBlock({ services }: { services: Service[] }) {
   return (
@@ -210,7 +210,7 @@ export function ContactBlock({ destinations }: { destinations: Destination[] }) 
           </ul>
         </div>
 
-        <div className=" border border-hairline bg-paper p-6 shadow-float sm:p-7">
+        <div className=" border border-hairline bg-paper p-6 shadow-float sm:p-7 rounded-box">
           <InquiryForm destinations={destinations} sourcePage="/" />
         </div>
       </div>
@@ -232,7 +232,7 @@ export function BlogCard({ post }: { post: BlogPost }) {
   return (
     <Link
       href={`/blog/${post.slug}`}
-      className="group flex h-full flex-col overflow-hidden border border-hairline bg-paper shadow-soft transition-shadow hover:shadow-float"
+      className="group flex h-full flex-col overflow-hidden border border-hairline bg-paper shadow-soft transition-shadow hover:shadow-float rounded-box"
     >
       {cover ? (
         // eslint-disable-next-line @next/next/no-img-element

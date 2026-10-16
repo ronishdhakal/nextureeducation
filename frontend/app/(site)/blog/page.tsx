@@ -41,7 +41,7 @@ export default async function BlogPage() {
                 <Reveal key={post.id} delay={i * 60}>
                   <Link
                     href={`/blog/${post.slug}`}
-                    className="group flex flex-col h-full border border-hairline bg-paper overflow-hidden transition-shadow hover:shadow-md"
+                    className="group flex flex-col h-full border border-hairline bg-paper overflow-hidden transition-shadow hover:shadow-md rounded-box"
                   >
                     {cover ? (
                       // eslint-disable-next-line @next/next/no-img-element
@@ -74,7 +74,7 @@ export default async function BlogPage() {
             })}
           </div>
         ) : (
-          <div className=" border border-hairline p-10 text-center text-ink/60">
+          <div className=" border border-hairline p-10 text-center text-ink/60 rounded-box">
             No posts yet. Check back soon.
           </div>
         )}

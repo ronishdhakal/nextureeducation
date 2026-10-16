@@ -18,7 +18,7 @@ export function FAQSection() {
         subcopy="If yours isn't here, that's what the free session is for."
       />
 
-      <div className="mt-10 max-w-3xl divide-y divide-hairline overflow-hidden border border-hairline bg-paper shadow-soft">
+      <div className="mt-10 max-w-3xl divide-y divide-hairline overflow-hidden border border-hairline bg-paper shadow-soft rounded-box">
         {FAQ_ITEMS.map((item, i) => {
           const isOpen = open === i;
           return (
@@ -27,7 +27,7 @@ export function FAQSection() {
                 type="button"
                 onClick={() => setOpen(isOpen ? null : i)}
                 aria-expanded={isOpen}
-                className={`flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-violet-tint ${isOpen ? "bg-violet-tint" : ""}`}
+                className={`rounded-box flex w-full items-center justify-between gap-4 px-6 py-5 text-left transition-colors hover:bg-violet-tint ${isOpen ? "bg-violet-tint" : ""}`}
               >
                 <span className="font-display font-bold tracking-[-0.01em] text-ink">
                   {item.question}

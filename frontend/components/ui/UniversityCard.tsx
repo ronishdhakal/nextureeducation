@@ -4,13 +4,13 @@ import type { University } from "@/lib/types";
 export function UniversityCard({ university }: { university: University }) {
   const logo = mediaUrl(university.logo);
   return (
-    <div className="flex items-center gap-4 border border-hairline bg-paper p-5">
+    <div className="flex items-center gap-4 border border-hairline bg-paper p-5 rounded-box">
       {logo ? (
         // eslint-disable-next-line @next/next/no-img-element
         <img
           src={logo}
           alt={`${university.name} logo`}
-          className="size-12 object-contain border border-hairline p-1"
+          className="size-12 object-contain border border-hairline p-1 rounded-box"
         />
       ) : (
         <span className="size-12 bg-violet-pale text-violet-deep font-display font-bold flex items-center justify-center text-lg">

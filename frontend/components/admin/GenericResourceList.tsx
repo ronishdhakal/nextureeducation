@@ -31,7 +31,7 @@ const PAGE_SIZE = 10;
 function Badge({ on, onLabel, offLabel }: { on: boolean; onLabel: string; offLabel: string }) {
   return (
     <span
-      className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 text-[11px] font-medium ${
+      className={`rounded-md inline-flex items-center gap-1.5 px-2.5 py-0.5 text-[11px] font-medium ${
         on ? "bg-mint/15 text-[#0d7a63]" : "bg-paper-2 text-stone"
       }`}
     >
@@ -151,7 +151,7 @@ function renderCell(col: ListColumn, row: Row, config: ResourceConfig) {
         : "—";
     case "role":
       return (
-        <span className=" bg-violet-pale px-2.5 py-0.5 text-[11px] font-medium text-violet-deep">
+        <span className=" bg-violet-pale px-2.5 py-0.5 text-[11px] font-medium text-violet-deep rounded-md">
           {ROLE_LABELS[value as AdminRole] ?? String(value)}
         </span>
       );
@@ -201,7 +201,7 @@ function RowMenu({ editHref, onDelete }: { editHref: string; onDelete: () => voi
         <MoreVertical className="size-4" />
       </button>
       {open ? (
-        <div className="absolute right-0 z-10 mt-1 w-32 overflow-hidden border border-hairline bg-white py-1 text-left shadow-float">
+        <div className="absolute right-0 z-10 mt-1 w-32 overflow-hidden border border-hairline bg-white py-1 text-left shadow-float rounded-md">
           <Link href={editHref} className="block px-3.5 py-2 text-xs text-ink hover:bg-violet-tint">
             Edit
           </Link>
@@ -235,7 +235,7 @@ function FilterSelect({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="appearance-none border border-violet/40 bg-white py-2 pl-3.5 pr-9 text-xs text-ink outline-none focus:border-violet"
+        className="appearance-none border border-violet/40 bg-white py-2 pl-3.5 pr-9 text-xs text-ink outline-none focus:border-violet rounded-box"
       >
         {children}
       </select>
@@ -334,7 +334,7 @@ export function GenericResourceList({ config }: { config: ResourceConfig }) {
         </div>
         <Link
           href={`${config.basePath}/new`}
-          className="inline-flex items-center gap-2 bg-violet-pale px-6 py-3 text-xs font-medium text-violet-deep transition-colors hover:bg-violet hover:text-white"
+          className="inline-flex items-center gap-2 bg-violet-pale px-6 py-3 text-xs font-medium text-violet-deep transition-colors hover:bg-violet hover:text-white rounded-box"
         >
           <Plus className="size-3.5" /> {config.addLabel || `Add ${config.singularLabel}`}
         </Link>
@@ -391,7 +391,7 @@ export function GenericResourceList({ config }: { config: ResourceConfig }) {
       ) : null}
 
       <div className={`${config.stats || config.tabs ? "mt-6" : "mt-8"} flex flex-wrap items-center justify-between gap-3`}>
-        <label className="flex w-full max-w-xs items-center gap-2 border border-hairline bg-white px-3 py-2 focus-within:border-violet">
+        <label className="flex w-full max-w-xs items-center gap-2 border border-hairline bg-white px-3 py-2 focus-within:border-violet rounded-box">
           <Search className="size-3.5 text-ink/50" />
           <input
             type="search"
@@ -521,7 +521,7 @@ export function GenericResourceList({ config }: { config: ResourceConfig }) {
                   type="button"
                   onClick={() => setPage(i + 1)}
                   aria-current={i + 1 === current}
-                  className={`min-w-6  px-1.5 py-1 ${
+                  className={`rounded-md min-w-6  px-1.5 py-1 ${
                     i + 1 === current ? "bg-violet-pale font-medium text-violet-deep" : "hover:bg-violet-tint"
                   }`}
                 >

@@ -36,7 +36,7 @@ export default async function UniversitiesPage() {
             ))}
           </div>
         ) : (
-          <div className=" border border-hairline p-10 text-center text-ink/60">
+          <div className=" border border-hairline p-10 text-center text-ink/60 rounded-box">
             Our partner university list is being updated. Get in touch and we&apos;ll match
             you directly.
           </div>

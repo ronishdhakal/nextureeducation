@@ -43,13 +43,13 @@ export function WhyLocal({ settings }: { settings: SiteSettings | null }) {
         {REASONS.map((r) => (
           <div
             key={r.title}
-            className=" border border-hairline bg-paper p-6 shadow-soft"
+            className=" border border-hairline bg-paper p-6 shadow-soft rounded-box"
           >
             <h3 className="mb-1.5 font-display text-base font-bold text-ink">{r.title}</h3>
             <p className="text-sm leading-relaxed text-ink/60">{r.detail}</p>
           </div>
         ))}
-        <div className=" border border-violet/15 bg-violet-tint p-6">
+        <div className=" border border-violet/15 bg-violet-tint p-6 rounded-box">
           <p className="text-sm text-ink/75">
             <span className="font-semibold text-ink">Address:</span>{" "}
             {settings?.address || "Bagbazar, Kathmandu, Nepal"}

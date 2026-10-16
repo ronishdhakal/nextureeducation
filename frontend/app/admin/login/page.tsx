@@ -9,7 +9,7 @@ import { Logo } from "@/components/ui/Logo";
 import { adminLogin } from "@/lib/adminApi";
 
 const inputClass =
-  "w-full bg-white border border-violet/40 px-3.5 py-2.5 text-sm text-ink placeholder:text-stone-light outline-none transition-colors focus:border-violet focus:ring-2 focus:ring-violet/15";
+  "w-full bg-white border border-violet/40 px-3.5 py-2.5 text-sm text-ink placeholder:text-stone-light outline-none transition-colors focus:border-violet focus:ring-2 focus:ring-violet/15 rounded-box";
 
 function LoginForm() {
   const router = useRouter();
@@ -36,7 +36,7 @@ function LoginForm() {
 
   return (
     <div className="flex min-h-screen items-center justify-center bg-admin-bg px-4 py-10">
-      <div className="grid w-full max-w-5xl items-center gap-10 bg-white p-8 shadow-float md:grid-cols-2 md:p-12">
+      <div className="grid w-full max-w-5xl items-center gap-10 bg-white p-8 shadow-float md:grid-cols-2 md:p-12 rounded-box">
         <div>
           <div className="flex items-center gap-4">
             <Logo />
@@ -101,14 +101,14 @@ function LoginForm() {
             <button
               type="submit"
               disabled={loading}
-              className="mt-2 inline-flex items-center justify-center bg-violet px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-violet/25 transition-colors hover:bg-violet-deep disabled:opacity-60"
+              className="mt-2 inline-flex items-center justify-center bg-violet px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-violet/25 transition-colors hover:bg-violet-deep disabled:opacity-60 rounded-box"
             >
               {loading ? "Logging in…" : "Log In"}
             </button>
           </form>
         </div>
 
-        <div className="relative hidden aspect-[4/3] overflow-hidden bg-gradient-to-br from-violet-pale via-violet-tint to-violet/30 md:block">
+        <div className="relative hidden aspect-[4/3] overflow-hidden bg-gradient-to-br from-violet-pale via-violet-tint to-violet/30 md:block rounded-box">
           <Image
             src="/assets/home/background.png"
             alt=""

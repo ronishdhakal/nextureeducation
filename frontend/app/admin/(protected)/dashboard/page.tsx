@@ -252,7 +252,7 @@ export default function DashboardPage() {
             <Link
               key={href}
               href={href}
-              className="flex items-center gap-2.5 bg-violet-pale px-4 py-2.5 text-xs text-violet-deep transition-colors hover:bg-violet-pale/70"
+              className="flex items-center gap-2.5 bg-violet-pale px-4 py-2.5 text-xs text-violet-deep transition-colors hover:bg-violet-pale/70 rounded-box"
             >
               <Icon className="size-4" strokeWidth={1.8} />+ {label}
             </Link>

@@ -76,7 +76,7 @@ export default async function ServiceDetailPage({ params }: Props) {
             )}
           </div>
 
-          <div className="lg:sticky lg:top-24 h-fit border border-hairline bg-paper-2 p-6 sm:p-7">
+          <div className="lg:sticky lg:top-24 h-fit border border-hairline bg-paper-2 p-6 sm:p-7 rounded-box">
             <SectionHeading
               title="Ready to talk it through?"
               subcopy="A quick form now saves a lot of back-and-forth later."

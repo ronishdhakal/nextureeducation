@@ -193,7 +193,7 @@ function CallLogPanel({ lead, onLogged }: { lead: Lead; onLogged: () => void }) 
     <div>
       <p className="text-xs font-semibold uppercase tracking-wide text-stone mb-1.5">Call log</p>
 
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2.5 border border-hairline bg-paper-2 p-3.5">
+      <form onSubmit={handleSubmit} className="flex flex-col gap-2.5 border border-hairline bg-paper-2 p-3.5 rounded-box">
         <div className="grid grid-cols-2 gap-2.5">
           <Select
             value={outcome}
@@ -224,7 +224,7 @@ function CallLogPanel({ lead, onLogged }: { lead: Lead; onLogged: () => void }) 
         <button
           type="submit"
           disabled={saving}
-          className="inline-flex items-center justify-center gap-1.5 self-start bg-violet text-white font-semibold px-4 py-2 text-xs transition-colors hover:bg-violet-deep disabled:opacity-60"
+          className="inline-flex items-center justify-center gap-1.5 self-start bg-violet text-white font-semibold px-4 py-2 text-xs transition-colors hover:bg-violet-deep disabled:opacity-60 rounded-box"
         >
           <PhoneCall className="size-3.5" /> {saving ? "Saving…" : "Log call"}
         </button>
@@ -238,7 +238,7 @@ function CallLogPanel({ lead, onLogged }: { lead: Lead; onLogged: () => void }) 
           <p className="text-xs text-stone">No calls logged yet.</p>
         ) : null}
         {logs?.map((log) => (
-          <div key={log.id} className=" border border-hairline p-3 text-xs group">
+          <div key={log.id} className=" border border-hairline p-3 text-xs group rounded-box">
             <div className="flex items-center justify-between gap-2">
               <span className="font-semibold text-violet-deep uppercase tracking-wide">
                 {outcomeLabel(log.outcome)}
@@ -477,7 +477,7 @@ export default function LeadsPage() {
           <button
             type="button"
             onClick={handleExport}
-            className="inline-flex items-center gap-2 border border-hairline bg-white px-5 py-2.5 text-sm font-semibold hover:border-violet transition-colors"
+            className="inline-flex items-center gap-2 border border-hairline bg-white px-5 py-2.5 text-sm font-semibold hover:border-violet transition-colors rounded-box"
           >
             <Download className="size-4" /> Export CSV
           </button>
@@ -485,7 +485,7 @@ export default function LeadsPage() {
       />
 
       <div className="grid grid-cols-3 gap-4 mb-6">
-        <div className=" border border-hairline bg-white p-4 flex items-center gap-3 transition-shadow hover:shadow-[0_1px_3px_rgba(23,11,34,0.06)]">
+        <div className=" border border-hairline bg-white p-4 flex items-center gap-3 transition-shadow hover:shadow-[0_1px_3px_rgba(23,11,34,0.06)] rounded-box">
           <span className="inline-flex size-10 items-center justify-center bg-violet-pale text-violet-deep shrink-0">
             <Users className="size-4.5" strokeWidth={2.2} />
           </span>
@@ -494,7 +494,7 @@ export default function LeadsPage() {
             <p className="text-xs text-stone mt-1.5">Total leads</p>
           </div>
         </div>
-        <div className=" border border-hairline bg-white p-4 flex items-center gap-3 transition-shadow hover:shadow-[0_1px_3px_rgba(23,11,34,0.06)]">
+        <div className=" border border-hairline bg-white p-4 flex items-center gap-3 transition-shadow hover:shadow-[0_1px_3px_rgba(23,11,34,0.06)] rounded-box">
           <span className="inline-flex size-10 items-center justify-center bg-red-50 text-red-600 shrink-0">
             <Flame className="size-4.5" strokeWidth={2.2} />
           </span>
@@ -506,7 +506,7 @@ export default function LeadsPage() {
         <button
           type="button"
           onClick={() => setDueOnly((v) => !v)}
-          className={` border p-4 flex items-center gap-3 text-left transition-all ${
+          className={`rounded-box border p-4 flex items-center gap-3 text-left transition-all ${
             dueOnly
               ? "border-violet bg-violet-pale shadow-[0_1px_3px_rgba(23,11,34,0.06)]"
               : "border-hairline bg-white hover:border-violet/40 hover:shadow-[0_1px_3px_rgba(23,11,34,0.06)]"
@@ -538,7 +538,7 @@ export default function LeadsPage() {
             key={key}
             type="button"
             onClick={() => setTab(key)}
-            className={` px-4 py-2 text-xs font-medium transition-colors ${
+            className={`rounded-box px-4 py-2 text-xs font-medium transition-colors ${
               tab === key
                 ? "bg-violet text-white shadow-sm shadow-violet/25"
                 : "border border-hairline bg-white text-ink/80 hover:border-violet"
@@ -549,7 +549,7 @@ export default function LeadsPage() {
         ))}
       </div>
 
-      <div className="mb-5 border border-hairline bg-white overflow-hidden">
+      <div className="mb-5 border border-hairline bg-white overflow-hidden rounded-box">
         <div className="p-4">
           <div className="relative max-w-sm">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 size-4 text-stone-light" />
@@ -558,7 +558,7 @@ export default function LeadsPage() {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search by name, phone or email…"
-              className="w-full bg-paper-2 border border-hairline pl-9 pr-3.5 py-2.5 text-sm outline-none focus:border-violet focus:ring-4 focus:ring-violet/10 focus:bg-white transition-all"
+              className="w-full bg-paper-2 border border-hairline pl-9 pr-3.5 py-2.5 text-sm outline-none focus:border-violet focus:ring-4 focus:ring-violet/10 focus:bg-white transition-all rounded-box"
             />
           </div>
         </div>
@@ -682,7 +682,7 @@ export default function LeadsPage() {
       {error ? <p className="text-sm text-red-600 mb-4">{error}</p> : null}
 
       <div className="grid lg:grid-cols-[2fr_1fr] gap-6">
-        <div className="admin-scroll border border-hairline bg-white overflow-hidden overflow-x-auto">
+        <div className="admin-scroll border border-hairline bg-white overflow-hidden overflow-x-auto rounded-box">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-hairline bg-paper-2 text-left text-xs font-semibold uppercase tracking-wide text-stone">
@@ -759,7 +759,7 @@ export default function LeadsPage() {
           ) : null}
         </div>
 
-        <div className=" border border-hairline bg-white p-6 h-fit lg:sticky lg:top-6">
+        <div className=" border border-hairline bg-white p-6 h-fit lg:sticky lg:top-6 rounded-box">
           {selected ? (
             <div className="flex flex-col gap-5">
               <div className="flex items-center gap-3">
@@ -779,19 +779,19 @@ export default function LeadsPage() {
               <div className="grid grid-cols-2 gap-2.5">
                 <a
                   href={`tel:${selected.phone}`}
-                  className="inline-flex items-center justify-center gap-2 border border-hairline py-2.5 text-sm font-semibold text-ink hover:border-violet hover:text-violet-deep transition-colors"
+                  className="inline-flex items-center justify-center gap-2 border border-hairline py-2.5 text-sm font-semibold text-ink hover:border-violet hover:text-violet-deep transition-colors rounded-box"
                 >
                   <Phone className="size-4" /> Call
                 </a>
                 {selected.email ? (
                   <a
                     href={`mailto:${selected.email}`}
-                    className="inline-flex items-center justify-center gap-2 border border-hairline py-2.5 text-sm font-semibold text-ink hover:border-violet hover:text-violet-deep transition-colors"
+                    className="inline-flex items-center justify-center gap-2 border border-hairline py-2.5 text-sm font-semibold text-ink hover:border-violet hover:text-violet-deep transition-colors rounded-box"
                   >
                     <Mail className="size-4" /> Email
                   </a>
                 ) : (
-                  <span className="inline-flex items-center justify-center gap-2 border border-hairline py-2.5 text-sm font-semibold text-stone-light">
+                  <span className="inline-flex items-center justify-center gap-2 border border-hairline py-2.5 text-sm font-semibold text-stone-light rounded-box">
                     <Mail className="size-4" /> No email
                   </span>
                 )}
@@ -920,7 +920,7 @@ export default function LeadsPage() {
                   type="button"
                   onClick={() => handleConvert(selected)}
                   disabled={converting}
-                  className="inline-flex w-full items-center justify-center gap-2 border border-violet px-4 py-2.5 text-sm font-semibold text-violet-deep transition-colors hover:bg-violet-pale disabled:opacity-60"
+                  className="inline-flex w-full items-center justify-center gap-2 border border-violet px-4 py-2.5 text-sm font-semibold text-violet-deep transition-colors hover:bg-violet-pale disabled:opacity-60 rounded-box"
                 >
                   {converting ? "Creating student…" : "Convert to student"}
                 </button>

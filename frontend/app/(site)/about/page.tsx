@@ -156,7 +156,7 @@ export default async function AboutPage() {
           <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {CORE.map(({ Icon, title, text }, i) => (
               <Reveal key={title} delay={i * 60}>
-                <div className="h-full border border-hairline bg-paper p-5 shadow-soft">
+                <div className="h-full border border-hairline bg-paper p-5 shadow-soft rounded-box">
                   <span className="inline-flex size-8 items-center justify-center rounded-full bg-violet-pale text-violet-deep">
                     <Icon className="size-4" strokeWidth={2} />
                   </span>
@@ -182,7 +182,7 @@ export default async function AboutPage() {
                 const photo = mediaUrl(m.photo);
                 return (
                   <Reveal key={m.id} delay={i * 60}>
-                    <div className="flex h-full flex-col items-center border border-hairline bg-paper p-5 text-center shadow-soft">
+                    <div className="flex h-full flex-col items-center border border-hairline bg-paper p-5 text-center shadow-soft rounded-box">
                       {photo ? (
                         // eslint-disable-next-line @next/next/no-img-element
                         <img src={photo} alt={m.name} className="size-16 rounded-full object-cover" />

@@ -107,7 +107,7 @@ export default async function ClassDetailPage({ params }: Props) {
               <DetailHeading large>Why Choose Our {name} Course?</DetailHeading>
               <div className="grid gap-4 sm:grid-cols-2">
                 {why.map((w, i) => (
-                  <div key={w.title} className="border border-hairline border-t-2 border-t-brand bg-paper p-5">
+                  <div key={w.title} className="border border-hairline border-t-2 border-t-brand bg-paper p-5 rounded-box">
                     <Index n={i + 1} />
                     <h3 className="mt-2 text-sm font-semibold text-ink">{w.title}</h3>
                     {w.detail ? (
@@ -136,7 +136,7 @@ export default async function ClassDetailPage({ params }: Props) {
                   <Link
                     key={r.id}
                     href={`/classes/${r.slug}`}
-                    className="group flex flex-col border border-hairline bg-paper p-5 shadow-soft transition-shadow hover:shadow-float"
+                    className="group flex flex-col border border-hairline bg-paper p-5 shadow-soft transition-shadow hover:shadow-float rounded-box"
                   >
                     <h3 className="text-sm font-semibold uppercase text-violet-dark">{r.name}</h3>
                     <p className="mt-2 line-clamp-2 text-xs leading-relaxed text-ink/65">
@@ -157,7 +157,7 @@ export default async function ClassDetailPage({ params }: Props) {
         </div>
 
         <aside className="h-fit lg:sticky lg:top-24">
-          <div className="border border-hairline bg-paper shadow-float">
+          <div className="border border-hairline bg-paper shadow-float rounded-box">
             <div className="border-b border-hairline bg-violet-tint px-5 py-4">
               <h2 className="font-display text-base font-semibold text-brand">Course Details</h2>
             </div>

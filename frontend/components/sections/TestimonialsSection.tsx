@@ -36,7 +36,7 @@ export function TestimonialsSection({
           const photo = mediaUrl(t.photo);
           return (
             <Reveal key={t.id} delay={i * 60}>
-              <div className="flex h-full flex-col border border-hairline bg-paper p-6 shadow-soft">
+              <div className="flex h-full flex-col border border-hairline bg-paper p-6 shadow-soft rounded-box">
                 <p className="flex-1 leading-relaxed text-ink/75">&ldquo;{t.quote}&rdquo;</p>
                 <div className="mt-5 flex items-center gap-3 border-t border-hairline pt-4">
                   {photo ? (

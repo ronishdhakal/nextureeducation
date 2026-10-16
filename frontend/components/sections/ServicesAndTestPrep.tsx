@@ -27,7 +27,7 @@ export function ServicesAndTestPrep({
             <Reveal key={service.id} delay={i * 50} className="h-full">
               <Link
                 href={`/services/${service.slug}`}
-                className="group flex h-full flex-col gap-3.5 border border-hairline bg-paper p-7 shadow-soft transition-shadow duration-200 hover:border-violet/30 hover:shadow-md"
+                className="group flex h-full flex-col gap-3.5 border border-hairline bg-paper p-7 shadow-soft transition-shadow duration-200 hover:border-violet/30 hover:shadow-md rounded-box"
               >
                 <span className="inline-flex size-11 items-center justify-center bg-violet-pale text-violet-deep">
                   <ServiceIcon name={service.icon} className="size-5" />
@@ -62,7 +62,7 @@ export function ServicesAndTestPrep({
               <Reveal key={tp.id} delay={i * 60}>
                 <Link
                   href="/classes"
-                  className="flex h-full flex-col border border-hairline bg-paper p-6 shadow-soft transition-shadow duration-200 hover:border-violet/30 hover:shadow-md"
+                  className="flex h-full flex-col border border-hairline bg-paper p-6 shadow-soft transition-shadow duration-200 hover:border-violet/30 hover:shadow-md rounded-box"
                 >
                   <p className="mb-2 text-[12px] font-bold uppercase tracking-[0.12em] text-violet-deep">
                     {tp.name}

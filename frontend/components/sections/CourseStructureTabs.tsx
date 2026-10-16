@@ -18,7 +18,7 @@ export function CourseStructureTabs({ blocks }: { blocks: { title: string; items
             role="tab"
             aria-selected={i === active}
             onClick={() => setActive(i)}
-            className={`min-w-28 px-5 py-2 text-xs font-medium transition-colors ${
+            className={`rounded-box min-w-28 px-5 py-2 text-xs font-medium transition-colors ${
               i === active
                 ? "bg-violet text-white shadow-sm shadow-violet/25"
                 : "bg-violet-pale text-ink/80 hover:bg-violet-pale/70"
@@ -30,7 +30,7 @@ export function CourseStructureTabs({ blocks }: { blocks: { title: string; items
       </div>
       <div
         role="tabpanel"
-        className="mt-5 max-w-2xl border border-hairline bg-violet-tint p-5 shadow-soft"
+        className="mt-5 max-w-2xl border border-hairline bg-violet-tint p-5 shadow-soft rounded-box"
       >
         <h3 className="text-sm font-medium text-violet-dark">{current.title}</h3>
         <ul className="mt-3 grid gap-2.5 sm:grid-cols-2">

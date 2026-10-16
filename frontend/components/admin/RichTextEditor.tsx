@@ -86,7 +86,7 @@ function Toolbar({
           if (v === "p") chain.setParagraph().run();
           else chain.setHeading({ level: Number(v) as 2 | 3 | 4 }).run();
         }}
-        className="mr-1 h-7 border border-violet/40 bg-white px-2 text-xs text-ink outline-none"
+        className="mr-1 h-7 border border-violet/40 bg-white px-2 text-xs text-ink outline-none rounded-box"
       >
         <option value="p">Paragraph</option>
         <option value="2">Heading 2</option>
@@ -267,12 +267,12 @@ export function RichTextEditor({
 
   if (!editor) {
     return (
-      <div className=" border border-hairline bg-white h-48 animate-pulse" />
+      <div className=" border border-hairline bg-white h-48 animate-pulse rounded-box" />
     );
   }
 
   return (
-    <div className=" border border-violet/40 bg-white overflow-hidden focus-within:border-violet transition-colors">
+    <div className=" border border-violet/40 bg-white overflow-hidden focus-within:border-violet transition-colors rounded-box">
       <Toolbar
         editor={editor}
         uploading={uploading}

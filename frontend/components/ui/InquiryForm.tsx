@@ -25,7 +25,7 @@ type Props = {
 };
 
 const inputClass =
-  "w-full bg-white border border-violet/40 px-3.5 py-2.5 text-sm text-ink placeholder:text-stone-light focus:border-violet focus:ring-2 focus:ring-violet/15 outline-none transition-colors";
+  "w-full bg-white border border-violet/40 px-3.5 py-2.5 text-sm text-ink placeholder:text-stone-light focus:border-violet focus:ring-2 focus:ring-violet/15 outline-none transition-colors rounded-box";
 const labelClass =
   "block text-xs font-medium mb-1.5 text-ink";
 
@@ -71,7 +71,7 @@ export function InquiryForm({
 
   if (status === "success") {
     return (
-      <div className={` px-6 py-8 text-center bg-violet-pale ${className}`}>
+      <div className={`rounded-box px-6 py-8 text-center bg-violet-pale ${className}`}>
         <p className="font-display font-bold text-xl mb-1 text-ink">You&apos;re on the list.</p>
         <p className="text-ink/65">
           We&apos;ll call or email you within one business day. No spam, no sales calls in
@@ -190,7 +190,7 @@ export function InquiryForm({
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex items-center justify-center self-center bg-violet text-white font-semibold px-14 py-3 text-sm shadow-sm shadow-violet/25 transition-colors duration-150 hover:bg-violet-deep disabled:opacity-60"
+        className="inline-flex items-center justify-center self-center bg-violet text-white font-semibold px-14 py-3 text-sm shadow-sm shadow-violet/25 transition-colors duration-150 hover:bg-violet-deep disabled:opacity-60 rounded-box"
       >
         {status === "submitting" ? "Sending…" : "Request a Consultation"}
       </button>

@@ -49,6 +49,10 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 
+  /* One switch for every card, button, input and image frame:
+     0 = square corners, 0.75rem = rounded. */
+  --radius-box: 0.75rem;
+
   --font-display: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-sans: var(--font-inter), system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: "Courier New", Courier, monospace;

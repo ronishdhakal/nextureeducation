@@ -145,9 +145,16 @@ if USE_R2_STORAGE:
     AWS_STORAGE_BUCKET_NAME = os.environ.get("R2_BUCKET_NAME")
     AWS_S3_ENDPOINT_URL = os.environ.get("R2_ENDPOINT_URL")
     AWS_S3_CUSTOM_DOMAIN = os.environ.get("R2_PUBLIC_DOMAIN") or None
-    AWS_S3_ADDRESSING_STYLE = "virtual"
+    # Cloudflare R2: region is always "auto", path-style addressing is the safest
+    # with the account endpoint, and ACLs are not used (access is set on the bucket).
+    AWS_S3_REGION_NAME = "auto"
+    AWS_S3_SIGNATURE_VERSION = "s3v4"
+    AWS_S3_ADDRESSING_STYLE = "path"
     AWS_DEFAULT_ACL = None
     AWS_QUERYSTRING_AUTH = False
+    # Never overwrite: two uploads called "photo.jpg" must not replace each other.
+    AWS_S3_FILE_OVERWRITE = False
+    AWS_S3_OBJECT_PARAMETERS = {"CacheControl": "public, max-age=31536000"}
     MEDIA_URL = f"https://{AWS_S3_CUSTOM_DOMAIN}/" if AWS_S3_CUSTOM_DOMAIN else "/media/"
 else:
     STORAGES = {

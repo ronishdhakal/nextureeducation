@@ -10,7 +10,7 @@ export function DestinationCard({ destination }: { destination: Destination }) {
   return (
     <Link
       href={`/destination/${destination.slug}`}
-      className="group flex h-full flex-col overflow-hidden border border-hairline bg-paper shadow-soft transition-shadow duration-200 hover:border-violet/30 hover:shadow-md"
+      className="group flex h-full flex-col overflow-hidden border border-hairline bg-paper shadow-soft transition-shadow duration-200 hover:border-violet/30 hover:shadow-md rounded-box"
     >
       <div className="flex flex-1 flex-col gap-4 p-6">
         <div className="flex items-center justify-between">
@@ -28,7 +28,7 @@ export function DestinationCard({ destination }: { destination: Destination }) {
             </span>
           </div>
           {destination.is_featured ? (
-            <span className="inline-flex bg-violet-pale px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-violet-deep">
+            <span className="inline-flex bg-violet-pale px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.12em] text-violet-deep rounded-md">
               Popular
             </span>
           ) : null}

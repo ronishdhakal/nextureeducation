@@ -33,7 +33,7 @@ function Select({
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="appearance-none border border-violet/40 bg-white py-2 pl-3.5 pr-9 text-xs text-ink outline-none focus:border-violet"
+        className="appearance-none border border-violet/40 bg-white py-2 pl-3.5 pr-9 text-xs text-ink outline-none focus:border-violet rounded-box"
       >
         {children}
       </select>
@@ -114,14 +114,14 @@ export default function NotificationsPage() {
           type="button"
           onClick={markAllRead}
           disabled={!unread}
-          className="inline-flex items-center gap-2 bg-violet-pale px-6 py-3 text-xs font-medium text-violet-deep transition-colors hover:bg-violet hover:text-white disabled:opacity-50"
+          className="inline-flex items-center gap-2 bg-violet-pale px-6 py-3 text-xs font-medium text-violet-deep transition-colors hover:bg-violet hover:text-white disabled:opacity-50 rounded-box"
         >
           <CheckCheck className="size-4" /> Mark all as read
         </button>
       </div>
 
       <div className="mt-8 flex flex-wrap items-center justify-between gap-3">
-        <label className="flex w-full max-w-xs items-center gap-2 border border-hairline bg-white px-3 py-2 focus-within:border-violet">
+        <label className="flex w-full max-w-xs items-center gap-2 border border-hairline bg-white px-3 py-2 focus-within:border-violet rounded-box">
           <Search className="size-3.5 text-ink/50" />
           <input
             type="search"
@@ -220,7 +220,7 @@ export default function NotificationsPage() {
                   type="button"
                   onClick={() => setPage(i + 1)}
                   aria-current={i + 1 === current}
-                  className={`min-w-6  px-1.5 py-1 ${
+                  className={`rounded-md min-w-6  px-1.5 py-1 ${
                     i + 1 === current ? "bg-violet-pale font-medium text-violet-deep" : "hover:bg-violet-tint"
                   }`}
                 >

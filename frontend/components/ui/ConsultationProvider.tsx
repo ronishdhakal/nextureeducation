@@ -82,7 +82,7 @@ export function ConsultationProvider({
         onClick={(e) => {
           if (e.target === dialogRef.current) close();
         }}
-        className="m-auto w-[calc(100%-2rem)] max-w-2xl bg-white p-0 text-ink shadow-2xl backdrop:bg-ink/50 backdrop:backdrop-blur-[2px]"
+        className="m-auto w-[calc(100%-2rem)] max-w-2xl bg-white p-0 text-ink shadow-2xl backdrop:bg-ink/50 backdrop:backdrop-blur-[2px] rounded-box"
       >
         <div className="max-h-[90vh] overflow-y-auto p-6 sm:p-8">
           <div className="flex items-start justify-between gap-4">

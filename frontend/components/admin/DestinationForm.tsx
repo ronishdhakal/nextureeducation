@@ -161,7 +161,7 @@ export function DestinationForm({ destination }: { destination?: Destination }) 
           </Field>
         </div>
 
-        <div className="flex items-center gap-6 bg-paper-2 px-4 py-3.5">
+        <div className="flex items-center gap-6 bg-paper-2 px-4 py-3.5 rounded-box">
           <Checkbox
             label="Featured"
             checked={form.is_featured}
@@ -318,7 +318,7 @@ export function DestinationForm({ destination }: { destination?: Destination }) 
         <button
           type="submit"
           disabled={saving}
-          className="inline-flex items-center justify-center bg-violet text-white font-semibold px-6 py-3 text-sm shadow-sm shadow-violet/20 transition-all hover:bg-violet-deep hover:shadow-violet/30 disabled:opacity-60"
+          className="inline-flex items-center justify-center bg-violet text-white font-semibold px-6 py-3 text-sm shadow-sm shadow-violet/20 transition-all hover:bg-violet-deep hover:shadow-violet/30 disabled:opacity-60 rounded-box"
         >
           {saving ? "Saving…" : destination ? "Save changes" : "Create destination"}
         </button>

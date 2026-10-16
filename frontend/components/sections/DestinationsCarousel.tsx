@@ -14,7 +14,7 @@ export function DestinationTile({ destination }: { destination: Destination }) {
   return (
     <Link
       href={`/destination/${destination.slug}`}
-      className="group flex h-full flex-col overflow-hidden bg-violet-dark shadow-float transition-transform duration-300 hover:-translate-y-1"
+      className="group flex h-full flex-col overflow-hidden bg-violet-dark shadow-float transition-transform duration-300 hover:-translate-y-1 rounded-box"
     >
       <div className="relative h-36 w-full overflow-hidden bg-gradient-to-br from-violet-pale to-violet/40">
         {hero ? (
@@ -82,7 +82,7 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
 
   if (!destinations.length) {
     return (
-      <p className=" border border-dashed border-hairline p-10 text-center text-sm text-stone">
+      <p className=" border border-dashed border-hairline p-10 text-center text-sm text-stone rounded-box">
         Destinations are being added. Check back soon.
       </p>
     );

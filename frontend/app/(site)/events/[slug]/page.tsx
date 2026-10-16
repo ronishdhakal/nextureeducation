@@ -55,7 +55,7 @@ export default async function EventDetailPage({ params }: Props) {
         image={mediaUrl(event.cover_image)}
         imageAlt={event.title}
       >
-        <span className=" bg-violet-pale px-2.5 py-1 text-[11px] font-medium text-violet-deep">
+        <span className=" bg-violet-pale px-2.5 py-1 text-[11px] font-medium text-violet-deep rounded-md">
           {event.category_display}
         </span>
         <div className="flex flex-wrap gap-x-4 gap-y-1.5 text-[11px] text-ink/70">
@@ -121,7 +121,7 @@ export default async function EventDetailPage({ params }: Props) {
             <DetailHeading large>What to expect</DetailHeading>
             <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {expect.map((x, i) => (
-                <div key={x.title} className="border border-hairline border-t-2 border-t-brand bg-paper p-4">
+                <div key={x.title} className="border border-hairline border-t-2 border-t-brand bg-paper p-4 rounded-box">
                   <Index n={i + 1} />
                   <h3 className="mt-2 text-sm font-semibold text-ink">{x.title}</h3>
                   {x.detail ? (

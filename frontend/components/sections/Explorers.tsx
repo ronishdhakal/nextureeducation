@@ -75,7 +75,7 @@ export function TestPrepExplorer({ testPreps }: { testPreps: TestPrep[] }) {
                 <Link
                   key={t.id}
                   href={`/classes/${t.slug}`}
-                  className="group flex flex-col border border-hairline bg-paper p-5 shadow-float transition-transform duration-300 hover:-translate-y-1"
+                  className="group flex flex-col border border-hairline bg-paper p-5 shadow-float transition-transform duration-300 hover:-translate-y-1 rounded-box"
                 >
                   <h2 className="text-sm font-semibold uppercase text-violet-dark">{t.name}</h2>
                   {t.tagline ? (
@@ -129,7 +129,7 @@ export function EventsExplorer({ events }: { events: EventItem[] }) {
   );
 
   const tab = (active: boolean) =>
-    ` px-4 py-2 text-xs font-medium transition-colors ${
+    `rounded-box px-4 py-2 text-xs font-medium transition-colors ${
       active
         ? "bg-violet text-white shadow-sm shadow-violet/25"
         : "border border-hairline bg-paper text-ink/80 hover:border-violet"
@@ -171,7 +171,7 @@ export function EventsExplorer({ events }: { events: EventItem[] }) {
                 <Link
                   key={e.id}
                   href={`/events/${e.slug}`}
-                  className="group grid overflow-hidden border border-hairline bg-paper shadow-float transition-transform duration-300 hover:-translate-y-0.5 sm:grid-cols-[0.9fr_1.1fr]"
+                  className="group grid overflow-hidden border border-hairline bg-paper shadow-float transition-transform duration-300 hover:-translate-y-0.5 sm:grid-cols-[0.9fr_1.1fr] rounded-box"
                 >
                   <div className="h-48 bg-gradient-to-br from-violet-pale to-violet/30 sm:h-auto sm:min-h-52">
                     {cover ? (
@@ -180,7 +180,7 @@ export function EventsExplorer({ events }: { events: EventItem[] }) {
                     ) : null}
                   </div>
                   <div className="flex flex-col items-start gap-3 p-6">
-                    <span className=" bg-violet-pale px-2.5 py-1 text-[11px] font-medium text-violet-deep">
+                    <span className=" bg-violet-pale px-2.5 py-1 text-[11px] font-medium text-violet-deep rounded-md">
                       {e.category_display}
                     </span>
                     <h2 className="font-display text-xl font-semibold leading-snug text-ink">

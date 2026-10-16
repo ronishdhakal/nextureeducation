@@ -84,7 +84,7 @@ export function Hero({ settings }: { settings: SiteSettings | null }) {
 
       {stats.length ? (
         <div className="relative z-10 mx-auto -mt-px w-full max-w-6xl px-6 pb-2 sm:px-8 md:-mt-14 md:pb-0">
-          <dl className="grid grid-cols-2 gap-y-6 border border-hairline bg-paper p-6 shadow-float md:grid-flow-col md:auto-cols-fr md:divide-x md:divide-hairline md:p-0 md:py-6">
+          <dl className="grid grid-cols-2 gap-y-6 border border-hairline bg-paper p-6 shadow-float md:grid-flow-col md:auto-cols-fr md:divide-x md:divide-hairline md:p-0 md:py-6 rounded-box">
             {stats.map(({ Icon, value, label }) => (
               <div key={label} className="flex items-center gap-3 md:justify-center md:px-4">
                 <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-full bg-violet-pale text-violet-deep">

@@ -2,7 +2,7 @@ import { UploadCloud } from "lucide-react";
 import type { ComponentType, ReactNode } from "react";
 
 const baseInput =
-  "w-full bg-white border border-violet/40 px-3.5 py-2.5 text-sm text-ink placeholder:text-stone-light focus:border-violet focus:ring-2 focus:ring-violet/15 outline-none transition-all";
+  "w-full bg-white border border-violet/40 px-3.5 py-2.5 text-sm text-ink placeholder:text-stone-light focus:border-violet focus:ring-2 focus:ring-violet/15 outline-none transition-all rounded-box";
 
 export function Field({
   label,
@@ -53,7 +53,7 @@ export function FormSection({
   children: ReactNode;
 }) {
   return (
-    <div className=" border border-hairline bg-white p-6 sm:p-8">
+    <div className=" border border-hairline bg-white p-6 sm:p-8 rounded-box">
       <div className="flex items-center gap-3 mb-6">
         {Icon ? (
           <span className="inline-flex size-9 items-center justify-center bg-violet-pale text-violet-deep shrink-0">
@@ -106,7 +106,7 @@ export function Dropzone({
         const dropped = e.dataTransfer.files?.[0];
         if (dropped) onChange(dropped);
       }}
-      className="flex min-h-32 cursor-pointer flex-col items-center justify-center gap-2 border border-violet/40 bg-white p-4 text-center transition-colors hover:border-violet hover:bg-violet-tint"
+      className="flex min-h-32 cursor-pointer flex-col items-center justify-center gap-2 border border-violet/40 bg-white p-4 text-center transition-colors hover:border-violet hover:bg-violet-tint rounded-box"
     >
       {preview ? (
         // eslint-disable-next-line @next/next/no-img-element

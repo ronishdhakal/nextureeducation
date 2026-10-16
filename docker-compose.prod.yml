@@ -78,7 +78,7 @@ services:
       args:
         NEXT_PUBLIC_API_URL: https://${API_DOMAIN}/api
         NEXT_PUBLIC_SITE_URL: https://${SITE_DOMAIN}
-        NEXT_PUBLIC_MEDIA_HOSTNAME: ${API_DOMAIN}
+        NEXT_PUBLIC_MEDIA_HOSTNAME: ${R2_PUBLIC_DOMAIN:-${API_DOMAIN}}
     restart: unless-stopped
     environment:
       # Server-side renders talk to the API over the private docker network.

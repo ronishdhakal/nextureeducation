@@ -29,7 +29,7 @@ export function buttonClasses(
       : size === "lg"
         ? "px-7 py-3.5 text-sm"
         : "px-5 py-2.5 text-sm";
-  return `group inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200 ${sizeClass} ${VARIANTS[variant]} ${className}`;
+  return `group inline-flex items-center justify-center gap-2 rounded-box font-semibold transition-all duration-200 ${sizeClass} ${VARIANTS[variant]} ${className}`;
 }
 
 export function Button({
@@ -40,16 +40,10 @@ export function Button({
   size = "md",
   arrow = false,
 }: ButtonProps) {
-  const sizeClass =
-    size === "xl"
-      ? "px-8 py-4 text-base"
-      : size === "lg"
-        ? "px-7 py-3.5 text-sm"
-        : "px-5 py-2.5 text-sm";
   return (
     <Link
       href={href}
-      className={`group inline-flex items-center justify-center gap-2 font-semibold transition-all duration-200 ${sizeClass} ${VARIANTS[variant]} ${className}`}
+      className={buttonClasses(variant, size, className)}
     >
       {children}
       {arrow ? (
