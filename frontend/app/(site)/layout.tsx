@@ -3,16 +3,18 @@ import { SiteFooter } from "@/components/sections/SiteFooter";
 import { SiteHeader } from "@/components/sections/SiteHeader";
 import { PromoPopup } from "@/components/ui/PromoPopup";
 import { ConsultationProvider } from "@/components/ui/ConsultationProvider";
-import { getActivePopup, getDestinations, getServices, getSiteSettings } from "@/lib/api";
+import { getActivePopup, getDestinations, getPages, getServices, getSiteSettings, getTestPreps } from "@/lib/api";
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL || "https://nexture.edu.np";
 
 export default async function SiteLayout({ children }: { children: React.ReactNode }) {
-  const [settings, services, destinations, popup] = await Promise.all([
+  const [settings, services, destinations, popup, pages, classes] = await Promise.all([
     getSiteSettings(),
     getServices(),
     getDestinations(),
     getActivePopup(),
+    getPages(),
+    getTestPreps(),
   ]);
 
   return (
@@ -66,7 +68,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
       />
       <SiteHeader />
       <main className="flex-1">{children}</main>
-      <SiteFooter settings={settings} services={services} destinations={destinations} />
+      <SiteFooter settings={settings} services={services} destinations={destinations} pages={pages} classes={classes} />
       <PromoPopup popup={popup} />
     </div>
     </ConsultationProvider>

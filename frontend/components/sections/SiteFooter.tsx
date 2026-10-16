@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Logo } from "@/components/ui/Logo";
-import type { Destination, Service, SiteSettings } from "@/lib/types";
+import type { Destination, Page, Service, SiteSettings, TestPrep } from "@/lib/types";
 
 const SOCIALS: { key: keyof SiteSettings; label: string }[] = [
   { key: "facebook_url", label: "Facebook" },
@@ -29,6 +29,7 @@ const COLUMNS = [
       { label: "Success Stories", href: "/success-stories" },
       { label: "Events", href: "/events" },
       { label: "Universities", href: "/universities" },
+      { label: "Sitemap", href: "/sitemap" },
     ],
   },
   {
@@ -45,11 +46,18 @@ export function SiteFooter({
   settings,
   services,
   destinations,
+  pages,
+  classes,
 }: {
   settings: SiteSettings | null;
   services: Service[];
   destinations: Destination[];
+  pages: Page[];
+  classes: TestPrep[];
 }) {
+  // Link only the legal pages that exist, so the footer never points at a 404.
+  const existing = new Set(pages.map((p) => p.slug));
+  const legalLinks = COLUMNS[2].links.filter((l) => existing.has(l.href.replace("/pages/", "")));
   const columns = [
     COLUMNS[0],
     COLUMNS[1],
@@ -64,6 +72,17 @@ export function SiteFooter({
           },
         ]
       : []),
+    ...(classes.length
+      ? [
+          {
+            title: "Classes",
+            links: classes.slice(0, 6).map((c) => ({
+              label: `${c.name} Classes`,
+              href: `/classes/${c.slug}`,
+            })),
+          },
+        ]
+      : []),
     ...(services.length
       ? [
           {
@@ -72,13 +91,13 @@ export function SiteFooter({
           },
         ]
       : []),
-    COLUMNS[2],
+    ...(legalLinks.length ? [{ title: "Legal Information", links: legalLinks }] : []),
   ];
   const socials = SOCIALS.filter((s) => settings?.[s.key]);
 
   return (
     <footer className="mt-auto border-t border-hairline bg-paper text-ink">
-      <div className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-x-6 gap-y-8 px-6 pb-10 pt-11 sm:gap-10 sm:px-8 sm:pb-12 sm:pt-14 lg:grid-cols-[1.3fr_repeat(5,1fr)]">
+      <div className="mx-auto grid w-full max-w-6xl grid-cols-2 gap-x-6 gap-y-8 px-6 pb-10 pt-11 sm:gap-10 sm:px-8 sm:pb-12 sm:pt-14 lg:grid-cols-[1.3fr_repeat(6,1fr)]">
         <div className="col-span-2 lg:col-span-1">
           <Logo className="mb-4" />
           <p className="max-w-xs text-sm leading-relaxed text-ink/65">

@@ -65,7 +65,7 @@ export function Hero({ settings }: { settings: SiteSettings | null }) {
           alt=""
           width={577}
           height={433}
-          priority
+          loading="lazy"
           className="absolute bottom-0 right-0 h-auto w-[120%] max-w-none opacity-60 [mask-image:linear-gradient(to_right,transparent,black_35%),linear-gradient(to_top,transparent,black_15%)] [mask-composite:intersect] sm:w-full md:w-full lg:w-[min(52vw,820px)]"
         />
         <div className="absolute bottom-0 left-1/2 aspect-[420/612] h-[88%] -translate-x-1/2 md:left-auto md:right-[max(1.5rem,calc(50vw-36rem+1rem))] md:h-[min(84%,500px)] md:translate-x-0">
@@ -75,7 +75,7 @@ export function Hero({ settings }: { settings: SiteSettings | null }) {
             alt="A smiling student holding notebooks, ready to study abroad with Nexture Education in Bagbazar, Kathmandu"
             width={420}
             height={612}
-            priority
+            loading="lazy"
             className="relative size-full object-contain object-bottom"
           />
         </div>

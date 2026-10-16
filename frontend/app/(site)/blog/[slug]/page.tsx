@@ -20,6 +20,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!post) return {};
   return buildMetadata({
     title: post.meta_title || post.title,
+    absoluteTitle: Boolean(post.meta_title),
     description: post.meta_description || post.excerpt,
     path: `/blog/${post.slug}`,
     image: mediaUrl(post.cover_image) || undefined,
@@ -55,6 +56,9 @@ export default async function BlogPostPage({ params }: Props) {
           image: cover || undefined,
           author: post.author ? { "@type": "Person", name: post.author } : undefined,
           datePublished: post.published_at || undefined,
+          dateModified: post.updated_at || post.published_at || undefined,
+          mainEntityOfPage: `${SITE_URL}/blog/${post.slug}`,
+          publisher: { "@type": "Organization", name: "Nexture Education", url: SITE_URL },
         }}
       />
       <JsonLd

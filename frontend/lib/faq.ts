@@ -1,4 +1,4 @@
-import type { Destination } from "./types";
+import type { Destination, TestPrep } from "./types";
 
 export type FaqItem = { question: string; answer: string };
 
@@ -15,7 +15,7 @@ export function joinNames(names: string[]): string {
  * Built from the live destinations so the answers never name a country we do not serve.
  * The same list renders on the page and in the FAQPage structured data.
  */
-export function buildHomeFaq(destinations: Destination[]): FaqItem[] {
+export function buildHomeFaq(destinations: Destination[], classes: TestPrep[] = []): FaqItem[] {
   const names = destinations.map((d) => d.name);
   const list = names.length ? joinNames(names) : "popular study destinations";
 
@@ -34,6 +34,13 @@ export function buildHomeFaq(destinations: Destination[]): FaqItem[] {
     items.push({
       question: `Which is the best consultancy in Bagbazar for ${d.name}?`,
       answer: `Nexture Education in Bagbazar, Kathmandu helps students from Nepal plan, apply and get their visa for ${d.name}. ${d.summary} Book a free consultation to see which universities and intakes fit your profile.`.replace(/\s+/g, " "),
+    });
+  }
+
+  for (const c of classes.slice(0, 3)) {
+    items.push({
+      question: `Which are the best ${c.name} classes in Bagbazar?`,
+      answer: `Nexture Education runs ${c.name} preparation classes at our office in Bagbazar, Kathmandu, with experienced trainers, mock tests and personal feedback. ${c.tagline || c.description || ""} Book a free demo class to see how we teach before you commit.`.replace(/\s+/g, " "),
     });
   }
 

@@ -12,6 +12,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
+import { JsonLd } from "@/components/JsonLd";
+
 import { CourseStructureTabs } from "@/components/sections/CourseStructureTabs";
 import {
   ConsultationAutoPrompt,
@@ -21,7 +23,7 @@ import { DetailHeading, DetailHero, Index, WRAP } from "@/components/ui/blocks";
 import { RichText } from "@/components/ui/RichText";
 import { getTestPrep, getTestPreps, mediaUrl } from "@/lib/api";
 import { parseBlocks, parseLines, parseTitled } from "@/lib/lines";
-import { buildMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, buildMetadata, SITE_URL } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -30,12 +32,13 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const t = await getTestPrep(slug);
   if (!t) return {};
   return buildMetadata({
-    title: t.meta_title || `${t.name} Preparation Classes in Kathmandu`,
+    title: t.meta_title || `Best ${t.name} Classes in Bagbazar, Kathmandu | Nexture`,
+    absoluteTitle: true,
     description:
       t.meta_description ||
-      t.tagline ||
-      `${t.name} preparation with expert trainers, mock tests and personalized guidance at Nexture Education, Bagbazar, Kathmandu.`,
+      `Best ${t.name} classes in Bagbazar, Kathmandu: expert trainers, mock tests and a free demo class at Nexture Education. Book your seat today.`,
     path: `/classes/${t.slug}`,
+    image: mediaUrl(t.hero_image) || undefined,
   });
 }
 
@@ -62,15 +65,41 @@ export default async function ClassDetailPage({ params }: Props) {
   return (
     <>
       <ConsultationAutoPrompt message={`I am interested in ${name} classes.`} />
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Classes", path: "/classes" },
+          { name: `${name} Preparation`, path: `/classes/${test.slug}` },
+        ])}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Course",
+          name: `${name} Preparation`,
+          description: test.tagline || test.description || `${name} preparation classes in Kathmandu.`,
+          url: `${SITE_URL}/classes/${test.slug}`,
+          provider: {
+            "@type": "EducationalOrganization",
+            name: "Nexture Education",
+            url: SITE_URL,
+            address: { "@type": "PostalAddress", addressLocality: "Bagbazar, Kathmandu", addressCountry: "NP" },
+          },
+          courseMode: "onsite",
+        }}
+      />
       <DetailHero
         title={
           <>
+            <span className="mb-2 block font-sans text-xs font-medium uppercase leading-normal tracking-[0.06em] text-violet-deep sm:text-sm">
+              Best {name} Classes in Bagbazar
+            </span>
             {name} <span className="text-violet-deep">Preparation</span>
           </>
         }
         summary={test.tagline || test.description}
         image={mediaUrl(test.hero_image)}
         imageAlt={`${name} preparation class`}
+        breadcrumbs={[{ label: "Classes", href: "/classes" }, { label: `${name} Preparation` }]}
       >
         <ConsultationButton arrow message={`I would like to book a free demo class for ${name}.`}>
           Book a Free Demo Class
@@ -104,7 +133,7 @@ export default async function ClassDetailPage({ params }: Props) {
 
           {why.length ? (
             <section>
-              <DetailHeading large>Why Choose Our {name} Course?</DetailHeading>
+              <DetailHeading large>Why Choose Our {name} Classes in Bagbazar?</DetailHeading>
               <div className="grid gap-4 sm:grid-cols-2">
                 {why.map((w, i) => (
                   <div key={w.title} className="border border-hairline border-t-2 border-t-brand bg-paper p-5 rounded-box">
@@ -127,6 +156,16 @@ export default async function ClassDetailPage({ params }: Props) {
               <CourseStructureTabs blocks={structure} />
             </section>
           ) : null}
+
+          <section>
+            <DetailHeading large>Best {name} Classes in Bagbazar, Kathmandu</DetailHeading>
+            <p className="max-w-3xl text-sm leading-relaxed text-ink/75">
+              Nexture Education runs {name} preparation classes at our Bagbazar office in
+              Kathmandu. You learn from experienced trainers, practise with timed mock tests and
+              get feedback on your weak areas, so you walk into the exam knowing your target score
+              is realistic. Book a free demo class and see how we teach before you commit.
+            </p>
+          </section>
 
           {related.length ? (
             <section>

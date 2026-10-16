@@ -15,6 +15,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!page) return {};
   return buildMetadata({
     title: page.meta_title || page.title,
+    absoluteTitle: Boolean(page.meta_title),
     description: page.meta_description || page.title,
     path: `/pages/${page.slug}`,
   });

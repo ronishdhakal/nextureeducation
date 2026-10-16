@@ -41,7 +41,7 @@ export function TestimonialsSection({
                 <div className="mt-5 flex items-center gap-3 border-t border-hairline pt-4">
                   {photo ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <img loading="lazy" decoding="async"
                       src={photo}
                       alt={`${t.student_name}${t.destination_name ? `, student in ${t.destination_name}` : ""}`}
                       className="size-10 rounded-full object-cover border border-hairline"

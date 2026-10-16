@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/JsonLd";
 import { DestinationsCarousel } from "@/components/sections/DestinationsCarousel";
 import { Hero } from "@/components/sections/Hero";
 import {
+  BestClassesBlock,
   BestConsultancyBlock,
   BlogBlock,
   ContactBlock,
@@ -48,7 +49,7 @@ export default async function Home() {
     getBlogPosts(),
   ]);
 
-  const faq = buildHomeFaq(destinations);
+  const faq = buildHomeFaq(destinations, testPreps);
 
   return (
     <>
@@ -84,10 +85,11 @@ export default async function Home() {
       <JourneySteps />
       <BestConsultancyBlock destinations={destinations} />
       <TestPrepBlock testPreps={testPreps} />
+      <BestClassesBlock testPreps={testPreps} />
       <StoriesBlock testimonials={testimonials} />
-      <HomeFaq items={faq} />
       <ContactBlock destinations={destinations} />
       <BlogBlock posts={posts} />
+      <HomeFaq items={faq} />
     </>
   );
 }

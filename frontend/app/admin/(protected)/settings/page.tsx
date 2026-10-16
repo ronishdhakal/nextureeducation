@@ -24,6 +24,29 @@ export default function SiteSettingsPage() {
   const [saving, setSaving] = useState(false);
   const [error, setError] = useState("");
   const [saved, setSaved] = useState(false);
+  const [clearing, setClearing] = useState(false);
+  const [cacheMessage, setCacheMessage] = useState<{ ok: boolean; text: string } | null>(null);
+
+  async function clearCache() {
+    setClearing(true);
+    setCacheMessage(null);
+    try {
+      const res = await fetch("/api/admin/clear-cache", { method: "POST" });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.detail || "Could not clear the cache.");
+      setCacheMessage({
+        ok: true,
+        text: "Cache cleared. The website now shows your latest changes.",
+      });
+    } catch (err) {
+      setCacheMessage({
+        ok: false,
+        text: err instanceof Error ? err.message : "Could not clear the cache.",
+      });
+    } finally {
+      setClearing(false);
+    }
+  }
 
   useEffect(() => {
     getSiteSettingsAdmin<SiteSettings>()
@@ -120,6 +143,30 @@ export default function SiteSettingsPage() {
           </button>
         </div>
       </form>
+
+      <div className="mt-10 max-w-4xl border-t border-hairline pt-6">
+        <h2 className="font-display font-bold text-ink">Website cache</h2>
+        <p className="mt-1 max-w-xl text-xs leading-relaxed text-stone">
+          To keep the site fast, pages and content are saved for a few minutes. After you edit
+          something in the admin it can take up to five minutes to appear. Clear the cache to show
+          your changes straight away.
+        </p>
+        <div className="mt-4 flex flex-wrap items-center gap-4">
+          <button
+            type="button"
+            onClick={clearCache}
+            disabled={clearing}
+            className="inline-flex items-center justify-center border border-violet px-5 py-2.5 text-sm font-semibold text-violet-deep transition-colors hover:bg-violet-pale disabled:opacity-60 rounded-box"
+          >
+            {clearing ? "Clearing…" : "Clear website cache"}
+          </button>
+          {cacheMessage ? (
+            <p className={`text-sm ${cacheMessage.ok ? "text-[#0d7a63]" : "text-red-600"}`}>
+              {cacheMessage.text}
+            </p>
+          ) : null}
+        </div>
+      </div>
     </div>
   );
 }

@@ -151,7 +151,7 @@ export function StoriesBlock({ testimonials }: { testimonials: Testimonial[] }) 
                   <div className="flex items-center gap-3">
                     {photo ? (
                       // eslint-disable-next-line @next/next/no-img-element
-                      <img
+                      <img loading="lazy" decoding="async"
                         src={photo}
                         alt={`${t.student_name}${t.destination_name ? `, student in ${t.destination_name}` : ""}`}
                         className="size-10 rounded-full object-cover"
@@ -360,6 +360,47 @@ export function HomeFaq({ items }: { items: FaqItem[] }) {
               </summary>
               <p className="px-5 pb-5 text-sm leading-relaxed text-ink/75">{item.answer}</p>
             </details>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+/** One H3 per class ("Best IELTS Classes in Bagbazar"), each linking to its class page. */
+export function BestClassesBlock({ testPreps }: { testPreps: TestPrep[] }) {
+  if (!testPreps.length) return null;
+  const names = joinNames(testPreps.map((t) => t.name));
+  return (
+    <section className="bg-paper">
+      <div className={`${WRAP} py-11 md:py-20`}>
+        <SectionHeader
+          eyebrow="Test Preparation in Bagbazar, Kathmandu"
+          title={`Best ${names} Classes in Bagbazar, Kathmandu`}
+          subcopy={`Join ${names} classes at our Bagbazar office: experienced trainers, timed mock tests and personal feedback, with a free demo class before you commit.`}
+        />
+        <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {testPreps.map((t, i) => (
+            <Reveal key={t.id} delay={(i % 3) * 60}>
+              <Link
+                href={`/classes/${t.slug}`}
+                className={`${cardClass} group flex h-full flex-col p-5 transition-transform duration-300 hover:-translate-y-1`}
+              >
+                <h3 className="text-lg font-medium leading-snug text-ink">
+                  Best {t.name} Classes in Bagbazar
+                </h3>
+                <p className="mt-2 line-clamp-3 flex-1 text-xs leading-relaxed text-ink/70">
+                  {t.tagline || t.description}
+                </p>
+                <span className="mt-4 inline-flex items-center gap-1 text-xs text-violet-deep">
+                  Join {t.name} classes
+                  <ArrowRight
+                    className="size-3.5 transition-transform group-hover:translate-x-0.5"
+                    strokeWidth={1.8}
+                  />
+                </span>
+              </Link>
+            </Reveal>
           ))}
         </div>
       </div>

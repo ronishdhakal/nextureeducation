@@ -181,7 +181,7 @@ export default async function AboutPage() {
                     <div className="flex h-full flex-col items-center bg-white p-6 text-center shadow-float rounded-box">
                       {photo ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={photo} alt={`${m.name}, ${m.role} at Nexture Education`} className="size-20 rounded-full object-cover" />
+                        <img loading="lazy" decoding="async" src={photo} alt={`${m.name}, ${m.role} at Nexture Education`} className="size-20 rounded-full object-cover" />
                       ) : (
                         <span className="flex size-20 items-center justify-center rounded-full bg-violet-pale text-xl font-semibold text-violet-deep">
                           {m.name[0]}

@@ -21,13 +21,16 @@ export const PUBLIC_API_BASE =
   process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000/api";
 export const SERVER_API_BASE = process.env.API_URL_INTERNAL || PUBLIC_API_BASE;
 
+/** Tag on every backend read; clearing it refreshes the whole public site. */
+export const API_CACHE_TAG = "api";
+
 async function apiFetch<T>(
   path: string,
   { revalidate = 120, ...rest }: RequestInit & { revalidate?: number } = {}
 ): Promise<T> {
   const res = await fetch(`${SERVER_API_BASE}${path}`, {
     ...rest,
-    next: { revalidate },
+    next: { revalidate, tags: [API_CACHE_TAG] },
   });
   if (!res.ok) {
     throw new Error(`API request failed (${res.status}): ${path}`);

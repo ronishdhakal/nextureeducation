@@ -7,7 +7,7 @@ export function UniversityCard({ university }: { university: University }) {
     <div className="flex items-center gap-4 border border-hairline bg-paper p-5 rounded-box">
       {logo ? (
         // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <img loading="lazy" decoding="async"
           src={logo}
           alt={`${university.name} logo`}
           className="size-12 object-contain border border-hairline p-1 rounded-box"

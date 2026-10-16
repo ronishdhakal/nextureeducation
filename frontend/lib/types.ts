@@ -133,6 +133,7 @@ export interface BlogPost {
   body?: string;
   author: string;
   published_at: string | null;
+  updated_at?: string;
   meta_title?: string;
   meta_description?: string;
 }
@@ -239,6 +240,7 @@ export interface EventItem {
   summary: string;
   about: string;
   event_date: string;
+  updated_at?: string;
   start_time: string | null;
   end_time: string | null;
   venue: string;

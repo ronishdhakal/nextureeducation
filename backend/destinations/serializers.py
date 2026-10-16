@@ -26,6 +26,7 @@ class DestinationListSerializer(serializers.ModelSerializer):
             "summary",
             "popular_intakes",
             "university_count",
+            "updated_at",
             "is_featured",
             "is_published",
             "order",

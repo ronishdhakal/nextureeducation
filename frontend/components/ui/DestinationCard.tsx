@@ -17,7 +17,7 @@ export function DestinationCard({ destination }: { destination: Destination }) {
           <div className="flex items-center gap-3">
             {flag ? (
               // eslint-disable-next-line @next/next/no-img-element
-              <img
+              <img loading="lazy" decoding="async"
                 src={flag}
                 alt={`${destination.name} flag`}
                 className="h-10 w-14 border border-hairline object-cover shadow-sm"

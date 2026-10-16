@@ -31,7 +31,7 @@ export function DestinationTile({ destination }: { destination: Destination }) {
         <span className="flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
           {flag ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={flag} alt={`${destination.name} flag`} className="size-full object-cover" />
+            <img loading="lazy" decoding="async" src={flag} alt={`${destination.name} flag`} className="size-full object-cover" />
           ) : (
             <span className="text-[10px] font-bold text-violet-deep">
               {destination.country_code || destination.name.slice(0, 3).toUpperCase()}

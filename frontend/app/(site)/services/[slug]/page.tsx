@@ -21,6 +21,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!service) return {};
   return buildMetadata({
     title: service.meta_title || `${service.title} for Nepali Students`,
+    absoluteTitle: Boolean(service.meta_title),
     description: service.meta_description || service.short_description,
     path: `/services/${service.slug}`,
   });

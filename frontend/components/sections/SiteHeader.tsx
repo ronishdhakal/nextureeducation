@@ -24,8 +24,8 @@ export function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-hairline bg-paper/95 backdrop-blur">
-      <nav className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-3.5 sm:px-8">
-        <Logo />
+      <nav aria-label="Primary" className="mx-auto flex w-full max-w-6xl items-center justify-between gap-6 px-6 py-3.5 sm:px-8">
+        <Logo priority />
 
         <ul className="hidden items-center gap-9 lg:flex">
           {NAV_LINKS.map((link) => (

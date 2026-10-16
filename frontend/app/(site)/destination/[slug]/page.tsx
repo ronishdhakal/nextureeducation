@@ -28,11 +28,12 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     title:
       destination.meta_title ||
       `Best Consultancy in Nepal for ${destination.name} (${CURRENT_YEAR}) | Nexture`,
-    absoluteTitle: !destination.meta_title,
+    absoluteTitle: true,
     description:
       destination.meta_description ||
-      `Looking for the best consultancy in Bagbazar, Nepal for ${destination.name}? Nexture Education guides students on ${destination.name} universities, costs, intakes and visas. Book a free consultation.`,
+      `Best consultancy in Bagbazar, Nepal for ${destination.name}: universities, costs, intakes and visas. Book a free consultation with Nexture Education.`,
     path: `/destination/${destination.slug}`,
+    image: mediaUrl(destination.hero_image) || undefined,
   });
 }
 
@@ -151,6 +152,7 @@ export default async function DestinationDetailPage({ params }: Props) {
         summary={destination.summary}
         image={mediaUrl(destination.hero_image)}
         imageAlt={`Study in ${name} from Nepal with Nexture Education, the consultancy in Bagbazar, Kathmandu`}
+        breadcrumbs={[{ label: "Study Abroad", href: "/destination" }, { label: name }]}
       >
         <ConsultationButton
           arrow
@@ -275,7 +277,7 @@ export default async function DestinationDetailPage({ params }: Props) {
                       <div className="flex items-center gap-2.5">
                         {logo ? (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img src={logo} alt={`${u.name} logo`} className="size-7 object-contain" />
+                          <img loading="lazy" decoding="async" src={logo} alt={`${u.name} logo`} className="size-7 object-contain" />
                         ) : null}
                         <div className="min-w-0">
                           <h3 className="text-sm font-medium leading-tight text-violet-dark">{u.name}</h3>

@@ -2,6 +2,8 @@ import { CalendarDays, Clock, MapPin } from "lucide-react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 
+import { JsonLd } from "@/components/JsonLd";
+
 import { Button } from "@/components/ui/Button";
 import { EventRegisterForm } from "@/components/ui/EventRegisterForm";
 import { CheckList, Chip, DetailHeading, DetailHero, Index, WRAP } from "@/components/ui/blocks";
@@ -9,7 +11,7 @@ import { RichText } from "@/components/ui/RichText";
 import { getEvent, mediaUrl } from "@/lib/api";
 import { formatEventDate, formatEventTime } from "@/lib/eventFormat";
 import { parseLines, parseTitled } from "@/lib/lines";
-import { buildMetadata } from "@/lib/seo";
+import { breadcrumbJsonLd, buildMetadata, SITE_URL } from "@/lib/seo";
 
 type Props = { params: Promise<{ slug: string }> };
 
@@ -19,8 +21,10 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   if (!event) return {};
   return buildMetadata({
     title: event.meta_title || event.title,
+    absoluteTitle: Boolean(event.meta_title),
     description: event.meta_description || event.summary,
     path: `/events/${event.slug}`,
+    image: mediaUrl(event.cover_image) || undefined,
   });
 }
 
@@ -47,13 +51,52 @@ export default async function EventDetailPage({ params }: Props) {
   const expect = parseTitled(event.what_to_expect);
   const canRegister = (event.registration_type ?? "open") === "open";
 
+  // Nepal Standard Time is UTC+05:45.
+  const stamp = (t: string | null) => `${event.event_date}T${(t || "00:00:00").slice(0, 8)}+05:45`;
+  const attendance =
+    event.mode === "online"
+      ? "https://schema.org/OnlineEventAttendanceMode"
+      : event.mode === "hybrid"
+        ? "https://schema.org/MixedEventAttendanceMode"
+        : "https://schema.org/OfflineEventAttendanceMode";
+
   return (
     <>
+      <JsonLd
+        data={breadcrumbJsonLd([
+          { name: "Events", path: "/events" },
+          { name: event.title, path: `/events/${event.slug}` },
+        ])}
+      />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Event",
+          name: event.title,
+          description: event.summary,
+          startDate: stamp(event.start_time),
+          ...(event.end_time ? { endDate: stamp(event.end_time) } : {}),
+          eventStatus: "https://schema.org/EventScheduled",
+          eventAttendanceMode: attendance,
+          location:
+            event.mode === "online"
+              ? { "@type": "VirtualLocation", url: `${SITE_URL}/events/${event.slug}` }
+              : {
+                  "@type": "Place",
+                  name: event.venue || "Kathmandu, Nepal",
+                  address: { "@type": "PostalAddress", addressLocality: "Kathmandu", addressCountry: "NP" },
+                },
+          image: mediaUrl(event.cover_image) || undefined,
+          organizer: { "@type": "Organization", name: event.organizer || "Nexture Education", url: SITE_URL },
+          url: `${SITE_URL}/events/${event.slug}`,
+        }}
+      />
       <DetailHero
         title={renderTitle(event.title)}
         summary={event.summary}
         image={mediaUrl(event.cover_image)}
-        imageAlt={event.title}
+        imageAlt={`${event.title}: ${event.category_display} by Nexture Education`}
+        breadcrumbs={[{ label: "Events", href: "/events" }, { label: event.title }]}
       >
         <span className=" bg-violet-pale px-2.5 py-1 text-[11px] font-medium text-violet-deep rounded-md">
           {event.category_display}

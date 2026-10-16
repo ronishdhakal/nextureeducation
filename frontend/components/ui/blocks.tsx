@@ -2,6 +2,8 @@ import { Check, Search } from "lucide-react";
 import Image from "next/image";
 import type { ReactNode } from "react";
 
+import { Breadcrumbs, type BreadcrumbItem } from "@/components/ui/Breadcrumbs";
+
 export const WRAP = "mx-auto w-full max-w-6xl px-6 sm:px-8";
 
 /** Listing-page hero: two-tone title with the landmarks artwork fading in on the right. */
@@ -27,7 +29,7 @@ export function PageHero({
         alt=""
         width={577}
         height={433}
-        priority
+        loading="lazy"
         className="pointer-events-none absolute right-0 top-0 hidden h-auto w-[52%] max-w-2xl opacity-40 [mask-image:linear-gradient(to_left,black_40%,transparent),linear-gradient(to_bottom,black_55%,transparent)] [mask-composite:intersect] md:block"
       />
       <div className={`${WRAP} relative pb-10 pt-12 md:pt-16`}>
@@ -85,17 +87,24 @@ export function DetailHero({
   summary,
   image,
   imageAlt,
+  breadcrumbs,
   children,
 }: {
   title: ReactNode;
   summary?: string;
   image?: string | null;
   imageAlt: string;
+  breadcrumbs?: BreadcrumbItem[];
   children?: ReactNode;
 }) {
   return (
     <section className="bg-violet-pale/60">
-      <div className={`${WRAP} grid items-center gap-8 py-10 md:grid-cols-2 md:py-12`}>
+      {breadcrumbs?.length ? (
+        <div className={`${WRAP} pt-5`}>
+          <Breadcrumbs items={breadcrumbs} />
+        </div>
+      ) : null}
+      <div className={`${WRAP} grid items-center gap-8 py-8 md:grid-cols-2 md:py-10`}>
         <div className="flex flex-col items-start gap-4">
           <h1 className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
             {title}
@@ -106,7 +115,14 @@ export function DetailHero({
         <div className="aspect-[16/9] overflow-hidden bg-gradient-to-br from-violet-pale to-violet/30 shadow-float rounded-box">
           {image ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={image} alt={imageAlt} className="size-full object-cover" />
+            <img
+              src={image}
+              alt={imageAlt}
+              loading="eager"
+              fetchPriority="high"
+              decoding="async"
+              className="size-full object-cover"
+            />
           ) : null}
         </div>
       </div>
