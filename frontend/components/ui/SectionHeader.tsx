@@ -10,21 +10,25 @@ export function SectionHeader({
   linkLabel,
   linkHref,
   align = "left",
+  titleClassName = "",
 }: {
-  eyebrow: string;
+  eyebrow?: string;
   title: ReactNode;
   subcopy?: string;
   linkLabel?: string;
   linkHref?: string;
   align?: "left" | "center";
+  titleClassName?: string;
 }) {
   return (
     <div className="flex items-start justify-between gap-6">
       <div className={`flex flex-col gap-2 ${align === "center" ? "mx-auto text-center" : ""}`}>
-        <p className="text-xs font-medium uppercase tracking-[0.06em] text-violet-deep">
-          {eyebrow}
-        </p>
-        <h2 className="font-display text-2xl font-semibold leading-tight text-ink text-balance sm:text-[1.75rem]">
+        {eyebrow ? (
+          <p className="text-xs font-medium uppercase tracking-[0.06em] text-violet-deep">
+            {eyebrow}
+          </p>
+        ) : null}
+        <h2 className={`font-display text-2xl font-semibold leading-tight text-ink text-balance sm:text-[1.75rem] ${titleClassName}`}>
           {title}
         </h2>
         {subcopy ? (

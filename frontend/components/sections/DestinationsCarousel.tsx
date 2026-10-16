@@ -16,7 +16,7 @@ export function DestinationTile({ destination }: { destination: Destination }) {
       href={`/destination/${destination.slug}`}
       className="group flex h-full flex-col overflow-hidden bg-violet-dark shadow-float transition-transform duration-300 hover:-translate-y-1 rounded-box"
     >
-      <div className="relative h-36 w-full overflow-hidden bg-gradient-to-br from-violet-pale to-violet/40">
+      <div className="relative h-40 w-full overflow-hidden bg-gradient-to-br from-violet-pale to-violet/40">
         {hero ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
@@ -27,11 +27,11 @@ export function DestinationTile({ destination }: { destination: Destination }) {
           />
         ) : null}
       </div>
-      <div className="flex flex-1 items-center gap-3 bg-gradient-to-b from-violet-dark to-ink px-3.5 py-3.5">
-        <span className="flex size-11 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
+      <div className="flex flex-1 items-center gap-3.5 bg-gradient-to-b from-[#4b2a8f] to-[#120c26] px-4 py-5">
+        <span className="flex size-16 shrink-0 items-center justify-center overflow-hidden rounded-full bg-white">
           {flag ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={flag} alt="" className="size-8 object-contain" />
+            <img src={flag} alt="" className="size-full object-cover" />
           ) : (
             <span className="text-[10px] font-bold text-violet-deep">
               {destination.country_code || destination.name.slice(0, 3).toUpperCase()}
@@ -39,8 +39,8 @@ export function DestinationTile({ destination }: { destination: Destination }) {
           )}
         </span>
         <div className="min-w-0">
-          <h3 className="text-base font-medium leading-tight text-white">{destination.name}</h3>
-          <p className="mt-0.5 line-clamp-2 text-[11px] leading-snug text-white/75">
+          <h3 className="text-lg font-normal leading-tight text-white">{destination.name}</h3>
+          <p className="mt-1 line-clamp-2 text-[11px] leading-snug text-white/85">
             {destination.summary}
           </p>
         </div>
@@ -89,7 +89,7 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
   }
 
   const arrowClass =
-    "absolute top-[38%] z-10 hidden size-9 -translate-y-1/2 items-center justify-center rounded-full bg-paper text-ink/70 shadow-float transition-colors hover:text-violet-deep md:inline-flex";
+    "absolute top-[40%] z-10 hidden -translate-y-1/2 p-1 text-ink/60 transition-colors hover:text-violet-deep md:inline-flex";
 
   return (
     <div className="relative">
@@ -97,28 +97,28 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
         type="button"
         aria-label="Previous destinations"
         onClick={() => scrollByPage(-1)}
-        className={`${arrowClass} -left-12`}
+        className={`${arrowClass} -left-10`}
       >
-        <ChevronLeft className="size-5" />
+        <ChevronLeft className="size-7" strokeWidth={1.6} />
       </button>
       <button
         type="button"
         aria-label="Next destinations"
         onClick={() => scrollByPage(1)}
-        className={`${arrowClass} -right-12`}
+        className={`${arrowClass} -right-10`}
       >
-        <ChevronRight className="size-5" />
+        <ChevronRight className="size-7" strokeWidth={1.6} />
       </button>
 
       <div
         ref={trackRef}
         onScroll={measure}
-        className="flex snap-x snap-mandatory gap-5 overflow-x-auto pb-4 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex snap-x snap-mandatory gap-6 overflow-x-auto pb-4 lg:gap-14 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {destinations.map((d) => (
           <div
             key={d.id}
-            className="w-[78%] shrink-0 snap-start sm:w-[calc((100%-1.25rem)/2)] lg:w-[calc((100%-2.5rem)/3)]"
+            className="w-[78%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-7rem)/3)]"
           >
             <DestinationTile destination={d} />
           </div>
@@ -126,7 +126,7 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
       </div>
 
       {pages > 1 ? (
-        <div className="mt-4 flex justify-center gap-2.5">
+        <div className="mt-6 flex justify-center gap-3">
           {Array.from({ length: pages }).map((_, i) => (
             <button
               key={i}
@@ -134,8 +134,8 @@ export function DestinationsCarousel({ destinations }: { destinations: Destinati
               aria-label={`Go to page ${i + 1}`}
               aria-current={i === active}
               onClick={() => goTo(i)}
-              className={`size-2.5 rounded-full transition-colors ${
-                i === active ? "bg-violet" : "bg-stone-light/70 hover:bg-stone-light"
+              className={`size-3 rounded-full transition-colors ${
+                i === active ? "bg-violet" : "bg-ink/40 hover:bg-ink/60"
               }`}
             />
           ))}

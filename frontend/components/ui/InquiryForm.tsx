@@ -6,7 +6,7 @@ import { createLead } from "@/lib/api";
 import type { Destination, PreferredLevel } from "@/lib/types";
 
 const LEVELS: { value: PreferredLevel; label: string }[] = [
-  { value: "undecided", label: "Not sure yet" },
+  { value: "undecided", label: "Select Study Level" },
   { value: "foundation", label: "Foundation" },
   { value: "diploma", label: "Diploma" },
   { value: "bachelor", label: "Bachelor's" },
@@ -93,7 +93,9 @@ export function InquiryForm({
         className="hidden"
       />
 
-      <div className={variant === "full" ? "grid sm:grid-cols-2 gap-4" : "flex flex-col gap-4"}>
+      {/* Figma order: Name | Email, Phone | Destination, Level | Message (tall). The compact
+          variant simply omits email and message, leaving name, phone, destination, level. */}
+      <div className={variant === "full" ? "grid gap-x-4 gap-y-3 sm:grid-cols-2" : "flex flex-col gap-4"}>
         <div>
           <label className={labelClass} htmlFor={`${uid}-name`}>
             Full Name
@@ -106,6 +108,22 @@ export function InquiryForm({
             placeholder="Your Full Name"
           />
         </div>
+
+        {variant === "full" ? (
+          <div>
+            <label className={labelClass} htmlFor={`${uid}-email`}>
+              Email
+            </label>
+            <input
+              id={`${uid}-email`}
+              name="email"
+              type="email"
+              className={inputClass}
+              placeholder="You@Example.Com"
+            />
+          </div>
+        ) : null}
+
         <div>
           <label className={labelClass} htmlFor={`${uid}-phone`}>
             Phone No
@@ -119,24 +137,7 @@ export function InquiryForm({
             placeholder="98XXXXXXXX"
           />
         </div>
-      </div>
 
-      {variant === "full" ? (
-        <div>
-          <label className={labelClass} htmlFor={`${uid}-email`}>
-            Email
-          </label>
-          <input
-            id={`${uid}-email`}
-            name="email"
-            type="email"
-            className={inputClass}
-            placeholder="you@example.com"
-          />
-        </div>
-      ) : null}
-
-      <div className={variant === "full" ? "grid sm:grid-cols-2 gap-4" : "flex flex-col gap-4"}>
         <div>
           <label className={labelClass} htmlFor={`${uid}-preferred_destination`}>
             Preferred Destination
@@ -147,7 +148,7 @@ export function InquiryForm({
             defaultValue={defaultDestinationId ?? ""}
             className={inputClass}
           >
-            <option value="">Not sure yet</option>
+            <option value="">Select Destination</option>
             {destinations.map((d) => (
               <option key={d.id} value={d.id}>
                 {d.name}
@@ -155,6 +156,7 @@ export function InquiryForm({
             ))}
           </select>
         </div>
+
         <div>
           <label className={labelClass} htmlFor={`${uid}-preferred_level`}>
             Interested Study Level
@@ -167,30 +169,30 @@ export function InquiryForm({
             ))}
           </select>
         </div>
-      </div>
 
-      {variant === "full" ? (
-        <div>
-          <label className={labelClass} htmlFor={`${uid}-message`}>
-            Message
-          </label>
-          <textarea
-            id={`${uid}-message`}
-            name="message"
-            rows={3}
-            defaultValue={defaultMessage}
-            className={inputClass}
-            placeholder="Tell us about your goals or any questions..."
-          />
-        </div>
-      ) : null}
+        {variant === "full" ? (
+          <div className="flex flex-col sm:row-span-2">
+            <label className={labelClass} htmlFor={`${uid}-message`}>
+              Message
+            </label>
+            <textarea
+              id={`${uid}-message`}
+              name="message"
+              rows={3}
+              defaultValue={defaultMessage}
+              className={`${inputClass} min-h-[5.5rem] flex-1 resize-none`}
+              placeholder="Tell Us About Your Goals Or Any Questions…"
+            />
+          </div>
+        ) : null}
+      </div>
 
       {status === "error" ? <p className="text-sm text-red-600">{error}</p> : null}
 
       <button
         type="submit"
         disabled={status === "submitting"}
-        className="inline-flex items-center justify-center self-center bg-violet text-white font-semibold px-14 py-3 text-sm shadow-sm shadow-violet/25 transition-colors duration-150 hover:bg-violet-deep disabled:opacity-60 rounded-box"
+        className="inline-flex items-center justify-center mt-2 w-full max-w-xs self-center rounded-full bg-violet px-10 py-3 text-sm font-semibold text-white shadow-sm shadow-violet/25 transition-colors duration-150 hover:bg-violet-deep disabled:opacity-60"
       >
         {status === "submitting" ? "Sending…" : "Request a Consultation"}
       </button>

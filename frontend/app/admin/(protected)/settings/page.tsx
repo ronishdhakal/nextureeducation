@@ -19,11 +19,16 @@ const TEXT_FIELDS: { key: keyof SiteSettings; label: string; hint?: string }[] =
   { key: "tiktok_url", label: "TikTok URL" },
 ];
 
-const STAT_FIELDS: { key: keyof SiteSettings; label: string }[] = [
-  { key: "stat_students_placed", label: "Students placed" },
-  { key: "stat_partner_universities", label: "Partner universities" },
-  { key: "stat_visa_success_rate", label: "Visa success rate" },
-  { key: "stat_countries", label: "Destination countries" },
+const STAT_FIELDS: {
+  key: keyof SiteSettings;
+  labelKey: keyof SiteSettings;
+  title: string;
+  numberHint: string;
+}[] = [
+  { key: "stat_students_placed", labelKey: "stat_students_label", title: "Students", numberHint: "e.g. 500+" },
+  { key: "stat_visa_success_rate", labelKey: "stat_visa_success_rate_label", title: "Visa success", numberHint: "e.g. 95%" },
+  { key: "stat_partner_universities", labelKey: "stat_partner_universities_label", title: "Universities", numberHint: "e.g. 50+" },
+  { key: "stat_countries", labelKey: "stat_countries_label", title: "Destinations", numberHint: "e.g. 6+" },
 ];
 
 export default function SiteSettingsPage() {
@@ -115,16 +120,29 @@ export default function SiteSettingsPage() {
         </div>
 
         <div className="border-t border-hairline pt-6">
-          <h2 className="font-display font-bold text-ink mb-5">Stats band</h2>
-          <div className="grid sm:grid-cols-2 gap-5">
+          <h2 className="font-display font-bold text-ink">Stats card on the home page</h2>
+          <p className="mb-5 mt-1 text-xs text-stone">
+            The four numbers under the hero. A stat is hidden while its number is empty. The
+            icons are fixed; the numbers and the text beneath them are yours to set.
+          </p>
+          <div className="grid gap-x-5 gap-y-5 sm:grid-cols-2">
             {STAT_FIELDS.map((f) => (
-              <Field key={f.key} label={f.label} htmlFor={f.key}>
-                <TextInput
-                  id={f.key}
-                  value={String(settings[f.key] ?? "")}
-                  onChange={(e) => set(f.key, e.target.value as never)}
-                />
-              </Field>
+              <div key={f.key} className="grid grid-cols-[7rem_1fr] gap-3 border border-hairline p-4 rounded-box">
+                <Field label={`${f.title}: number`} htmlFor={f.key} hint={f.numberHint}>
+                  <TextInput
+                    id={f.key}
+                    value={String(settings[f.key] ?? "")}
+                    onChange={(e) => set(f.key, e.target.value as never)}
+                  />
+                </Field>
+                <Field label="Text beneath" htmlFor={f.labelKey}>
+                  <TextInput
+                    id={f.labelKey}
+                    value={String(settings[f.labelKey] ?? "")}
+                    onChange={(e) => set(f.labelKey, e.target.value as never)}
+                  />
+                </Field>
+              </div>
             ))}
           </div>
         </div>

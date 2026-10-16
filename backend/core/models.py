@@ -49,6 +49,12 @@ class SiteSettings(models.Model):
     stat_partner_universities = models.CharField(max_length=20, blank=True)
     stat_visa_success_rate = models.CharField(max_length=20, blank=True)
     stat_countries = models.CharField(max_length=20, blank=True)
+    stat_students_label = models.CharField(max_length=40, blank=True, default="Student Guided")
+    stat_partner_universities_label = models.CharField(
+        max_length=40, blank=True, default="University Partners"
+    )
+    stat_visa_success_rate_label = models.CharField(max_length=40, blank=True, default="Visa Success")
+    stat_countries_label = models.CharField(max_length=40, blank=True, default="Global Destinations")
 
     class Meta:
         verbose_name = "Site Settings"
@@ -88,9 +94,14 @@ class Branch(TimeStamped, Orderable):
 
 class TeamMember(TimeStamped, Orderable):
     name = models.CharField(max_length=120)
-    role = models.CharField(max_length=120)
+    role = models.CharField(max_length=120, help_text="Designation, e.g. Founder & Managing Director")
     photo = models.ImageField(upload_to="team/", blank=True, null=True)
     bio = models.TextField(blank=True)
+    email = models.EmailField(blank=True)
+    facebook_url = models.URLField(blank=True)
+    instagram_url = models.URLField(blank=True)
+    linkedin_url = models.URLField(blank=True)
+    x_url = models.URLField(blank=True, help_text="X (Twitter) profile")
     is_active = models.BooleanField(default=True)
 
     class Meta(Orderable.Meta):

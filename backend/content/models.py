@@ -12,6 +12,9 @@ class Testimonial(TimeStamped, Orderable):
         Destination, null=True, blank=True, on_delete=models.SET_NULL, related_name="testimonials"
     )
     university = models.CharField(max_length=150, blank=True)
+    headline = models.CharField(
+        max_length=80, blank=True, help_text="Short title above the quote, e.g. Smooth and Stress-Free!"
+    )
     rating = models.PositiveSmallIntegerField(default=5, help_text="1 to 5 stars")
     quote = models.TextField()
     year = models.PositiveIntegerField(null=True, blank=True)

@@ -92,6 +92,7 @@ export interface Testimonial {
   destination_name: string;
   university: string;
   rating?: number;
+  headline?: string;
   quote: string;
   year: number | null;
   is_featured: boolean;
@@ -104,6 +105,11 @@ export interface TeamMember {
   role: string;
   photo: string | null;
   bio: string;
+  email: string;
+  facebook_url: string;
+  instagram_url: string;
+  linkedin_url: string;
+  x_url: string;
   order: number;
 }
 
@@ -159,6 +165,10 @@ export interface SiteSettings {
   stat_partner_universities: string;
   stat_visa_success_rate: string;
   stat_countries: string;
+  stat_students_label: string;
+  stat_partner_universities_label: string;
+  stat_visa_success_rate_label: string;
+  stat_countries_label: string;
 }
 
 export type PreferredLevel =

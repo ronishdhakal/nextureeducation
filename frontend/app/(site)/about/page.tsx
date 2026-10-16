@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/Button";
 import { ConsultationButton } from "@/components/ui/ConsultationProvider";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
+import { SocialIcons } from "@/components/ui/SocialIcons";
 import { getSiteSettings, getTeamMembers, mediaUrl } from "@/lib/api";
 import { buildMetadata } from "@/lib/seo";
 
@@ -55,9 +56,9 @@ export default async function AboutPage() {
   const [settings, team] = await Promise.all([getSiteSettings(), getTeamMembers()]);
 
   const stats: { Icon: LucideIcon; value: string; label: string }[] = [
-    { Icon: Users, value: settings?.stat_students_placed || "", label: "Student Guided" },
-    { Icon: Landmark, value: settings?.stat_partner_universities || "", label: "University Partners" },
-    { Icon: Globe2, value: settings?.stat_countries || "", label: "Global Destinations" },
+    { Icon: Users, value: settings?.stat_students_placed || "", label: settings?.stat_students_label || "Student Guided" },
+    { Icon: Landmark, value: settings?.stat_partner_universities || "", label: settings?.stat_partner_universities_label || "University Partners" },
+    { Icon: Globe2, value: settings?.stat_countries || "", label: settings?.stat_countries_label || "Global Destinations" },
   ].filter((st) => st.value);
 
   return (
@@ -65,7 +66,6 @@ export default async function AboutPage() {
       <section className="bg-paper">
         <div className="mx-auto grid w-full max-w-6xl items-stretch md:grid-cols-2">
           <div className="flex flex-col justify-center gap-4 px-6 py-14 sm:px-8 md:py-20">
-            <p className="text-xs font-medium text-violet-deep">About us</p>
             <h1 className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
               About <span className="text-violet-deep">Nexture Education</span>
             </h1>
@@ -168,31 +168,30 @@ export default async function AboutPage() {
         <section className="bg-paper">
           <div className={`${WRAP} pb-14 md:pb-16`}>
             <SectionHeader
-              eyebrow="Our Team"
               title="Meet Our Expert Team"
               subcopy="Our experienced and dedicated team is here to guide you at every step of your study abroad journey."
+              titleClassName="sm:text-[2rem]"
             />
-            <div className="mt-9 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
               {team.map((m, i) => {
                 const photo = mediaUrl(m.photo);
                 return (
                   <Reveal key={m.id} delay={i * 60}>
-                    <div className="flex h-full flex-col items-center border border-hairline bg-paper p-5 text-center shadow-soft rounded-box">
+                    <div className="flex h-full flex-col items-center bg-white p-6 text-center shadow-float rounded-box">
                       {photo ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={photo} alt={m.name} className="size-16 rounded-full object-cover" />
+                        <img src={photo} alt={m.name} className="size-20 rounded-full object-cover" />
                       ) : (
-                        <span className="flex size-16 items-center justify-center rounded-full bg-violet-pale text-lg font-semibold text-violet-deep">
+                        <span className="flex size-20 items-center justify-center rounded-full bg-violet-pale text-xl font-semibold text-violet-deep">
                           {m.name[0]}
                         </span>
                       )}
-                      <p className="mt-3 text-sm font-medium text-ink">{m.name}</p>
-                      <p className="text-xs text-ink/80">{m.role}</p>
+                      <p className="mt-4 text-base font-medium text-ink">{m.name}</p>
+                      <p className="mt-0.5 text-sm text-ink/85">{m.role}</p>
                       {m.bio ? (
-                        <p className="mt-2 line-clamp-4 text-[11px] leading-relaxed text-ink/60">
-                          {m.bio}
-                        </p>
+                        <p className="mt-3 line-clamp-4 text-[11px] leading-relaxed text-ink/70">{m.bio}</p>
                       ) : null}
+                      <SocialIcons links={m} className="mt-auto pt-4" />
                     </div>
                   </Reveal>
                 );

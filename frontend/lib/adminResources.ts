@@ -215,6 +215,7 @@ export const TESTIMONIAL_CONFIG: ResourceConfig = {
     { key: "photo", label: "Featured image", type: "image" },
     { key: "destination", label: "Destination", type: "destination-select" },
     { key: "university", label: "University", type: "text" },
+    { key: "headline", label: "Headline", type: "text", maxLength: 80, hint: "Shown above the quote, e.g. Smooth and Stress-Free!" },
     { key: "quote", label: "Quote", type: "textarea", required: true },
     { key: "year", label: "Year", type: "number" },
     { key: "order", label: "Order", type: "number", defaultValue: 0 },
@@ -746,5 +747,35 @@ export const POPUP_CONFIG: ResourceConfig = {
     },
     { key: "open_in_new_tab", label: "Open link in a new tab", type: "boolean" },
     { key: "is_active", label: "Active", type: "boolean", defaultValue: true },
+  ],
+};
+
+export const TEAM_CONFIG: ResourceConfig = {
+  resource: "team",
+  basePath: "/admin/team",
+  singularLabel: "Team Member",
+  pluralLabel: "Team",
+  description: "People shown under Meet Our Expert Team on the About page.",
+  searchPlaceholder: "Search by name or designation",
+  ordering: "order",
+  titleField: "name",
+  listColumns: [
+    { key: "name", label: "Name" },
+    { key: "role", label: "Designation" },
+    { key: "order", label: "Order" },
+    { key: "is_active", label: "Shown", kind: "bool" },
+  ],
+  fields: [
+    { key: "name", label: "Name", type: "text", required: true },
+    { key: "role", label: "Designation", type: "text", required: true, hint: "e.g. Founder & Managing Director" },
+    { key: "photo", label: "Photo", type: "image", hint: "Square photo works best" },
+    { key: "bio", label: "Short bio", type: "textarea", rows: 4, maxLength: 400 },
+    { key: "email", label: "Email", type: "text" },
+    { key: "facebook_url", label: "Facebook profile", type: "text", hint: "Full link, https://facebook.com/..." },
+    { key: "instagram_url", label: "Instagram profile", type: "text" },
+    { key: "linkedin_url", label: "LinkedIn profile", type: "text" },
+    { key: "x_url", label: "X (Twitter) profile", type: "text" },
+    { key: "order", label: "Order", type: "number", defaultValue: 0, hint: "Lower numbers appear first" },
+    { key: "is_active", label: "Show on the website", type: "boolean", defaultValue: true },
   ],
 };
