@@ -12,6 +12,7 @@ import {
   ClipboardList,
   FolderOpen,
   Headphones,
+  Images,
   Inbox,
   Megaphone,
   Stamp,
@@ -73,6 +74,7 @@ const NAV_GROUPS: {
     label: "Settings",
     items: [
       { label: "Users & Roles", href: "/admin/users", icon: ShieldCheck, module: "users" },
+      { label: "Media Library", href: "/admin/media", icon: Images, module: "settings" },
       { label: "Branches", href: "/admin/branches", icon: Building2, module: "settings" },
       { label: "Site Settings", href: "/admin/settings", icon: Settings, module: "settings" },
     ],

@@ -71,7 +71,9 @@ export function moduleForPath(pathname: string): AdminModule {
   )
     return "students";
   if (pathname.startsWith("/admin/users")) return "users";
-  if (pathname.startsWith("/admin/settings") || pathname.startsWith("/admin/branches"))
+  if (pathname.startsWith("/admin/settings") ||
+    pathname.startsWith("/admin/branches") ||
+    pathname.startsWith("/admin/media"))
     return "settings";
   return "content";
 }

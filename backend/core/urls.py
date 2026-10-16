@@ -18,6 +18,7 @@ from services.views import ServiceViewSet, TestPrepViewSet
 
 from django.urls import include, path
 
+from .media_views import MediaDeleteView, MediaLibraryView
 from .views import (
     BranchViewSet,
     EditorMediaUploadView,
@@ -51,6 +52,8 @@ router.register("events", EventViewSet, basename="event")
 urlpatterns = [
     path("auth/me/", MeView.as_view(), name="auth-me"),
     path("settings/", SiteSettingsView.as_view(), name="site-settings"),
+    path("media/library/", MediaLibraryView.as_view(), name="media-library"),
+    path("media/library/delete/", MediaDeleteView.as_view(), name="media-library-delete"),
     path("media/upload/", EditorMediaUploadView.as_view(), name="editor-media-upload"),
     path("", include(router.urls)),
 ]
