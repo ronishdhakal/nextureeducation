@@ -141,11 +141,9 @@ export default async function DestinationDetailPage({ params }: Props) {
         message={`I am interested in studying in ${name}.`}
       />
       <DetailHero
+        kicker={`Best Consultancy in Nepal for ${name}`}
         title={
           <>
-            <span className="mb-2 block font-sans text-xs font-medium uppercase leading-normal tracking-[0.06em] text-violet-deep sm:text-sm">
-              Best Consultancy in Nepal for {name}
-            </span>
             Study in <span className="text-violet-deep">{name}</span>
           </>
         }

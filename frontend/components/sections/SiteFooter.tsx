@@ -26,6 +26,7 @@ const COLUMNS = [
   {
     title: "Resources",
     links: [
+      { label: "Our Team", href: "/team" },
       { label: "Success Stories", href: "/success-stories" },
       { label: "Events", href: "/events" },
       { label: "Universities", href: "/universities" },

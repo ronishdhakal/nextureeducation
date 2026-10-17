@@ -59,6 +59,7 @@ export default async function SitemapPage() {
           links={[
             { label: "Home", href: "/" },
             { label: "About Us", href: "/about" },
+            { label: "Our Team", href: "/team" },
             { label: "Study Abroad Destinations", href: "/destination" },
             { label: "Classes", href: "/classes" },
             { label: "Events", href: "/events" },

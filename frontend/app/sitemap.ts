@@ -22,6 +22,7 @@ const STATIC_ROUTES: { path: string; priority: number; changeFrequency: Entry["c
   { path: "/universities", priority: 0.7, changeFrequency: "monthly" },
   { path: "/success-stories", priority: 0.6, changeFrequency: "monthly" },
   { path: "/about", priority: 0.6, changeFrequency: "yearly" },
+  { path: "/team", priority: 0.5, changeFrequency: "monthly" },
   { path: "/blog", priority: 0.7, changeFrequency: "daily" },
   { path: "/contact", priority: 0.6, changeFrequency: "yearly" },
   { path: "/sitemap", priority: 0.2, changeFrequency: "monthly" },

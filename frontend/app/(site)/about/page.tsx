@@ -3,10 +3,10 @@ import Image from "next/image";
 
 import { Button } from "@/components/ui/Button";
 import { ConsultationButton } from "@/components/ui/ConsultationProvider";
+import { TeamGrid } from "@/components/sections/TeamGrid";
 import { Reveal } from "@/components/ui/Reveal";
 import { SectionHeader } from "@/components/ui/SectionHeader";
-import { SocialIcons } from "@/components/ui/SocialIcons";
-import { getTeamMembers, mediaUrl } from "@/lib/api";
+import { getTeamMembers } from "@/lib/api";
 import { buildMetadata } from "@/lib/seo";
 import { SITE_STATS } from "@/lib/siteStats";
 
@@ -172,31 +172,11 @@ export default async function AboutPage() {
               title="Meet Our Expert Team"
               subcopy="Our experienced and dedicated team is here to guide you at every step of your study abroad journey."
               titleClassName="sm:text-[2rem]"
+              linkLabel="View all members"
+              linkHref="/team"
             />
-            <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4 lg:gap-8">
-              {team.map((m, i) => {
-                const photo = mediaUrl(m.photo);
-                return (
-                  <Reveal key={m.id} delay={i * 60}>
-                    <div className="flex h-full flex-col items-center bg-white p-6 text-center shadow-float rounded-box">
-                      {photo ? (
-                        // eslint-disable-next-line @next/next/no-img-element
-                        <img loading="lazy" decoding="async" src={photo} alt={`${m.name}, ${m.role} at Nexture Education`} className="size-20 rounded-full object-cover" />
-                      ) : (
-                        <span className="flex size-20 items-center justify-center rounded-full bg-violet-pale text-xl font-semibold text-violet-deep">
-                          {m.name[0]}
-                        </span>
-                      )}
-                      <p className="mt-4 text-base font-medium text-ink">{m.name}</p>
-                      <p className="mt-0.5 text-sm text-ink/85">{m.role}</p>
-                      {m.bio ? (
-                        <p className="mt-3 line-clamp-4 text-[11px] leading-relaxed text-ink/70">{m.bio}</p>
-                      ) : null}
-                      <SocialIcons links={m} className="mt-auto pt-4" />
-                    </div>
-                  </Reveal>
-                );
-              })}
+            <div className="mt-10">
+              <TeamGrid members={team.slice(0, 4)} />
             </div>
           </div>
         </section>

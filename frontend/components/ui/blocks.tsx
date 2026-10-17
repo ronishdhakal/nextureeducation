@@ -4,6 +4,10 @@ import type { ReactNode } from "react";
 
 import { Breadcrumbs, type BreadcrumbItem } from "@/components/ui/Breadcrumbs";
 
+/** Look of the small keyword line that is the page's H1 on landing pages. */
+const KICKER_CLASS =
+  "block font-sans text-xs font-medium uppercase leading-normal tracking-[0.06em] text-violet-deep";
+
 export const WRAP = "mx-auto w-full max-w-6xl px-6 sm:px-8";
 
 /** Listing-page hero: two-tone title with the landmarks artwork fading in on the right. */
@@ -33,20 +37,26 @@ export function PageHero({
         className="pointer-events-none absolute right-0 top-0 hidden h-auto w-[52%] max-w-2xl opacity-40 [mask-image:linear-gradient(to_left,black_40%,transparent),linear-gradient(to_bottom,black_55%,transparent)] [mask-composite:intersect] md:block"
       />
       <div className={`${WRAP} relative pb-10 pt-12 md:pt-16`}>
-        <h1
-          className={`font-display text-3xl font-semibold leading-snug text-ink sm:text-[2.4rem] ${
+        {(() => {
+          const headlineClass = `font-display text-3xl font-semibold leading-snug text-ink sm:text-[2.4rem] ${
             upper ? "uppercase" : ""
-          }`}
-        >
-          {eyebrow ? (
-            <span className="mb-3 block font-sans text-xs font-medium uppercase leading-normal tracking-[0.06em] text-violet-deep">
-              {eyebrow}
-            </span>
-          ) : null}
-          {lead}
-          <br />
-          <span className="text-violet-deep">{accent}</span>
-        </h1>
+          }`;
+          const headline = (
+            <>
+              {lead}
+              <br />
+              <span className="text-violet-deep">{accent}</span>
+            </>
+          );
+          return eyebrow ? (
+            <div>
+              <h1 className={`${KICKER_CLASS} mb-3`}>{eyebrow}</h1>
+              <h2 className={headlineClass}>{headline}</h2>
+            </div>
+          ) : (
+            <h1 className={headlineClass}>{headline}</h1>
+          );
+        })()}
         <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/70">{subcopy}</p>
         {children}
       </div>
@@ -84,6 +94,7 @@ export function SearchBox({
 
 export function DetailHero({
   title,
+  kicker,
   summary,
   image,
   imageAlt,
@@ -91,6 +102,8 @@ export function DetailHero({
   children,
 }: {
   title: ReactNode;
+  /** Keyword line shown above the title. When given it is the page's H1 and the title becomes an H2. */
+  kicker?: string;
   summary?: string;
   image?: string | null;
   imageAlt: string;
@@ -106,9 +119,18 @@ export function DetailHero({
       ) : null}
       <div className={`${WRAP} grid items-center gap-8 py-8 md:grid-cols-2 md:py-10`}>
         <div className="flex flex-col items-start gap-4">
-          <h1 className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
-            {title}
-          </h1>
+          {kicker ? (
+            <div>
+              <h1 className={`${KICKER_CLASS} mb-2 sm:text-sm`}>{kicker}</h1>
+              <h2 className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
+                {title}
+              </h2>
+            </div>
+          ) : (
+            <h1 className="font-display text-3xl font-semibold leading-tight text-ink sm:text-4xl">
+              {title}
+            </h1>
+          )}
           {summary ? <p className="max-w-sm text-sm leading-relaxed text-ink/70">{summary}</p> : null}
           {children}
         </div>

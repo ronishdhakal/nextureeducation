@@ -88,11 +88,9 @@ export default async function ClassDetailPage({ params }: Props) {
         }}
       />
       <DetailHero
+        kicker={`Best ${name} Classes in Bagbazar`}
         title={
           <>
-            <span className="mb-2 block font-sans text-xs font-medium uppercase leading-normal tracking-[0.06em] text-violet-deep sm:text-sm">
-              Best {name} Classes in Bagbazar
-            </span>
             {name} <span className="text-violet-deep">Preparation</span>
           </>
         }

@@ -40,12 +40,15 @@ export function Hero({ settings }: { settings: SiteSettings | null }) {
     <section className="relative overflow-hidden bg-gradient-to-br from-violet-pale/70 via-violet-tint to-paper">
       <div className="relative z-10 mx-auto w-full max-w-6xl px-5 pb-10 pt-9 sm:px-8 sm:pb-12 sm:pt-12 md:pb-36 md:pt-20">
         <div className="flex max-w-[40rem] flex-col gap-3.5 sm:gap-5 md:max-w-[52%] lg:max-w-[40rem]">
-          <h1 className="font-display text-[1.65rem] font-semibold leading-[1.35] text-ink sm:text-[2.4rem] sm:leading-[1.3] lg:text-[2.8rem]">
-            <span className="mb-2 block font-sans text-xs font-normal uppercase leading-normal tracking-[0.03em] text-violet sm:mb-3 sm:text-base">
+          {/* The keyword line is the page's H1; the big headline is an H2. Same look, different tags. */}
+          <div>
+            <h1 className="mb-2 block font-sans text-xs font-normal uppercase leading-normal tracking-[0.03em] text-violet sm:mb-3 sm:text-base">
               {eyebrow}
-            </span>
-            {renderHeadline(headline)}
-          </h1>
+            </h1>
+            <h2 className="font-display text-[1.65rem] font-semibold leading-[1.35] text-ink sm:text-[2.4rem] sm:leading-[1.3] lg:text-[2.8rem]">
+              {renderHeadline(headline)}
+            </h2>
+          </div>
           <p className="max-w-md text-sm leading-relaxed text-ink/70 sm:text-base lg:text-lg">{subcopy}</p>
           <div className="flex flex-wrap gap-2.5 pt-2 sm:gap-4 sm:pt-4">
             <ConsultationButton size="xl" arrow>

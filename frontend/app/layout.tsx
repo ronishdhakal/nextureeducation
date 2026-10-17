@@ -42,6 +42,10 @@ export const metadata: Metadata = {
     index: true,
     follow: true,
   },
+  // Google Search Console ownership check (renders <meta name="google-site-verification">).
+  verification: {
+    google: "i9IQHzALffVARoCc7X7txb9SvuO8ZeKCtqGrk8nXD8s",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
