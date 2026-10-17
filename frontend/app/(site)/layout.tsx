@@ -1,3 +1,4 @@
+import { GoogleAnalytics } from "@/components/GoogleAnalytics";
 import { JsonLd } from "@/components/JsonLd";
 import { SiteFooter } from "@/components/sections/SiteFooter";
 import { SiteHeader } from "@/components/sections/SiteHeader";
@@ -20,6 +21,7 @@ export default async function SiteLayout({ children }: { children: React.ReactNo
   return (
     <ConsultationProvider destinations={destinations}>
     <div className="flex min-h-full flex-col">
+      <GoogleAnalytics />
       <JsonLd
         data={{
           "@context": "https://schema.org",
